@@ -1,26 +1,24 @@
 import java.util.*; 
 
-Engine engine = new Engine();
-
 class Engine
 {
-  private Vector<Mover> movers = new Vector<Mover>();
+  private Vector<Motor> movers = new Vector<Motor>();
 
-  public void add(Mover mover)
+  public void add(Motor mover)
   {
     movers.add(mover);
   }
 
   public void update()
   {
-    for (Mover mover : movers)
+    for (Motor mover : movers)
     {      
       mover.update();
     }
   }
 
 
-  public void remove(Mover mover)
+  public void remove(Motor mover)
   {
     movers.removeElement(mover);
   }

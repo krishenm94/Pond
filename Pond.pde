@@ -3,6 +3,10 @@ float CLOCK = 0;
 float CLOCK_MAX = 360;
 float CLOCK_INCREMENT = 0.1;
 
+Engine engine = new Engine();
+Population population = new Population();
+Paint paint = new Paint();
+
 void setup()
 {
   size(1500, 500);

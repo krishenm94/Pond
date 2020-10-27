@@ -6,36 +6,35 @@ float SLITHER_FACTOR = 1.5;
 float TERMINAL_VELOCITY = 3;
 float STAGNANT_VELOCITY = 1;
 
-class Mover {
+class Motor {
   float mass;
   PVector displacement;
   PVector velocity;
   PVector acceleration;
   float timeOffset = random(0, CLOCK_MAX);
 
-  public Mover(float startMass, PVector startDisplacement, PVector startVelocity)
+  public Motor(float startMass, PVector startDisplacement, PVector startVelocity)
   {
     mass = startMass;
     displacement = startDisplacement;
     velocity = startVelocity;
     acceleration = new PVector(0, 0);
-    
+
     engine.add(this);
   }
 
   public void update()
   {
     velocity.add(acceleration);
-    
-    if( velocity.mag() > TERMINAL_VELOCITY)
+
+    if ( velocity.mag() > TERMINAL_VELOCITY)
     {
       velocity.div(velocity.mag() / TERMINAL_VELOCITY);
-    }
-    else if( velocity.mag() < STAGNANT_VELOCITY)
+    } else if ( velocity.mag() < STAGNANT_VELOCITY)
     {
       velocity.mult(STAGNANT_VELOCITY / velocity.mag());
     }
-    
+
     PVector velocityNormal = new PVector(velocity.x, velocity.y);
     velocityNormal.rotate(90);
     velocityNormal.mult(sin(CLOCK + timeOffset));
@@ -46,12 +45,12 @@ class Mover {
     //velocity.y *= sin(velocity.x * CLOCK) * 1.7;
     displacement.add(velocity);
     displacement.add(velocityNormal);
-    
+
     PVector accelerationStep = new PVector();
-    
+
     accelerationStep.add(PVector.random2D().mult(ACCELERATION_NOISE_FACTOR));
     accelerationStep.div(pow(mass, 3));
-    
+
     acceleration.mult(ACCELERATION_GROWTH_FACTOR);
     acceleration.add(accelerationStep);
 

@@ -2,8 +2,6 @@ float HOW_FAT_TO_MAKE_BABY_MULTIPLIER = 0.01;
 
 import java.util.*;  
 
-Population population = new Population();
-
 class Population
 {
   private Vector<Organism> organisms = new Vector<Organism>();
@@ -105,13 +103,13 @@ class Population
         continue;
       }
 
-      if (organism.isSmallerThan(other)) {
-        other.chomp(organism);
+      if (organism.canIEat(other)) {
+        organism.chomp(other);
         continue;
       }
 
-      if (other.isSmallerThan(organism)) {
-        organism.chomp(other);
+      if (other.canIEat(organism)) {
+        other.chomp(organism);
         continue;
       }
     }
