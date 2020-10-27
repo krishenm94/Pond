@@ -7,6 +7,7 @@ float TERMINAL_VELOCITY = 3;
 float STAGNANT_VELOCITY = 1;
 
 class Motor {
+  private Organism body;
   float mass;
   PVector displacement;
   PVector velocity;
@@ -92,5 +93,10 @@ class Motor {
       velocity.y = velocity.y * COLLISION_DAMPING_FACTOR;
       acceleration.y = acceleration.y  * COLLISION_DAMPING_FACTOR;
     }
+  }
+
+  float mass()
+  {
+    return body.mass;
   }
 }

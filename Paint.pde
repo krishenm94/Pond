@@ -19,21 +19,22 @@ class Paint
     {
       return;
     }
+    
     stroke(0, 255, 255);
     fill(0, 255, 255);
-    rect(this.displacement().x, this.displacement().y, this.mass(), this.mass());
+    rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
   }
 
   void daddy(Organism organism)
   {
     if (!DRAW_DADDY)
     {
-
       return;
     }
+    
     stroke(0, 255, 0);
     fill(0, 70, 180);
-    rect(this.displacement().x, this.displacement().y, this.mass(), this.mass());
+    rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
   }
 
   void baby(Organism organism)
@@ -42,9 +43,10 @@ class Paint
     {
       return;
     }
+    
     stroke(0, 0, 100);
     fill(0, 150, 25);
-    rect(organism.displacement().x, organism.displacement().y, organism.mass(), organism.mass());
+    rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
   }
 
   void show(Organism organism)
@@ -56,12 +58,11 @@ class Paint
 
     stroke(organism.colour, 40);
     fill(organism.colour, 20);
-    ellipse(organism.displacement().x, organism.displacement().y, organism.mass(), organism.mass());
+    ellipse(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
   }
 
   void dead(Organism organism)
   {
-
     if (!DRAW_DEAD)
     {
       return;
@@ -69,7 +70,7 @@ class Paint
 
     stroke(255);
     fill(0);
-    rect(organism.displacement().x, organism.displacement().y, organism.mass(), organism.mass());
+    rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
   }
 
   void predator(Organism organism)
@@ -81,6 +82,6 @@ class Paint
 
     stroke(0);
     fill(255, 0, 0);
-    rect(organism.displacement().x, organism.displacement().y, organism.mass(), organism.mass());
+    rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
   }
 }

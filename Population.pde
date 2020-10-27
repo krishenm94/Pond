@@ -34,7 +34,7 @@ class Population
     for (Organism organism : organisms)
     {  
       organism.show();
-      populationBiomass += organism.mass();
+      populationBiomass += organism.mass;
     }
 
     println("Total biomass: " + populationBiomass);
@@ -123,15 +123,15 @@ class Population
 
   boolean areMeeting(Organism org1, Organism org2)
   {
-    float left1 = org1.displacement().x + org1.mass() / 4;
-    float right1 = org1.displacement().x + org1.mass() /4 * 3;
-    float top1 = org1.displacement().y + org1.mass() / 4;
-    float bottom1 = org1.displacement().y + org1.mass() /4 * 3;
+    float left1 = org1.displacement().x + org1.mass / 4;
+    float right1 = org1.displacement().x + org1.mass /4 * 3;
+    float top1 = org1.displacement().y + org1.mass / 4;
+    float bottom1 = org1.displacement().y + org1.mass /4 * 3;
 
-    float left2 = org2.displacement().x + org2.mass() / 4;
-    float right2 = org2.displacement().x + org2.mass() /4 * 3;
-    float top2 = org2.displacement().y + org2.mass() / 4;
-    float bottom2 = org2.displacement().y + org2.mass() / 4 *3;
+    float left2 = org2.displacement().x + org2.mass / 4;
+    float right2 = org2.displacement().x + org2.mass /4 * 3;
+    float top2 = org2.displacement().y + org2.mass / 4;
+    float bottom2 = org2.displacement().y + org2.mass / 4 *3;
 
     if (left1 > right2 || left2 > right1 ||
       top1 > bottom2 || top2 > bottom1)

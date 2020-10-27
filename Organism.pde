@@ -18,13 +18,14 @@ class Organism
 {
   protected Motor mover;
   private float startMass = random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT);
+  float mass = startMass;
   protected color colour = color(random(0, 255), random(0, 255), random(0, 255));
   boolean isDead = false;
   Species species = Species.Fish;
 
   boolean canIEat(Organism other)
   {
-    return this.mass() * PREDATOR_FACTOR > other.mass();
+    return this.mass * PREDATOR_FACTOR > other.mass;
   }
 
   public Organism(PVector displacement, color _colour)
@@ -55,12 +56,12 @@ class Organism
   void chomp(Organism other)
   {
     if (other.isDead ||
-      this.mass() > this.startMass * TOO_STUFFED_TO_EAT_FACTOR)
+      this.mass > this.startMass * TOO_STUFFED_TO_EAT_FACTOR)
     {
       return;
     }
 
-    this.setMass(this.mass() + other.mass());
+    mass = this.mass + other.mass;
     other.isDead = true;
 
     paint.predator(this);
@@ -94,24 +95,14 @@ class Organism
 
   float howFat()
   {
-    return (mass() - startMass)/ startMass;
-  }
-
-  float mass()
-  {
-    return mover.mass;
-  }
-
-  void setMass(float mass)
-  {
-    mover.mass = mass;
+    return (mass - startMass)/ startMass;
   }
 
   Organism makeBaby()
   {
     PVector displacement = PVector.random2D();
 
-    float newMass = mass() * (1 - FISSION_FACTOR);
+    float newMass = mass * (1 - FISSION_FACTOR);
 
     displacement.mult(newMass * PROJECTILE_DELIVERY_FACTOR);
     displacement.add(this.displacement());
@@ -126,8 +117,8 @@ class Organism
 
     Organism baby = new Organism(displacement, childColour);
     baby.setVelocity(baby.velocity().mult(PROJECTILE_DELIVERY_FACTOR));
-    baby.setMass(mass() * FISSION_FACTOR);
-    this.setMass(mass() - baby.mass());
+    baby.mass = mass * FISSION_FACTOR;
+    this.mass = mass - baby.mass;
 
     paint.daddy(this);
     paint.baby(baby);
