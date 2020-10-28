@@ -33,13 +33,13 @@ class Paint
     } else
     {
       //stroke(0);
-      ellipse(organism.displacement().x - organism.mass/2 , 
+      ellipse(organism.displacement().x - organism.mass/2, 
         organism.displacement().y - organism.mass/2, 
         organism.mass, 
         organism.mass);
     }
   }
-  
+
   void show(Organism organism, color colour, boolean FLAG)
   {
     if (!FLAG)

@@ -38,6 +38,8 @@ class Population
     for (Organism organism : organisms)
     {  
       organism.show();
+      organism.move();
+
       populationBiomass += organism.mass;
       
       if(organism.species == Genome.Species.Snake)
@@ -107,12 +109,9 @@ class Population
 
       if (other.species == organism.species) 
       {
-        PVector otherVelocity = other.velocity();
-        other.setVelocity(organism.velocity());
-        organism.setVelocity(otherVelocity);
+        organism.collidingWith = other;
+        other.collidingWith = organism;
 
-        other.setAcceleration(other.acceleration().add(organism.acceleration()).mult(0.5));
-        organism.setAcceleration(other.acceleration().mult(-1));
         continue;
       }
 
@@ -137,14 +136,14 @@ class Population
   boolean areMeeting(Organism org1, Organism org2)
   {
     float left1 = org1.displacement().x + org1.mass / OVERLAP_OFFSET_QUOTIENT;
-    float right1 = org1.displacement().x + org1.mass * (OVERLAP_OFFSET_QUOTIENT-1) / OVERLAP_OFFSET_QUOTIENT;
+    float right1 = org1.displacement().x + org1.mass * (OVERLAP_OFFSET_QUOTIENT1) / OVERLAP_OFFSET_QUOTIENT;
     float top1 = org1.displacement().y + org1.mass / OVERLAP_OFFSET_QUOTIENT;
-    float bottom1 = org1.displacement().y + org1.mass * (OVERLAP_OFFSET_QUOTIENT-1) / OVERLAP_OFFSET_QUOTIENT;
+    float bottom1 = org1.displacement().y + org1.mass * (OVERLAP_OFFSET_QUOTIENT1) / OVERLAP_OFFSET_QUOTIENT;
 
     float left2 = org2.displacement().x + org2.mass / OVERLAP_OFFSET_QUOTIENT;
-    float right2 = org2.displacement().x + org2.mass * (OVERLAP_OFFSET_QUOTIENT-1) / OVERLAP_OFFSET_QUOTIENT;
+    float right2 = org2.displacement().x + org2.mass * (OVERLAP_OFFSET_QUOTIENT1) / OVERLAP_OFFSET_QUOTIENT;
     float top2 = org2.displacement().y + org2.mass / OVERLAP_OFFSET_QUOTIENT;
-    float bottom2 = org2.displacement().y + org2.mass * (OVERLAP_OFFSET_QUOTIENT-1) / OVERLAP_OFFSET_QUOTIENT;
+    float bottom2 = org2.displacement().y + org2.mass * (OVERLAP_OFFSET_QUOTIENT1) / OVERLAP_OFFSET_QUOTIENT;
 
     if (left1 > right2 || left2 > right1 ||
       top1 > bottom2 || top2 > bottom1)

@@ -3,7 +3,7 @@ import java.util.Random;
 static class Genome
 {
   enum Species {
-      Worm, 
+    Worm, 
       Snake
   }
 

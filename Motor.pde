@@ -7,7 +7,7 @@ float TERMINAL_VELOCITY = 2;
 float STAGNANT_VELOCITY = 0.5;
 
 class Motor {
-  private Organism body;
+  private Organism self;
 
   PVector displacement;
   PVector velocity;
@@ -16,43 +16,45 @@ class Motor {
 
   public Motor(Organism organism, PVector startDisplacement, PVector startVelocity)
   {
-    body = organism;
+    self = organism;
     displacement = startDisplacement;
     velocity = startVelocity;
     acceleration = new PVector(0, 0);
-
-    engine.add(this);
   }
 
   public void update()
   {
-    if (body.species == Genome.Species.Snake)
-    {
-      moveSnake();
-    } 
-    else 
-    {
-      move();
-    }
 
+    move();
     clampToCanvas();
-    bounceIfColliding();
+    bounceIfWallCollision();
+    bounceIfOrganismCollision();
   }
 
-  protected void move()
+  private void move()
+  {
+    updateAcceleration();
+    updateVelocity();
+    updateDisplacement();
+  }
+
+  protected void updateDisplacement() {
+    displacement.add(velocity);
+  }
+
+  protected void updateVelocity()
   {
     velocity.add(acceleration);
-    
-        if ( velocity.mag() > TERMINAL_VELOCITY)
+    if ( velocity.mag() > TERMINAL_VELOCITY)
     {
       velocity.div(velocity.mag() / TERMINAL_VELOCITY);
     } else if ( velocity.mag() < STAGNANT_VELOCITY)
     {
       velocity.mult(STAGNANT_VELOCITY / velocity.mag());
     }
+  }
 
-    displacement.add(velocity);
-
+  protected void updateAcceleration() {
     PVector accelerationStep = new PVector();
 
     accelerationStep.add(PVector.random2D().mult(ACCELERATION_NOISE_FACTOR * 12* sin(CLOCK + timeOffset)));
@@ -117,7 +119,7 @@ class Motor {
     displacement.y = clamp(displacement.y, 0, height);
   }
 
-  private void bounceIfColliding()
+  private void bounceIfWallCollision()
   {
     if (displacement.x == width || displacement.x == 0)
     {
@@ -132,8 +134,26 @@ class Motor {
     }
   }
 
+  private void bounceIfOrganismCollision()
+  {
+    if (self.collidingWith == null)
+    {
+      return;
+    }
+    Organism other = self.collidingWith;
+    PVector otherVelocity = other.velocity();
+    other.setVelocity(self.velocity());
+    self.setVelocity(otherVelocity);
+
+    other.setAcceleration(other.acceleration().add(self.acceleration()).div(2));
+    self.setAcceleration(other.acceleration().mult(-1));
+
+    other.collidingWith = null;
+    self.collidingWith = null;
+  }
+
   float mass()
   {
-    return body.mass;
+    return self.mass;
   }
 }

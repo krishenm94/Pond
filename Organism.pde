@@ -15,12 +15,19 @@ class Organism
   private float startMass = random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT);
   float mass = startMass;
   private color colour = color(random(0, 255), random(0, 255), random(0, 255));
+  
   boolean isDead = false;
   Genome.Species species = Genome.random();
+  Organism collidingWith; // Make this a List
 
   boolean canIEat(Organism other)
   {
     return this.mass * PREDATOR_FACTOR > other.mass;
+  }
+
+  void move()
+  {
+    motor.move();
   }
 
   public Organism(PVector displacement, color _colour)
@@ -61,7 +68,7 @@ class Organism
     
     paint.show(this, color( 0,255, 0), DRAW_PREDATION || DRAW_POST_CHOMP_GROWTH);
     
-    mass = this.mass - other.mass;
+    mass = this.mass  other.mass;
     paint.show(this, color(255, 0, 0), DRAW_PREDATION || DRAW_PREDATOR);
     mass = this.mass + other.mass;
     
