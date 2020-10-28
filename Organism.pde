@@ -40,7 +40,7 @@ class Organism
 
   private void init(PVector displacement)
   {
-    mover = new Motor(random(10, 35), displacement, PVector.random2D());
+    mover = new Motor(this, displacement, PVector.random2D());
   }
 
   public void show()
@@ -113,6 +113,7 @@ class Organism
     Organism baby = new Organism(displacement, childColour);
     baby.setVelocity(baby.velocity().mult(PROJECTILE_DELIVERY_FACTOR));
     baby.mass = mass * FISSION_FACTOR;
+    baby.species = this.species;
     this.mass = mass - baby.mass;
 
     paint.daddy(this);
@@ -120,5 +121,10 @@ class Organism
 
 
     return baby;
+  }
+  
+  float timeOffset()
+  {
+    return mover.timeOffset;
   }
 }

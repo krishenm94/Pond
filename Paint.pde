@@ -13,6 +13,31 @@ class Paint
   {
   }
 
+  void show(Organism organism)
+  {
+    if (!DRAW_ORGANISM)
+    {
+      return;
+    }
+
+    stroke(organism.colour, 40);
+    fill(organism.colour, 25);
+
+    if (organism.species == Genome.Species.Snake)
+    {
+      //stroke(0);
+      ellipse(organism.displacement().x, organism.displacement().y, 
+        0.5 * (sin(CLOCK + organism.timeOffset())* organism.mass) + organism.mass, organism.mass);
+    } else
+    {
+      //stroke(0);
+      ellipse(organism.displacement().x - organism.mass/2 , 
+        organism.displacement().y - organism.mass/2, 
+        organism.mass, 
+        organism.mass);
+    }
+  }
+
   void birth(Organism organism)
   {   
     if (!DRAW_BIRTH)
@@ -47,18 +72,6 @@ class Paint
     stroke(0, 0, 100);
     fill(0, 150, 25);
     rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
-  }
-
-  void show(Organism organism)
-  {
-    if (!DRAW_ORGANISM)
-    {
-      return;
-    }
-
-    stroke(organism.colour, 40);
-    fill(organism.colour, 20);
-    ellipse(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
   }
 
   void dead(Organism organism)

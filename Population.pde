@@ -30,16 +30,27 @@ class Population
     babyTime();
 
     //int speciesCount = 0;
+    int fishCount = 0;
+    int snakeCount = 0;
     float populationBiomass = 0;
     for (Organism organism : organisms)
     {  
       organism.show();
       populationBiomass += organism.mass;
+      
+      if(organism.species == Genome.Species.Snake)
+      {
+        snakeCount++;
+      }
+      else
+      {
+        fishCount++;
+      }
     }
 
     println("Total biomass: " + populationBiomass);
     //println("Species size: " + organisms.size());
-    println("Population size: " + organisms.size());
+    println("Population size : " + organisms.size() + ", (Snakes, Fish): " + "(" + snakeCount +", " + fishCount + ")");
   }
 
   private void babyTime()
@@ -93,7 +104,7 @@ class Population
         continue;
       }
 
-      if (other.colour == organism.colour) {
+      if (other.species == organism.species) {
         PVector otherVelocity = other.velocity();
         other.setVelocity(organism.velocity());
         organism.setVelocity(otherVelocity);
