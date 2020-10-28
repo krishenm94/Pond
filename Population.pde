@@ -132,15 +132,15 @@ class Population
 
   boolean areMeeting(Organism org1, Organism org2)
   {
-    float left1 = org1.displacement().x - org1.mass;
-    float right1 = org1.displacement().x + org1.mass;
-    float top1 = org1.displacement().y - org1.mass;
-    float bottom1 = org1.displacement().y + org1.mass;
+    float left1 = org1.displacement().x - org1.mass/2;
+    float right1 = org1.displacement().x + org1.mass/2;
+    float top1 = org1.displacement().y - org1.mass/2;
+    float bottom1 = org1.displacement().y + org1.mass/2;
 
-    float left2 = org2.displacement().x - org2.mass;
-    float right2 = org2.displacement().x + org2.mass;
-    float top2 = org2.displacement().y - org2.mass;
-    float bottom2 = org2.displacement().y + org2.mass;
+    float left2 = org2.displacement().x - org2.mass/2;
+    float right2 = org2.displacement().x + org2.mass/2;
+    float top2 = org2.displacement().y - org2.mass/2;
+    float bottom2 = org2.displacement().y + org2.mass/2;
 
     if (left1 > right2 || left2 > right1 ||
       top1 > bottom2 || top2 > bottom1)
@@ -148,6 +148,39 @@ class Population
       return false;
     }
 
+    float xOverlapL1R2 = left1 - right2;
+    float xOverlapR2L1 = left2 - right1;
+    float yOverlapT2B1 = top2 - bottom1;
+    float yOverlapT1B2 = top1 - bottom2;
+
+    // TODO: Use mass to determine ratio
+
+    if (xOverlapL1R2 < 0)
+    {
+      org1.displacement().add(xOverlapL1R2/2, 0);
+      org2.displacement().add(-xOverlapL1R2/2, 0);
+    } 
+    if (xOverlapR2L1 < 0)
+    {
+      org1.displacement().add(-xOverlapR2L1/4, 0);
+      org2.displacement().add(xOverlapR2L1/4, 0);
+    }  
+    if (yOverlapT2B1 < 0)
+    {
+      org1.displacement().add(0, -yOverlapT2B1/4);
+      org2.displacement().add(0, yOverlapT2B1/4);
+    } 
+    if (yOverlapT1B2 < 0)
+    {
+      org1.displacement().add(0, yOverlapT1B2/4);
+      org2.displacement().add(0, -yOverlapT1B2/4);
+    }
+
     return true;
   }
+
+  //  private void moveOutOfOverlap()
+  //{
+  //  float xOverlap = 
+  //}
 }

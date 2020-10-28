@@ -26,8 +26,8 @@ class Motor {
   {
     move();
     clampToCanvas();
-    bounceIfOrganismCollision();
-    bounceIfWallCollision();    
+    //bounceIfOrganismCollision();
+    bounceIfWallCollision();
   }
 
   private void move()
@@ -81,7 +81,7 @@ class Motor {
     velocityNormal.mult(sin(CLOCK + timeOffset));
     velocityNormal.mult(SLITHER_FACTOR);
 
-    // ALGAE GROWTH ALGORITHM?
+    // TODO: ALGAE GROWTH ALGORITHM?
     //velocity.x *= sin(velocity.y * CLOCK) * 1.7;
     //velocity.y *= sin(velocity.x * CLOCK) * 1.7;
 
@@ -135,19 +135,24 @@ class Motor {
 
   private void bounceIfOrganismCollision()
   {
+    // TODO: Use mass to determine ratio
     if (self.collidingWith == null)
     {
       return;
     }
-    
-    
-    Organism other = self.collidingWith;
-    PVector otherVelocity = other.velocity();
-    other.setVelocity(self.velocity());
-    self.setVelocity(otherVelocity);
 
-    other.setAcceleration(other.acceleration().add(self.acceleration()).div(2));
-    self.setAcceleration(other.acceleration().mult(-1));
+    Organism other = self.collidingWith;
+
+    PVector velocityCopy = velocity;
+    PVector otherToSelfVector = velocityCopy.sub(other.displacement());
+    otherToSelfVector.normalize();
+    PVector selfToOtherVector = otherToSelfVector.mult(-1);
+
+    velocity = otherToSelfVector.mult(velocity.mag());
+    other.setVelocity(selfToOtherVector.mult(other.velocity().mag()));
+
+    //other.setAcceleration(other.acceleration().add(self.acceleration()).div(2));
+    //self.setAcceleration(other.acceleration().mult(-1));
 
     other.collidingWith = null;
     self.collidingWith = null;

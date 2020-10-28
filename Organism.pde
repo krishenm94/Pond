@@ -1,12 +1,11 @@
 float FISSION_FACTOR = 0.4;
 float PROJECTILE_DELIVERY_FACTOR = 1.0;
 float MUTATION_CHANCE_BOUNDARY = 0.8;
-float EDIBILITY_FACTOR = 0.5;
 
-float MASS_LOWER_LIMIT = 10;
-float MASS_UPPER_LIMIT = 50;
+float MASS_LOWER_LIMIT = 5;
+float MASS_UPPER_LIMIT = 20;
 
-float PREDATOR_FACTOR = 0.9;
+float PREDATOR_FACTOR = 0.5;
 float TOO_STUFFED_TO_EAT_FACTOR = 5;
 
 class Organism
@@ -18,7 +17,7 @@ class Organism
 
   boolean isDead = false;
   Genome.Species species = Genome.random();
-  Organism collidingWith; // Make this a List
+  Organism collidingWith; // TODO: Make this a List
 
   boolean canIEat(Organism other)
   {
@@ -78,6 +77,11 @@ class Organism
   PVector displacement()
   {
     return motor.displacement;
+  }
+
+  void setDisplacement(PVector vector)
+  {
+    motor.displacement = vector;
   }
 
   PVector velocity()

@@ -49,6 +49,8 @@ class Paint
 
     stroke(0);
     fill(colour);
-    rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
+    rect(organism.displacement().x - organism.mass / 2
+      , organism.displacement().y - organism.mass / 2
+      , organism.mass, organism.mass);
   }
 }

@@ -8,16 +8,16 @@ Paint paint = new Paint();
 
 void setup()
 {
-  size(500, 500);
+  size(1000, 500);
   background(BACKGROUND);
   smooth();
 
-  population.init(100);
+  population.init(150);
 }
 
 void draw()
 {
-  background(BACKGROUND);
+  //background(BACKGROUND);
 
   population.update();
 
