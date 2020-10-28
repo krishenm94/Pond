@@ -12,14 +12,14 @@ class Paint
   Paint()
   {
   }
-  
+
   void birth(Organism organism)
   {   
     if (!DRAW_BIRTH)
     {
       return;
     }
-    
+
     stroke(0, 255, 255);
     fill(0, 255, 255);
     rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
@@ -31,7 +31,7 @@ class Paint
     {
       return;
     }
-    
+
     stroke(0, 255, 0);
     fill(0, 70, 180);
     rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
@@ -43,7 +43,7 @@ class Paint
     {
       return;
     }
-    
+
     stroke(0, 0, 100);
     fill(0, 150, 25);
     rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);

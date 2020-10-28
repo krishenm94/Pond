@@ -26,7 +26,7 @@ void draw()
   drawMouse();
 
   CLOCK += CLOCK_INCREMENT;
-  CLOCK %= CLOCK_MAX;
+  //CLOCK %= CLOCK_MAX;
 }
 
 void drawMouse()

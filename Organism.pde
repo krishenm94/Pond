@@ -9,11 +9,6 @@ float MASS_UPPER_LIMIT = 20;
 float PREDATOR_FACTOR = 0.5;
 float TOO_STUFFED_TO_EAT_FACTOR = 5;
 
-enum Species {
-  Fish, 
-    Snake
-}
-
 class Organism
 {
   protected Motor mover;
@@ -21,7 +16,7 @@ class Organism
   float mass = startMass;
   protected color colour = color(random(0, 255), random(0, 255), random(0, 255));
   boolean isDead = false;
-  Species species = Species.Fish;
+  Genome.Species species = Genome.random();
 
   boolean canIEat(Organism other)
   {

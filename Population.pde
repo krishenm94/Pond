@@ -1,6 +1,6 @@
-float HOW_FAT_TO_MAKE_BABY_MULTIPLIER = 0.01;
+import java.util.*; 
 
-import java.util.*;  
+float HOW_FAT_TO_MAKE_BABY_MULTIPLIER = 0.005;
 
 class Population
 {
