@@ -1,5 +1,7 @@
 import java.util.*; 
 
+int OVERLAP_OFFSET = 6;
+
 float HOW_FAT_TO_MAKE_BABY_MULTIPLIER = 0.005;
 
 class Population
@@ -30,7 +32,7 @@ class Population
     babyTime();
 
     //int speciesCount = 0;
-    int fishCount = 0;
+    int wormCount = 0;
     int snakeCount = 0;
     float populationBiomass = 0;
     for (Organism organism : organisms)
@@ -44,13 +46,13 @@ class Population
       }
       else
       {
-        fishCount++;
+        wormCount++;
       }
     }
 
     println("Total biomass: " + populationBiomass);
     //println("Species size: " + organisms.size());
-    println("Population size : " + organisms.size() + ", (Snakes, Fish): " + "(" + snakeCount +", " + fishCount + ")");
+    println("Population size : " + organisms.size() + ", (Snakes, Worms): " + "(" + snakeCount +", " + wormCount + ")");
   }
 
   private void babyTime()
@@ -134,15 +136,15 @@ class Population
 
   boolean areMeeting(Organism org1, Organism org2)
   {
-    float left1 = org1.displacement().x + org1.mass / 4;
-    float right1 = org1.displacement().x + org1.mass /4 * 3;
-    float top1 = org1.displacement().y + org1.mass / 4;
-    float bottom1 = org1.displacement().y + org1.mass /4 * 3;
+    float left1 = org1.displacement().x + org1.mass / OVERLAP_OFFSET;
+    float right1 = org1.displacement().x + org1.mass * (OVERLAP_OFFSET-1) / OVERLAP_OFFSET;
+    float top1 = org1.displacement().y + org1.mass / OVERLAP_OFFSET;
+    float bottom1 = org1.displacement().y + org1.mass * (OVERLAP_OFFSET-1) / OVERLAP_OFFSET;
 
-    float left2 = org2.displacement().x + org2.mass / 4;
-    float right2 = org2.displacement().x + org2.mass /4 * 3;
-    float top2 = org2.displacement().y + org2.mass / 4;
-    float bottom2 = org2.displacement().y + org2.mass / 4 *3;
+    float left2 = org2.displacement().x + org2.mass / OVERLAP_OFFSET;
+    float right2 = org2.displacement().x + org2.mass * (OVERLAP_OFFSET-1) / OVERLAP_OFFSET;
+    float top2 = org2.displacement().y + org2.mass / OVERLAP_OFFSET;
+    float bottom2 = org2.displacement().y + org2.mass * (OVERLAP_OFFSET-1) / OVERLAP_OFFSET;
 
     if (left1 > right2 || left2 > right1 ||
       top1 > bottom2 || top2 > bottom1)

@@ -13,7 +13,7 @@ void setup()
   background(BACKGROUND);
   smooth();
 
-  population.init(200);
+  population.init(100);
 }
 
 void draw()

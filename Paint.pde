@@ -2,8 +2,9 @@ boolean DRAW_BIRTH = false;
 boolean DRAW_DADDY = false;
 boolean DRAW_BABY = false;
 
-boolean DRAW_DEAD = false;
-boolean DRAW_PREDATOR = false;
+boolean DRAW_DEAD = true;
+boolean DRAW_PREDATOR = true;
+boolean DRAW_POST_CHOMP_GROWTH = true;
 
 boolean DRAW_ORGANISM = true;
 
@@ -37,64 +38,16 @@ class Paint
         organism.mass);
     }
   }
-
-  void birth(Organism organism)
-  {   
-    if (!DRAW_BIRTH)
-    {
-      return;
-    }
-
-    stroke(0, 255, 255);
-    fill(0, 255, 255);
-    rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
-  }
-
-  void daddy(Organism organism)
+  
+  void show(Organism organism, color colour, boolean FLAG)
   {
-    if (!DRAW_DADDY)
-    {
-      return;
-    }
-
-    stroke(0, 255, 0);
-    fill(0, 70, 180);
-    rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
-  }
-
-  void baby(Organism organism)
-  {
-    if (!DRAW_BABY)
-    {
-      return;
-    }
-
-    stroke(0, 0, 100);
-    fill(0, 150, 25);
-    rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
-  }
-
-  void dead(Organism organism)
-  {
-    if (!DRAW_DEAD)
-    {
-      return;
-    }
-
-    stroke(255);
-    fill(0);
-    rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
-  }
-
-  void predator(Organism organism)
-  {
-    if (!DRAW_PREDATOR)
+    if (!FLAG)
     {
       return;
     }
 
     stroke(0);
-    fill(255, 0, 0);
+    fill(colour);
     rect(organism.displacement().x, organism.displacement().y, organism.mass, organism.mass);
   }
 }

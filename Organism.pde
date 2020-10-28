@@ -58,9 +58,14 @@ class Organism
 
     mass = this.mass + other.mass;
     other.isDead = true;
-
-    paint.predator(this);
-    paint.dead(other);
+    
+    paint.show(this, color( 0,255, 0), DRAW_POST_CHOMP_GROWTH);
+    
+    mass = this.mass - other.mass;
+    paint.show(this, color(255, 0, 0), DRAW_PREDATOR);
+    mass = this.mass + other.mass;
+    
+    paint.show(other, color(255), DRAW_DEAD);
   }
 
   PVector displacement()
@@ -108,7 +113,7 @@ class Organism
       childColour = color(random(0, 255), random(0, 255), random(0, 255));
     } 
 
-    paint.birth(this);
+    paint.show(this, color(0, 255, 255), DRAW_BIRTH);
 
     Organism baby = new Organism(displacement, childColour);
     baby.setVelocity(baby.velocity().mult(PROJECTILE_DELIVERY_FACTOR));
@@ -116,13 +121,12 @@ class Organism
     baby.species = this.species;
     this.mass = mass - baby.mass;
 
-    paint.daddy(this);
-    paint.baby(baby);
-
+    paint.show(this, color(0, 70, 180), DRAW_BIRTH || DRAW_DADDY);
+    paint.show(baby, color(0, 150, 25), DRAW_BIRTH || DRAW_BABY);
 
     return baby;
   }
-  
+
   float timeOffset()
   {
     return mover.timeOffset;
