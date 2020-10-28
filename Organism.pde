@@ -59,13 +59,13 @@ class Organism
     mass = this.mass + other.mass;
     other.isDead = true;
     
-    paint.show(this, color( 0,255, 0), DRAW_POST_CHOMP_GROWTH);
+    paint.show(this, color( 0,255, 0), DRAW_PREDATION || DRAW_POST_CHOMP_GROWTH);
     
     mass = this.mass - other.mass;
-    paint.show(this, color(255, 0, 0), DRAW_PREDATOR);
+    paint.show(this, color(255, 0, 0), DRAW_PREDATION || DRAW_PREDATOR);
     mass = this.mass + other.mass;
     
-    paint.show(other, color(255), DRAW_DEAD);
+    paint.show(other, color(255), DRAW_PREDATION || DRAW_DEAD);
   }
 
   PVector displacement()

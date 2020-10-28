@@ -2,9 +2,10 @@ boolean DRAW_BIRTH = false;
 boolean DRAW_DADDY = false;
 boolean DRAW_BABY = false;
 
-boolean DRAW_DEAD = true;
-boolean DRAW_PREDATOR = true;
-boolean DRAW_POST_CHOMP_GROWTH = true;
+boolean DRAW_PREDATION = false;
+boolean DRAW_DEAD = false;
+boolean DRAW_PREDATOR = false;
+boolean DRAW_POST_CHOMP_GROWTH = false;
 
 boolean DRAW_ORGANISM = true;
 
