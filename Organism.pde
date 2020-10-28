@@ -11,10 +11,10 @@ float TOO_STUFFED_TO_EAT_FACTOR = 5;
 
 class Organism
 {
-  protected Motor mover;
+  private Motor mover;
   private float startMass = random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT);
   float mass = startMass;
-  protected color colour = color(random(0, 255), random(0, 255), random(0, 255));
+  private color colour = color(random(0, 255), random(0, 255), random(0, 255));
   boolean isDead = false;
   Genome.Species species = Genome.random();
 

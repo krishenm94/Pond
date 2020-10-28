@@ -34,7 +34,8 @@ void drawMouse()
   {
     stroke(255);
     fill(255);
-  } else
+  } 
+  else
   {
     stroke(0);
     fill(0);

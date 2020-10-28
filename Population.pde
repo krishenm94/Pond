@@ -51,7 +51,6 @@ class Population
     }
 
     println("Total biomass: " + populationBiomass);
-    //println("Species size: " + organisms.size());
     println("Population size : " + organisms.size() + ", (Snakes, Worms): " + "(" + snakeCount +", " + wormCount + ")");
   }
 
@@ -106,7 +105,8 @@ class Population
         continue;
       }
 
-      if (other.species == organism.species) {
+      if (other.species == organism.species) 
+      {
         PVector otherVelocity = other.velocity();
         other.setVelocity(organism.velocity());
         organism.setVelocity(otherVelocity);
