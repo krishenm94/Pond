@@ -136,14 +136,14 @@ class Population
   boolean areMeeting(Organism org1, Organism org2)
   {
     float left1 = org1.displacement().x + org1.mass / OVERLAP_OFFSET_QUOTIENT;
-    float right1 = org1.displacement().x + org1.mass * (OVERLAP_OFFSET_QUOTIENT1) / OVERLAP_OFFSET_QUOTIENT;
+    float right1 = org1.displacement().x + org1.mass * (OVERLAP_OFFSET_QUOTIENT) / OVERLAP_OFFSET_QUOTIENT;
     float top1 = org1.displacement().y + org1.mass / OVERLAP_OFFSET_QUOTIENT;
-    float bottom1 = org1.displacement().y + org1.mass * (OVERLAP_OFFSET_QUOTIENT1) / OVERLAP_OFFSET_QUOTIENT;
+    float bottom1 = org1.displacement().y + org1.mass * (OVERLAP_OFFSET_QUOTIENT) / OVERLAP_OFFSET_QUOTIENT;
 
     float left2 = org2.displacement().x + org2.mass / OVERLAP_OFFSET_QUOTIENT;
-    float right2 = org2.displacement().x + org2.mass * (OVERLAP_OFFSET_QUOTIENT1) / OVERLAP_OFFSET_QUOTIENT;
+    float right2 = org2.displacement().x + org2.mass * (OVERLAP_OFFSET_QUOTIENT) / OVERLAP_OFFSET_QUOTIENT;
     float top2 = org2.displacement().y + org2.mass / OVERLAP_OFFSET_QUOTIENT;
-    float bottom2 = org2.displacement().y + org2.mass * (OVERLAP_OFFSET_QUOTIENT1) / OVERLAP_OFFSET_QUOTIENT;
+    float bottom2 = org2.displacement().y + org2.mass * (OVERLAP_OFFSET_QUOTIENT) / OVERLAP_OFFSET_QUOTIENT;
 
     if (left1 > right2 || left2 > right1 ||
       top1 > bottom2 || top2 > bottom1)

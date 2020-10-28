@@ -6,12 +6,12 @@ float EDIBILITY_FACTOR = 0.5;
 float MASS_LOWER_LIMIT = 5;
 float MASS_UPPER_LIMIT = 20;
 
-float PREDATOR_FACTOR = 0.5;
+float PREDATOR_FACTOR = 0.9;
 float TOO_STUFFED_TO_EAT_FACTOR = 5;
 
 class Organism
 {
-  private Motor mover;
+  private Motor motor;
   private float startMass = random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT);
   float mass = startMass;
   private color colour = color(random(0, 255), random(0, 255), random(0, 255));
@@ -47,7 +47,7 @@ class Organism
 
   private void init(PVector displacement)
   {
-    mover = new Motor(this, displacement, PVector.random2D());
+    motor = new Motor(this, displacement, PVector.random2D());
   }
 
   public void show()
@@ -68,7 +68,7 @@ class Organism
     
     paint.show(this, color( 0,255, 0), DRAW_PREDATION || DRAW_POST_CHOMP_GROWTH);
     
-    mass = this.mass  other.mass;
+    mass = this.mass - other.mass;
     paint.show(this, color(255, 0, 0), DRAW_PREDATION || DRAW_PREDATOR);
     mass = this.mass + other.mass;
     
@@ -77,27 +77,27 @@ class Organism
 
   PVector displacement()
   {
-    return mover.displacement;
+    return motor.displacement;
   }
 
   PVector velocity()
   {
-    return mover.velocity;
+    return motor.velocity;
   }
 
   void setVelocity(PVector vector)
   {
-    mover.velocity = vector;
+    motor.velocity = vector;
   }
 
   PVector acceleration()
   {
-    return mover.acceleration;
+    return motor.acceleration;
   }
 
   void setAcceleration(PVector vector)
   {
-    mover.acceleration = vector;
+    motor.acceleration = vector;
   }
 
   float howFat()
@@ -136,6 +136,6 @@ class Organism
 
   float timeOffset()
   {
-    return mover.timeOffset;
+    return motor.timeOffset;
   }
 }
