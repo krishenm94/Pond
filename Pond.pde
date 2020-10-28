@@ -17,7 +17,7 @@ void setup()
 
 void draw()
 {
-  //background(BACKGROUND);
+  background(BACKGROUND);
 
   population.update();
 

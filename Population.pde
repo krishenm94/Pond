@@ -148,39 +148,48 @@ class Population
       return false;
     }
 
-    float xOverlapL1R2 = left1 - right2;
-    float xOverlapR2L1 = left2 - right1;
-    float yOverlapT2B1 = top2 - bottom1;
-    float yOverlapT1B2 = top1 - bottom2;
+    paint.show(org1, WHITE);
+    paint.show(org2, WHITE);
+
+    float xOverlapR2L1 = right2 - left1;
+    float xOverlapR1L2 = right1 - left2;
+    float yOverlapB1T2 = bottom1 - top2;
+    float yOverlapB2T1 = bottom2  - top1;
 
     // TODO: Use mass to determine ratio
+    int offset = 0;
 
-    if (xOverlapL1R2 < 0)
+    if (xOverlapR2L1 > 0 && xOverlapR2L1 <= xOverlapR1L2)
     {
-      org1.displacement().add(xOverlapL1R2/2, 0);
-      org2.displacement().add(-xOverlapL1R2/2, 0);
+      float overlap = xOverlapR2L1 + offset;
+      org1.displacement().add(overlap/2, 0);
+      org2.displacement().add(-overlap/2, 0);
     } 
-    if (xOverlapR2L1 < 0)
+    else if (xOverlapR1L2 > 0  && xOverlapR1L2 <= xOverlapR2L1)
     {
-      org1.displacement().add(-xOverlapR2L1/4, 0);
-      org2.displacement().add(xOverlapR2L1/4, 0);
+      float overlap = xOverlapR1L2 + offset;
+      org1.displacement().add(-overlap/2, 0);
+      org2.displacement().add(overlap/2, 0);
     }  
-    if (yOverlapT2B1 < 0)
+
+    if (yOverlapB1T2 > 0 && yOverlapB1T2 <= yOverlapB2T1)
     {
-      org1.displacement().add(0, -yOverlapT2B1/4);
-      org2.displacement().add(0, yOverlapT2B1/4);
+      float overlap = yOverlapB1T2 + offset;
+      org1.displacement().add(0, -overlap/2);
+      org2.displacement().add(0, overlap/2);
     } 
-    if (yOverlapT1B2 < 0)
+    else if (yOverlapB2T1 > 0 && yOverlapB2T1 <= yOverlapB1T2)
     {
-      org1.displacement().add(0, yOverlapT1B2/4);
-      org2.displacement().add(0, -yOverlapT1B2/4);
+      float overlap = yOverlapB2T1 + offset;
+      org1.displacement().add(0, overlap/2);
+      org2.displacement().add(0, -overlap/2);
     }
 
     return true;
   }
 
-  //  private void moveOutOfOverlap()
+  // private void moveOutOfOverlap()
   //{
-  //  float xOverlap = 
+  // float xOverlap = 
   //}
 }

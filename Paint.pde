@@ -9,6 +9,13 @@ boolean DRAW_POST_CHOMP_GROWTH = false;
 
 boolean DRAW_ORGANISM = true;
 
+color RED = color(255, 0, 0);
+color GREEN = color(0, 255, 0);
+color BLUE = color(0, 0, 255);
+color VIOLET = color(255, 0, 255);
+color BLACK = 0;
+color WHITE = 255;
+
 class Paint
 {
   Paint()
@@ -22,8 +29,8 @@ class Paint
       return;
     }
 
-    stroke(organism.colour, 140);
-    fill(organism.colour, 100);
+    stroke(organism.colour, 40);
+    fill(organism.colour, 20);
 
     //if (organism.species == Genome.Species.Snake)
     //{
@@ -52,5 +59,10 @@ class Paint
     rect(organism.displacement().x - organism.mass / 2
       , organism.displacement().y - organism.mass / 2
       , organism.mass, organism.mass);
+  }
+
+  void show(Organism organism, color colour)
+  {
+    show(organism, colour, true);
   }
 }
