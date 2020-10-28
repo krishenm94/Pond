@@ -1,7 +1,5 @@
 import java.util.*; 
 
-int OVERLAP_OFFSET_QUOTIENT = 6;
-
 float HOW_FAT_TO_MAKE_BABY_MULTIPLIER = 0.05;
 
 class Population
@@ -41,12 +39,11 @@ class Population
       organism.move();
 
       populationBiomass += organism.mass;
-      
-      if(organism.species == Genome.Species.Snake)
+
+      if (organism.species == Genome.Species.Snake)
       {
         snakeCount++;
-      }
-      else
+      } else
       {
         wormCount++;
       }
@@ -135,15 +132,15 @@ class Population
 
   boolean areMeeting(Organism org1, Organism org2)
   {
-    float left1 = org1.displacement().x + org1.mass / OVERLAP_OFFSET_QUOTIENT;
-    float right1 = org1.displacement().x + org1.mass * (OVERLAP_OFFSET_QUOTIENT) / OVERLAP_OFFSET_QUOTIENT;
-    float top1 = org1.displacement().y + org1.mass / OVERLAP_OFFSET_QUOTIENT;
-    float bottom1 = org1.displacement().y + org1.mass * (OVERLAP_OFFSET_QUOTIENT) / OVERLAP_OFFSET_QUOTIENT;
+    float left1 = org1.displacement().x - org1.mass;
+    float right1 = org1.displacement().x + org1.mass;
+    float top1 = org1.displacement().y - org1.mass;
+    float bottom1 = org1.displacement().y + org1.mass;
 
-    float left2 = org2.displacement().x + org2.mass / OVERLAP_OFFSET_QUOTIENT;
-    float right2 = org2.displacement().x + org2.mass * (OVERLAP_OFFSET_QUOTIENT) / OVERLAP_OFFSET_QUOTIENT;
-    float top2 = org2.displacement().y + org2.mass / OVERLAP_OFFSET_QUOTIENT;
-    float bottom2 = org2.displacement().y + org2.mass * (OVERLAP_OFFSET_QUOTIENT) / OVERLAP_OFFSET_QUOTIENT;
+    float left2 = org2.displacement().x - org2.mass;
+    float right2 = org2.displacement().x + org2.mass;
+    float top2 = org2.displacement().y - org2.mass;
+    float bottom2 = org2.displacement().y + org2.mass;
 
     if (left1 > right2 || left2 > right1 ||
       top1 > bottom2 || top2 > bottom1)

@@ -22,19 +22,19 @@ class Paint
       return;
     }
 
-    stroke(organism.colour, 40);
-    fill(organism.colour, 25);
+    stroke(organism.colour, 140);
+    fill(organism.colour, 100);
 
-    if (organism.species == Genome.Species.Snake)
+    //if (organism.species == Genome.Species.Snake)
+    //{
+    //  //stroke(0);
+    //  ellipse(organism.displacement().x, organism.displacement().y, 
+    //    0.5 * (sin(CLOCK + organism.timeOffset())* organism.mass) + organism.mass, organism.mass);
+    //} else
     {
       //stroke(0);
-      ellipse(organism.displacement().x, organism.displacement().y, 
-        0.5 * (sin(CLOCK + organism.timeOffset())* organism.mass) + organism.mass, organism.mass);
-    } else
-    {
-      //stroke(0);
-      ellipse(organism.displacement().x - organism.mass/2, 
-        organism.displacement().y - organism.mass/2, 
+      ellipse(organism.displacement().x, 
+        organism.displacement().y, 
         organism.mass, 
         organism.mass);
     }

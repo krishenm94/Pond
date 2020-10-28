@@ -3,8 +3,8 @@ float PROJECTILE_DELIVERY_FACTOR = 1.0;
 float MUTATION_CHANCE_BOUNDARY = 0.8;
 float EDIBILITY_FACTOR = 0.5;
 
-float MASS_LOWER_LIMIT = 5;
-float MASS_UPPER_LIMIT = 20;
+float MASS_LOWER_LIMIT = 10;
+float MASS_UPPER_LIMIT = 50;
 
 float PREDATOR_FACTOR = 0.9;
 float TOO_STUFFED_TO_EAT_FACTOR = 5;
@@ -15,7 +15,7 @@ class Organism
   private float startMass = random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT);
   float mass = startMass;
   private color colour = color(random(0, 255), random(0, 255), random(0, 255));
-  
+
   boolean isDead = false;
   Genome.Species species = Genome.random();
   Organism collidingWith; // Make this a List
@@ -27,7 +27,7 @@ class Organism
 
   void move()
   {
-    motor.move();
+    motor.update();
   }
 
   public Organism(PVector displacement, color _colour)
@@ -65,13 +65,13 @@ class Organism
 
     mass = this.mass + other.mass;
     other.isDead = true;
-    
-    paint.show(this, color( 0,255, 0), DRAW_PREDATION || DRAW_POST_CHOMP_GROWTH);
-    
+
+    paint.show(this, color( 0, 255, 0), DRAW_PREDATION || DRAW_POST_CHOMP_GROWTH);
+
     mass = this.mass - other.mass;
     paint.show(this, color(255, 0, 0), DRAW_PREDATION || DRAW_PREDATOR);
     mass = this.mass + other.mass;
-    
+
     paint.show(other, color(255), DRAW_PREDATION || DRAW_DEAD);
   }
 

@@ -12,12 +12,12 @@ void setup()
   background(BACKGROUND);
   smooth();
 
-  population.init(300);
+  population.init(100);
 }
 
 void draw()
 {
-  //background(BACKGROUND);
+  background(BACKGROUND);
 
   population.update();
 
@@ -32,8 +32,7 @@ void drawMouse()
   {
     stroke(255);
     fill(255);
-  } 
-  else
+  } else
   {
     stroke(0);
     fill(0);

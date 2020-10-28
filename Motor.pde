@@ -24,7 +24,6 @@ class Motor {
 
   public void update()
   {
-
     move();
     clampToCanvas();
     bounceIfOrganismCollision();
@@ -140,6 +139,8 @@ class Motor {
     {
       return;
     }
+    
+    
     Organism other = self.collidingWith;
     PVector otherVelocity = other.velocity();
     other.setVelocity(self.velocity());
