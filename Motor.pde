@@ -8,15 +8,15 @@ float STAGNANT_VELOCITY = 1;
 
 class Motor {
   private Organism body;
-  float mass;
+
   PVector displacement;
   PVector velocity;
   PVector acceleration;
   float timeOffset = random(0, CLOCK_MAX);
 
-  public Motor(float startMass, PVector startDisplacement, PVector startVelocity)
+  public Motor(Organism organism, PVector startDisplacement, PVector startVelocity)
   {
-    mass = startMass;
+    body = organism;
     displacement = startDisplacement;
     velocity = startVelocity;
     acceleration = new PVector(0, 0);
