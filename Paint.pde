@@ -9,7 +9,7 @@ boolean DRAW_POST_CHOMP_GROWTH = false;
 
 boolean DRAW_ORGANISM = true;
 
-boolean DRAW_OVERLAP = false;
+boolean DRAW_OVERLAP = true;
 
 color RED = color(255, 0, 0);
 color GREEN = color(0, 255, 0);

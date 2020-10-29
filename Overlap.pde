@@ -1,4 +1,4 @@
-boolean MOVE_OUT_OF_OVERLAP = false;
+boolean MOVE_OUT_OF_OVERLAP = true;
 
 static class _Overlap {
 

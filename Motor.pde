@@ -76,7 +76,7 @@ class Motor {
     }
 
 
-    PVector velocityNormal = new PVector(velocity.x, velocity.y);
+    PVector velocityNormal = velocity.copy();
     velocityNormal.rotate(90);
     velocityNormal.mult(sin(CLOCK + timeOffset));
     velocityNormal.mult(SLITHER_FACTOR);
@@ -143,16 +143,43 @@ class Motor {
 
     Organism other = self.collidingWith;
 
-    PVector velocityCopy = velocity;
-    PVector otherToSelfVector = velocityCopy.sub(other.displacement());
+    PVector displacementCopy = displacement.copy();
+    PVector otherToSelfVector = displacementCopy.sub(other.displacement());
     otherToSelfVector.normalize();
-    PVector selfToOtherVector = otherToSelfVector.mult(-1);
 
-    velocity = otherToSelfVector.mult(velocity.mag());
-    other.setVelocity(selfToOtherVector.mult(other.velocity().mag()));
+    stroke(RED);
+    line(displacement.x, displacement.y, displacement.x + (velocity.x * 100), displacement.y + (velocity.y*100));
 
-    //other.setAcceleration(other.acceleration().add(self.acceleration()).div(2));
-    //self.setAcceleration(other.acceleration().mult(-1));
+    stroke(BLUE);
+    line(other.displacement().x, other.displacement().y, 
+      other.displacement().x + (other.velocity().x * 100), 
+      other.displacement().y + (other.velocity().y*100));
+
+    PVector newVelocity = otherToSelfVector.copy();
+    newVelocity.mult(velocity.mag());
+    velocity = newVelocity;
+
+    stroke(GREEN);
+    line(displacement.x, displacement.y, displacement.x + (velocity.x * 100), displacement.y + (velocity.y*100));
+
+    PVector newOtherVelocity = otherToSelfVector.copy();
+    newOtherVelocity.mult(-1);
+    newOtherVelocity.mult(other.velocity().mag());
+    other.setVelocity(newOtherVelocity);
+
+    stroke(MAROON);
+    line(other.displacement().x, other.displacement().y, 
+      other.displacement().x + (other.velocity().x * 100), 
+      other.displacement().y + (other.velocity().y*100));
+
+//     PVector newAcceleration = otherToSelfVector.copy();
+//     newAcceleration.mult(acceleration.mag());
+    // other.setAcceleration(newAcceleration);
+
+    // PVector newOtherAcceleration = otherToSelfVector;
+    // newOtherAcceleration.mult(-1);
+    // newOtherAcceleration.mult(other.velocity().mag());
+    // other.setAcceleration(newOtherAcceleration);
 
     other.collidingWith = null;
     self.collidingWith = null;
