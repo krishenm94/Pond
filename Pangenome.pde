@@ -1,21 +1,29 @@
 import java.util.Random;
 
-static class Genome
-{
   enum Species {
-    Algae, 
-      Fish, 
-      Snake
-  }
+  Algae, 
+  Fish, 
+  Snake
+}
 
-  static final List<Species> GENOME =
-    Collections.unmodifiableList(Arrays.asList(Species.values()));
+static class Pangenome
+{
+
+  static final List<Species> SPECIES_LIST =
+  Collections.unmodifiableList(Arrays.asList(Species.values()));
   private static final Random RANDOM = new Random();
 
-  static Species random()
+  static Species randomSpecies()
   {
-    return GENOME.get(RANDOM.nextInt(GENOME.size()));
+    return SPECIES_LIST.get(RANDOM.nextInt(SPECIES_LIST.size()));
   }
+}
+
+// TODO: Create subclasses of `Genome` to 
+// implement different `Gene` combinations
+static class Genome
+{
+
 }
 
 class Gene

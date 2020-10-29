@@ -16,7 +16,7 @@ class Organism
   private color colour;
 
   boolean isDead = false;
-  Genome.Species species;
+  Species species;
   Organism collidingWith; // TODO: Make this a List
 
   boolean canIEat(Organism other)
@@ -29,12 +29,12 @@ class Organism
     motor.update();
   }
 
-  private Organism(PVector displacement, Genome.Species _species)
+  private Organism(PVector displacement, Species _species)
   {
     this(random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT), displacement, _species);
   }
 
-  public Organism(float _mass, PVector displacement, Genome.Species _species)
+  public Organism(float _mass, PVector displacement, Species _species)
   {
     mass = _mass;
     species = _species;
