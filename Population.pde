@@ -130,66 +130,21 @@ class Population
     organisms.removeElement(organism);
   }
 
-  boolean areMeeting(Organism org1, Organism org2)
+  boolean areMeeting(Organism organism1, Organism organism2)
   {
-    float left1 = org1.displacement().x - org1.mass/2;
-    float right1 = org1.displacement().x + org1.mass/2;
-    float top1 = org1.displacement().y - org1.mass/2;
-    float bottom1 = org1.displacement().y + org1.mass/2;
+    Overlap overlap = new Overlap(organism1, organism2);
 
-    float left2 = org2.displacement().x - org2.mass/2;
-    float right2 = org2.displacement().x + org2.mass/2;
-    float top2 = org2.displacement().y - org2.mass/2;
-    float bottom2 = org2.displacement().y + org2.mass/2;
+    overlap.moveOut();
 
-    if (left1 > right2 || left2 > right1 ||
-      top1 > bottom2 || top2 > bottom1)
+    boolean isOverlapping = overlap.type == _Overlap.Type.None? false : true;
+
+    if (isOverlapping)
     {
-      return false;
+      painter.show(organism1, WHITE, DRAW_OVERLAP);
+      painter.show(organism2, WHITE, DRAW_OVERLAP);
     }
-
-    paint.show(org1, WHITE);
-    paint.show(org2, WHITE);
-
-    float xOverlapR2L1 = right2 - left1;
-    float xOverlapR1L2 = right1 - left2;
-    float yOverlapB1T2 = bottom1 - top2;
-    float yOverlapB2T1 = bottom2  - top1;
-
-    // TODO: Use mass to determine ratio
-    int offset = 0;
-
-    if (xOverlapR2L1 > 0 && xOverlapR2L1 <= xOverlapR1L2)
-    {
-      float overlap = xOverlapR2L1 + offset;
-      org1.displacement().add(overlap/2, 0);
-      org2.displacement().add(-overlap/2, 0);
-    } 
-    else if (xOverlapR1L2 > 0  && xOverlapR1L2 <= xOverlapR2L1)
-    {
-      float overlap = xOverlapR1L2 + offset;
-      org1.displacement().add(-overlap/2, 0);
-      org2.displacement().add(overlap/2, 0);
-    }  
-
-    if (yOverlapB1T2 > 0 && yOverlapB1T2 <= yOverlapB2T1)
-    {
-      float overlap = yOverlapB1T2 + offset;
-      org1.displacement().add(0, -overlap/2);
-      org2.displacement().add(0, overlap/2);
-    } 
-    else if (yOverlapB2T1 > 0 && yOverlapB2T1 <= yOverlapB1T2)
-    {
-      float overlap = yOverlapB2T1 + offset;
-      org1.displacement().add(0, overlap/2);
-      org2.displacement().add(0, -overlap/2);
-    }
-
-    return true;
+    
+    return isOverlapping;
   }
-
-  // private void moveOutOfOverlap()
-  //{
-  // float xOverlap = 
-  //}
 }
+

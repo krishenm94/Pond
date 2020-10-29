@@ -9,16 +9,18 @@ boolean DRAW_POST_CHOMP_GROWTH = false;
 
 boolean DRAW_ORGANISM = true;
 
+boolean DRAW_OVERLAP = true;
+
 color RED = color(255, 0, 0);
 color GREEN = color(0, 255, 0);
 color BLUE = color(0, 0, 255);
-color VIOLET = color(255, 0, 255);
+color MAROON = color(255, 0, 255);
 color BLACK = 0;
 color WHITE = 255;
 
-class Paint
+class Painter
 {
-  Paint()
+  Painter()
   {
   }
 

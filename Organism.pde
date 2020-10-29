@@ -51,7 +51,7 @@ class Organism
 
   public void show()
   {
-    paint.show(this);
+    painter.show(this);
   }
 
   void chomp(Organism other)
@@ -65,13 +65,13 @@ class Organism
     mass = this.mass + other.mass;
     other.isDead = true;
 
-    paint.show(this, color( 0, 255, 0), DRAW_PREDATION || DRAW_POST_CHOMP_GROWTH);
+    painter.show(this, color( 0, 255, 0), DRAW_PREDATION || DRAW_POST_CHOMP_GROWTH);
 
     mass = this.mass - other.mass;
-    paint.show(this, color(255, 0, 0), DRAW_PREDATION || DRAW_PREDATOR);
+    painter.show(this, color(255, 0, 0), DRAW_PREDATION || DRAW_PREDATOR);
     mass = this.mass + other.mass;
 
-    paint.show(other, color(255), DRAW_PREDATION || DRAW_DEAD);
+    painter.show(other, color(255), DRAW_PREDATION || DRAW_DEAD);
   }
 
   PVector displacement()
@@ -124,7 +124,7 @@ class Organism
       childColour = color(random(0, 255), random(0, 255), random(0, 255));
     } 
 
-    paint.show(this, color(0, 255, 255), DRAW_BIRTH);
+    painter.show(this, color(0, 255, 255), DRAW_BIRTH);
 
     Organism baby = new Organism(displacement, childColour);
     baby.setVelocity(baby.velocity().mult(PROJECTILE_DELIVERY_FACTOR));
@@ -132,8 +132,8 @@ class Organism
     baby.species = this.species;
     this.mass = mass - baby.mass;
 
-    paint.show(this, color(0, 70, 180), DRAW_BIRTH || DRAW_DADDY);
-    paint.show(baby, color(0, 150, 25), DRAW_BIRTH || DRAW_BABY);
+    painter.show(this, color(0, 70, 180), DRAW_BIRTH || DRAW_DADDY);
+    painter.show(baby, color(0, 150, 25), DRAW_BIRTH || DRAW_BABY);
 
     return baby;
   }

@@ -4,15 +4,15 @@ float CLOCK_MAX = 360;
 float CLOCK_INCREMENT = 0.1;
 
 Population population = new Population();
-Paint paint = new Paint();
+Painter painter = new Painter();
 
 void setup()
 {
-  size(1000, 500);
+  size(500, 500);
   background(BACKGROUND);
   smooth();
 
-  population.init(150);
+  population.init(100);
 }
 
 void draw()
