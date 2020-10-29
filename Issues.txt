@@ -8,3 +8,7 @@
 
 3. Store a list of Overlaps in Organism
     a. may not be required because handling collisions of two bodies ata time seems enough
+
+4. Implement shape accurate collision detection
+    a. Currently all overlap detection is based on a bounding rect
+    b. Reference: http://jeffreythompson.org/collision-detection/circle-rect.php

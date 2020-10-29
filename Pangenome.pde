@@ -1,8 +1,8 @@
 import java.util.Random;
 
   enum Species {
-  //Algae, 
-  //Fish, 
+  Algae, 
+  Fish, 
   Snake
 }
 
@@ -16,6 +16,11 @@ static class Pangenome
   static Species randomSpecies()
   {
     return SPECIES_LIST.get(RANDOM.nextInt(SPECIES_LIST.size()));
+  }
+
+  static Genome createGenome(Species species)
+  {
+    
   }
 }
 
