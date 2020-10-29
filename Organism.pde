@@ -13,7 +13,7 @@ float HOW_FAT_TO_MAKE_BABY_MULTIPLIER = 0.05;
 class Organism
 {
   private Motor motor;
-  private Dna = 
+  private Dna dna;
   private float startMass = random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT);
   float mass = startMass;
 
