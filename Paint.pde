@@ -11,6 +11,9 @@ boolean DRAW_ORGANISM = true;
 
 boolean DRAW_OVERLAP = true;
 
+boolean DEBUG_RECT = false;
+boolean DEBUG_ELLIPSE = true;
+
 color RED = color(255, 0, 0);
 color GREEN = color(0, 255, 0);
 color BLUE = color(0, 0, 255);
@@ -31,8 +34,8 @@ class Painter
       return;
     }
 
-    stroke(organism.colour, 30);
-    fill(organism.colour, 20);
+    stroke(organism.colour);
+    fill(organism.colour);
 
     ellipse(organism.displacement().x, 
       organism.displacement().y, 
@@ -49,9 +52,21 @@ class Painter
 
     stroke(0);
     fill(colour);
-    rect(organism.displacement().x - organism.mass / 2
-      , organism.displacement().y - organism.mass / 2
-      , organism.mass, organism.mass);
+
+    if (DEBUG_ELLIPSE)
+    {
+
+      ellipse(organism.displacement().x
+        , organism.displacement().y
+        , organism.mass, organism.mass);
+    }
+ 
+    if (DEBUG_RECT)
+    {
+      rect(organism.displacement().x - organism.mass / 2
+        , organism.displacement().y - organism.mass / 2
+        , organism.mass, organism.mass);
+    }
   }
 
   void show(Organism organism, color colour)

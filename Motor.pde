@@ -75,7 +75,6 @@ class Motor {
       velocity.mult(STAGNANT_VELOCITY / velocity.mag());
     }
 
-
     PVector velocityNormal = velocity.copy();
     velocityNormal.rotate(90);
     velocityNormal.mult(sin(CLOCK + timeOffset));
@@ -143,43 +142,51 @@ class Motor {
 
     Organism other = self.collidingWith;
 
-    PVector displacementCopy = displacement.copy();
-    PVector otherToSelfVector = displacementCopy.sub(other.displacement());
-    otherToSelfVector.normalize();
+    PVector otherToSelfVector = displacement.copy().sub(other.displacement());
+
+    PVector otherToSelfUnitVector = otherToSelfVector.copy().normalize();
 
     stroke(RED);
-    line(displacement.x, displacement.y, displacement.x + (velocity.x * 100), displacement.y + (velocity.y*100));
+    line(displacement.x, 
+      displacement.y, 
+      displacement.x + (velocity.x * 100), 
+      displacement.y + (velocity.y*100));
 
     stroke(BLUE);
-    line(other.displacement().x, other.displacement().y, 
+    line(other.displacement().x, 
+      other.displacement().y, 
       other.displacement().x + (other.velocity().x * 100), 
       other.displacement().y + (other.velocity().y*100));
 
-    PVector newVelocity = otherToSelfVector.copy();
-    newVelocity.mult(velocity.mag());
+    // For proof on perfectly inelastic collision of balls:
+    // https://stackoverflow.com/questions/35211114/2d-elastic-ball-collision-physics
+    ////////////////////////////////////////////////////////
+    PVector newVelocity = otherToSelfUnitVector.copy();
+    newVelocity.mult(other.mass * 2 / (other.mass + mass()));
+    newVelocity.mult(otherToSelfUnitVector.dot(velocity.copy().sub(other.velocity())));
+    newVelocity = velocity.copy().sub(newVelocity);
+
+    PVector selfToOtherUnitVector = otherToSelfUnitVector.copy().mult(-1);
+    PVector newOtherVelocity = selfToOtherUnitVector.copy();
+    newOtherVelocity.mult(mass() * 2 / (other.mass + mass()));
+    newOtherVelocity.mult(selfToOtherUnitVector.dot(other.velocity().copy().sub(velocity)));
+    newOtherVelocity = other.velocity().copy().sub(newOtherVelocity);
+
     velocity = newVelocity;
-
-    stroke(GREEN);
-    line(displacement.x, displacement.y, displacement.x + (velocity.x * 100), displacement.y + (velocity.y*100));
-
-    PVector newOtherVelocity = otherToSelfVector.copy();
-    newOtherVelocity.mult(-1);
-    newOtherVelocity.mult(other.velocity().mag());
     other.setVelocity(newOtherVelocity);
 
+    ///////////////////////////////////////////////////////////
+    stroke(GREEN);
+    line(displacement.x, 
+      displacement.y, 
+      displacement.x + (velocity.x * 100), 
+      displacement.y + (velocity.y*100));
+
     stroke(MAROON);
-    line(other.displacement().x, other.displacement().y, 
+    line(other.displacement().x, 
+      other.displacement().y, 
       other.displacement().x + (other.velocity().x * 100), 
       other.displacement().y + (other.velocity().y*100));
-
-//     PVector newAcceleration = otherToSelfVector.copy();
-//     newAcceleration.mult(acceleration.mag());
-    // other.setAcceleration(newAcceleration);
-
-    // PVector newOtherAcceleration = otherToSelfVector;
-    // newOtherAcceleration.mult(-1);
-    // newOtherAcceleration.mult(other.velocity().mag());
-    // other.setAcceleration(newOtherAcceleration);
 
     other.collidingWith = null;
     self.collidingWith = null;

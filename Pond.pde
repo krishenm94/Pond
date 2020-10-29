@@ -19,6 +19,15 @@ void setup()
   background(BACKGROUND);
   smooth();
 
+  PVector x = new PVector(1, 0);
+  PVector v135 = new PVector(-1, 1);
+  PVector v225 = new PVector(-1, -1);
+  
+  float th135 =PVector.angleBetween(v135, x);
+  float th225 =PVector.angleBetween(v225, x);
+  
+  println("th135: " + degrees(th135));
+  println("th225: " + degrees(th225));
   population.init(POPULATION_SIZE);
 }
 

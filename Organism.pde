@@ -13,7 +13,8 @@ class Organism
   private Motor motor;
   private float startMass = random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT);
   float mass = startMass;
-  private color colour = color(0,0,0,0);
+  private color colour = color(0,0,0,1); 
+// private color colour = color(random(0, 255), random(0, 255), random(0, 255))
 
   boolean isDead = false;
   Species species;
@@ -21,9 +22,9 @@ class Organism
 
   boolean canIEat(Organism other)
   {
-    return this.mass * PREDATOR_FACTOR > other.mass && !other.isDead && 
-    this.mass < this.startMass * TOO_STUFFED_TO_EAT_FACTOR
-    ;
+    return this.mass * PREDATOR_FACTOR > other.mass &&
+    !other.isDead && 
+    this.mass < this.startMass * TOO_STUFFED_TO_EAT_FACTOR;
   }
 
   void move()
