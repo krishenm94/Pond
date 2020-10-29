@@ -20,14 +20,21 @@ static class Genome
 
 class Gene
 {
-  boolean isDominant;
-  float value;
-  
-  
+  float value;  
 }
 
 class DNA
 {
+  private color colour;
+  float predatorFactor;
+  
+  int reproductionMultiplier;
+  int maturityFactor;
+  float fullnessMultiplier;
+  
+  float lowerMassLimit;
+  float upperMassLimit;
+  
   public DNA()
   {
   }

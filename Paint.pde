@@ -31,38 +31,13 @@ class Painter
       return;
     }
 
-    //stroke(organism.colour, 40);
-    //fill(organism.colour, 20);
+    stroke(organism.colour, 30);
+    fill(organism.colour, 20);
 
-
-    if (organism.species == Genome.Species.Snake)
-    {
-      stroke(255, 0, 0, 30);
-      fill(255, 0, 0, 20);
-    } else if (organism.species == Genome.Species.Algae)
-    {
-      stroke(0, 180, 0, 30);
-      fill(0, 180, 0, 20);
-    } else
-    {
-      stroke(0, 0, 120, 30);
-      fill(0, 50, 120, 20);
-    }
-
-
-    //if (organism.species == Genome.Species.Snake)
-    //{
-    //  //stroke(0);
-    //  ellipse(organism.displacement().x, organism.displacement().y, 
-    //    0.5 * (sin(CLOCK + organism.timeOffset())* organism.mass) + organism.mass, organism.mass);
-    //} else
-    {
-      //stroke(0);
-      ellipse(organism.displacement().x, 
-        organism.displacement().y, 
-        organism.mass, 
-        organism.mass);
-    }
+    ellipse(organism.displacement().x, 
+      organism.displacement().y, 
+      organism.mass, 
+      organism.mass);
   }
 
   void show(Organism organism, color colour, boolean FLAG)

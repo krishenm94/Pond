@@ -26,7 +26,7 @@ class Motor {
   {
     move();
     clampToCanvas();
-    //bounceIfOrganismCollision();
+    bounceIfOrganismCollision();
     bounceIfWallCollision();
   }
 

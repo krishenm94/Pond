@@ -21,7 +21,7 @@ class Population
 
   public void add()
   {
-    add(new Organism(randomDisplacement() Genome.random()));
+    add(new Organism(randomDisplacement(), PanGenome.random()));
   }
 
   PVector randomDisplacement()
@@ -37,10 +37,10 @@ class Population
     feedingTime();
     babyTime();
 
-    //int speciesCount = 0;
     int wormCount = 0;
     int snakeCount = 0;
     float populationBiomass = 0;
+    
     for (Organism organism : organisms)
     {  
       organism.show();
@@ -48,7 +48,7 @@ class Population
 
       populationBiomass += organism.mass;
 
-      if (organism.species == Genome.Species.Snake)
+      if (organism.species == PanGenome.Species.Snake)
       {
         snakeCount++;
       } else

@@ -13,7 +13,7 @@ class Organism
   private Motor motor;
   private float startMass = random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT);
   float mass = startMass;
-  private color colour = color(random(0, 255), random(0, 255), random(0, 255));
+  private color colour;
 
   boolean isDead = false;
   Genome.Species species;
