@@ -16,7 +16,7 @@ class Organism
   private color colour = color(random(0, 255), random(0, 255), random(0, 255));
 
   boolean isDead = false;
-  Genome.Species species = Genome.random();
+  Genome.Species species;
   Organism collidingWith; // TODO: Make this a List
 
   boolean canIEat(Organism other)
@@ -29,23 +29,15 @@ class Organism
     motor.update();
   }
 
-  public Organism(PVector displacement, color _colour)
+  private Organism(PVector displacement, Genome.Species _species)
   {
-    init(displacement);
-    colour = _colour;
+    this(random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT), displacement, _species);
   }
 
-  public Organism()
+  public Organism(float _mass, PVector displacement, Genome.Species _species)
   {
-    PVector displacement = new PVector();
-    displacement.x = random(0, width);
-    displacement.y = random(0, height);
-
-    init(displacement);
-  }
-
-  private void init(PVector displacement)
-  {
+    mass = _mass;
+    species = _species;
     motor = new Motor(this, displacement, PVector.random2D());
   }
 
@@ -111,26 +103,17 @@ class Organism
 
   Organism makeBaby()
   {
-    PVector displacement = PVector.random2D();
-
-    float newMass = mass * (1 - FISSION_FACTOR);
-
-    displacement.mult(newMass * PROJECTILE_DELIVERY_FACTOR);
-    displacement.add(this.displacement());
-
-    color childColour = colour;
-    if ( MUTATION_CHANCE_BOUNDARY < random(0, 1))
-    {
-      childColour = color(random(0, 255), random(0, 255), random(0, 255));
-    } 
-
     painter.show(this, color(0, 255, 255), DRAW_BIRTH);
 
-    Organism baby = new Organism(displacement, childColour);
+    PVector displacement = PVector.random2D();
+    displacement.mult(this.mass* PROJECTILE_DELIVERY_FACTOR);
+    displacement.add(this.displacement());
+    
+    Organism baby = new Organism(this.mass * FISSION_FACTOR, displacement, this.species);
+    
     baby.setVelocity(baby.velocity().mult(PROJECTILE_DELIVERY_FACTOR));
-    baby.mass = mass * FISSION_FACTOR;
-    baby.species = this.species;
-    this.mass = mass - baby.mass;
+    
+    this.mass = this.mass - baby.mass;
 
     painter.show(this, color(0, 70, 180), DRAW_BIRTH || DRAW_DADDY);
     painter.show(baby, color(0, 150, 25), DRAW_BIRTH || DRAW_BABY);

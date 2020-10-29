@@ -21,7 +21,15 @@ class Population
 
   public void add()
   {
-    add(new Organism());
+    add(new Organism(randomDisplacement() Genome.random()));
+  }
+
+  PVector randomDisplacement()
+  {
+    PVector displacement = new PVector();
+    displacement.x = random(0, width);
+    displacement.y = random(0, height);
+    return displacement;
   }
 
   public void update()
@@ -133,9 +141,7 @@ class Population
   boolean areMeeting(Organism organism1, Organism organism2)
   {
     Overlap overlap = new Overlap(organism1, organism2);
-
-    overlap.moveOut();
-
+    
     boolean isOverlapping = overlap.type == _Overlap.Type.None? false : true;
 
     if (isOverlapping)
@@ -147,4 +153,3 @@ class Population
     return isOverlapping;
   }
 }
-

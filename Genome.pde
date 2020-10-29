@@ -3,7 +3,8 @@ import java.util.Random;
 static class Genome
 {
   enum Species {
-    Worm, 
+    Algae, 
+      Fish, 
       Snake
   }
 
@@ -14,5 +15,20 @@ static class Genome
   static Species random()
   {
     return GENOME.get(RANDOM.nextInt(GENOME.size()));
+  }
+}
+
+class Gene
+{
+  boolean isDominant;
+  float value;
+  
+  
+}
+
+class DNA
+{
+  public DNA()
+  {
   }
 }

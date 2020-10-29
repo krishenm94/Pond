@@ -9,7 +9,7 @@ boolean DRAW_POST_CHOMP_GROWTH = false;
 
 boolean DRAW_ORGANISM = true;
 
-boolean DRAW_OVERLAP = true;
+boolean DRAW_OVERLAP = false;
 
 color RED = color(255, 0, 0);
 color GREEN = color(0, 255, 0);
@@ -31,8 +31,24 @@ class Painter
       return;
     }
 
-    stroke(organism.colour, 40);
-    fill(organism.colour, 20);
+    //stroke(organism.colour, 40);
+    //fill(organism.colour, 20);
+
+
+    if (organism.species == Genome.Species.Snake)
+    {
+      stroke(255, 0, 0, 30);
+      fill(255, 0, 0, 20);
+    } else if (organism.species == Genome.Species.Algae)
+    {
+      stroke(0, 180, 0, 30);
+      fill(0, 180, 0, 20);
+    } else
+    {
+      stroke(0, 0, 120, 30);
+      fill(0, 50, 120, 20);
+    }
+
 
     //if (organism.species == Genome.Species.Snake)
     //{

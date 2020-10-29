@@ -3,21 +3,26 @@ float CLOCK = 0;
 float CLOCK_MAX = 360;
 float CLOCK_INCREMENT = 0.1;
 
+boolean BLUR = true;
+
 Population population = new Population();
 Painter painter = new Painter();
 
 void setup()
 {
-  size(500, 500);
+  size(1200, 500);
   background(BACKGROUND);
   smooth();
 
-  population.init(100);
+  population.init(600);
 }
 
 void draw()
 {
-  background(BACKGROUND);
+  if (!BLUR)
+  {
+    background(BACKGROUND);
+  }
 
   population.update();
 
