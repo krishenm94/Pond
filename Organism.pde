@@ -2,8 +2,8 @@ float FISSION_FACTOR = 0.4;
 float PROJECTILE_DELIVERY_FACTOR = 1.0;
 float MUTATION_CHANCE_BOUNDARY = 0.8;
 
-float MASS_LOWER_LIMIT = 50;
-float MASS_UPPER_LIMIT = 50;
+float MASS_LOWER_LIMIT = 5;
+float MASS_UPPER_LIMIT = 30;
 
 float PREDATOR_FACTOR = 0.5;
 float TOO_STUFFED_TO_EAT_FACTOR = 5;
@@ -13,8 +13,8 @@ class Organism
   private Motor motor;
   private float startMass = random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT);
   float mass = startMass;
-  private color colour = color(0,0,0,1); 
-// private color colour = color(random(0, 255), random(0, 255), random(0, 255))
+  //private color colour = color(0,0,0,1); 
+  private color colour = color(random(0, 255), random(0, 255), random(0, 255));
 
   boolean isDead = false;
   Species species;

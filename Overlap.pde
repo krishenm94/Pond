@@ -5,8 +5,8 @@ static class _Overlap {
   enum Type { 
     None, 
     Partial, 
-    EnclosureOfOne, 
-    EnclosureOfTwo, 
+    EnclosureOfSelf, 
+    EnclosureOfOther, 
     MutualEnclosure
   }
 }
@@ -65,11 +65,11 @@ class Overlap
     } else if (left1 > left2 && right1 < right2 &&
       top1 > top2 && bottom1 < bottom2)
     {
-      type = _Overlap.Type.EnclosureOfOne;
+      type = _Overlap.Type.EnclosureOfSelf;
     } else if (left2 > left1 && right2 < right1 &&
       top2 > top1 && bottom2 < bottom1)
     {
-      type = _Overlap.Type.EnclosureOfTwo;
+      type = _Overlap.Type.EnclosureOfOther;
     } else
     { 
       type = _Overlap.Type.Partial;

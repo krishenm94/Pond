@@ -132,7 +132,6 @@ class Population
     }
   }
 
-
   public void remove(Organism organism)
   {
     organisms.removeElement(organism);

@@ -9,10 +9,12 @@ boolean DRAW_POST_CHOMP_GROWTH = false;
 
 boolean DRAW_ORGANISM = true;
 
-boolean DRAW_OVERLAP = true;
+boolean DRAW_OVERLAP = false;
 
 boolean DEBUG_RECT = false;
 boolean DEBUG_ELLIPSE = true;
+
+boolean DRAW_COLLISION = false;
 
 color RED = color(255, 0, 0);
 color GREEN = color(0, 255, 0);
@@ -34,8 +36,8 @@ class Painter
       return;
     }
 
-    stroke(organism.colour);
-    fill(organism.colour);
+    stroke(organism.colour, 30);
+    fill(organism.colour, 20);
 
     ellipse(organism.displacement().x, 
       organism.displacement().y, 

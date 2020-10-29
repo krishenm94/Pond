@@ -143,20 +143,22 @@ class Motor {
     Organism other = self.collidingWith;
 
     PVector otherToSelfVector = displacement.copy().sub(other.displacement());
-
     PVector otherToSelfUnitVector = otherToSelfVector.copy().normalize();
 
-    stroke(RED);
-    line(displacement.x, 
-      displacement.y, 
-      displacement.x + (velocity.x * 100), 
-      displacement.y + (velocity.y*100));
+    if (DRAW_COLLISION)
+    {
+      stroke(RED);
+      line(displacement.x, 
+        displacement.y, 
+        displacement.x + (velocity.x * 100), 
+        displacement.y + (velocity.y*100));
 
-    stroke(BLUE);
-    line(other.displacement().x, 
-      other.displacement().y, 
-      other.displacement().x + (other.velocity().x * 100), 
-      other.displacement().y + (other.velocity().y*100));
+      stroke(BLUE);
+      line(other.displacement().x, 
+        other.displacement().y, 
+        other.displacement().x + (other.velocity().x * 100), 
+        other.displacement().y + (other.velocity().y*100));
+    }
 
     // For proof on perfectly inelastic collision of balls:
     // https://stackoverflow.com/questions/35211114/2d-elastic-ball-collision-physics
@@ -176,17 +178,21 @@ class Motor {
     other.setVelocity(newOtherVelocity);
 
     ///////////////////////////////////////////////////////////
-    stroke(GREEN);
-    line(displacement.x, 
-      displacement.y, 
-      displacement.x + (velocity.x * 100), 
-      displacement.y + (velocity.y*100));
 
-    stroke(MAROON);
-    line(other.displacement().x, 
-      other.displacement().y, 
-      other.displacement().x + (other.velocity().x * 100), 
-      other.displacement().y + (other.velocity().y*100));
+    if (DRAW_COLLISION)
+    {
+      stroke(GREEN);
+      line(displacement.x, 
+        displacement.y, 
+        displacement.x + (velocity.x * 100), 
+        displacement.y + (velocity.y*100));
+
+      stroke(MAROON);
+      line(other.displacement().x, 
+        other.displacement().y, 
+        other.displacement().x + (other.velocity().x * 100), 
+        other.displacement().y + (other.velocity().y*100));
+    }
 
     other.collidingWith = null;
     self.collidingWith = null;

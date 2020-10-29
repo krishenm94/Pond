@@ -1,0 +1,10 @@
+# Issues
+
+1. Use a GenomeFactory and GeneFactory paradigm to control Organism attributes
+
+2. Remove Painter as a global variable 
+    a. HIDDEN DEPENDENCY!!!
+    b. Will be required once the code base grow large enough
+
+3. Store a list of Overlaps in Organism
+    a. may not be required because handling collisions of two bodies ata time seems enough
