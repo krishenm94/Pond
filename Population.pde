@@ -1,7 +1,5 @@
 import java.util.*; 
 
-float HOW_FAT_TO_MAKE_BABY_MULTIPLIER = 0.05;
-
 class Population
 {
   private Vector<Organism> organisms = new Vector<Organism>();
@@ -73,7 +71,7 @@ class Population
 
       float babyChance = random(0, 1);
 
-      if (babyChance < organism.howFat() * HOW_FAT_TO_MAKE_BABY_MULTIPLIER)
+      if (babyChance < organism.howFat())
       {
         theBabies.add(organism.makeBaby());
       }

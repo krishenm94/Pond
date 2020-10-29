@@ -12,3 +12,11 @@
 4. Implement shape accurate collision detection
     a. Currently all overlap detection is based on a bounding rect
     b. Reference: http://jeffreythompson.org/collision-detection/circle-rect.php
+
+5. Javafy files: Related to issue 2
+
+6. Mutation: Blocked by 1
+
+7. Sexual reproduction: Blocked by 1
+
+8. Movement modes for each species: Blocked by 1

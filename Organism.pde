@@ -8,11 +8,15 @@ float MASS_UPPER_LIMIT = 30;
 float PREDATOR_FACTOR = 0.5;
 float TOO_STUFFED_TO_EAT_FACTOR = 5;
 
+float HOW_FAT_TO_MAKE_BABY_MULTIPLIER = 0.05;
+
 class Organism
 {
   private Motor motor;
+  private Dna = 
   private float startMass = random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT);
   float mass = startMass;
+
   //private color colour = color(0,0,0,1); 
   private color colour = color(random(0, 255), random(0, 255), random(0, 255));
 
@@ -57,7 +61,9 @@ class Organism
     painter.show(this, color( 0, 255, 0), DRAW_PREDATION || DRAW_POST_CHOMP_GROWTH);
 
     mass = this.mass - other.mass;
+
     painter.show(this, color(255, 0, 0), DRAW_PREDATION || DRAW_PREDATOR);
+    
     mass = this.mass + other.mass;
 
     painter.show(other, color(255), DRAW_PREDATION || DRAW_DEAD);
@@ -95,7 +101,7 @@ class Organism
 
   float howFat()
   {
-    return (mass - startMass)/ startMass;
+    return (mass - startMass)/ startMass * HOW_FAT_TO_MAKE_BABY_MULTIPLIER;
   }
 
   Organism makeBaby()
