@@ -8,7 +8,7 @@ static int HEIGHT = 500;
 
 static int POPULATION_SIZE = 10;
 
-boolean BLUR = false;
+boolean BLUR = true;
 
 Population population = new Population();
 Painter painter = new Painter();

@@ -83,41 +83,39 @@ class Overlap
       return;
     }
     
-    int offset = 0;
+    float otherWeight = pow(self.mass, 3);
+    float selfWeight = pow(other.mass, 3);
 
-    float weight2 = pow(self.mass, 3);
-    float weight1 = pow(other.mass, 3);
-
-    float totalWeight = weight1 + weight2;
-    weight1 /= totalWeight;
-    weight2 /= totalWeight;
+    float totalWeight = selfWeight + otherWeight;
+    selfWeight /= totalWeight;
+    otherWeight /= totalWeight;
 
     if (right2ToLeft1 > 0 && right2ToLeft1 <= right1ToLeft2)
     {
-      float overlap = right2ToLeft1 + offset;
 
-      self.displacement().add(overlap * weight1, 0);
-      other.displacement().add(-overlap * weight2, 0);
+      self.displacement().add(right2ToLeft1 * selfWeight, 0);
+      other.displacement().add(-right2ToLeft1 * otherWeight, 0);
+
     } else if (right1ToLeft2 > 0  && right1ToLeft2 <= right2ToLeft1)
     {
-      float overlap = right1ToLeft2 + offset;
 
-      self.displacement().add(-overlap * weight1, 0);
-      other.displacement().add(overlap* weight2, 0);
+      self.displacement().add(-right1ToLeft2 * selfWeight, 0);
+      other.displacement().add(right1ToLeft2 * otherWeight, 0);
+
     }  
 
     if (bottom1ToTop2 > 0 && bottom1ToTop2 <= bottom2ToTop1)
     {
-      float overlap = bottom1ToTop2 + offset;
 
-      self.displacement().add(0, -overlap * weight1);
-      other.displacement().add(0, overlap* weight2);
+      self.displacement().add(0, -bottom1ToTop2 * selfWeight);
+      other.displacement().add(0, bottom1ToTop2 * otherWeight);
+
     } else if (bottom2ToTop1 > 0 && bottom2ToTop1 <= bottom1ToTop2)
     {
-      float overlap = bottom2ToTop1 + offset;
 
-      self.displacement().add(0, overlap * weight1);
-      other.displacement().add(0, -overlap* weight2);
+      self.displacement().add(0, bottom2ToTop1 * selfWeight);
+      other.displacement().add(0, -bottom2ToTop1 * otherWeight);
+
     }
   }
 }
