@@ -230,8 +230,13 @@ public class AlgaeMotor extends Motor
   protected void updateAcceleration()
   {
     PVector accelerationStep = velocity.copy();
-
     accelerationStep.mult(-1);
+
+    PVector center = new PVector(width/2, height/2);
+    PVector displacementToCenter = center.sub(displacement);
+    displacementToCenter.normalize().mult(5);
+    accelerationStep.add(displacementToCenter);
+    
     accelerationStep.div(pow(mass(), 3));
 
     acceleration.mult(ACCELERATION_GROWTH_FACTOR * 0.25);
