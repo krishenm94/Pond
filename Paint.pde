@@ -36,7 +36,7 @@ class Painter
       return;
     }
 
-    stroke(organism.colour, 30);
+    stroke(BLUR? organism.colour: color(0,0,0) , BLUR? 30 : 255);
     fill(organism.colour, BLUR? 20 : 200);
 
     ellipse(organism.displacement().x, 
