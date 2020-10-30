@@ -62,10 +62,12 @@ class Population
 
     Log.info("Total biomass: " + populationBiomass);
     Log.info("Population size : " + organisms.size());
-    //speciesCount.forEach((k, v)-> Log.info("Species: "+k.name()+", Count: "+v));
-    
-     for (Map.Entry<Species, Integer> entry : speciesCount.entrySet())
-     Log.info("Species: " + entry.getKey()+ ", Count: " + entry.getValue());
+
+    // TODO: Why isn't this working??
+    //speciesCount.forEach((k, v)->{ Log.info("Species: "+k.name()+", Count: "+v)});
+
+    for (Map.Entry<Species, Integer> entry : speciesCount.entrySet())
+      Log.info("Species: " + entry.getKey()+ ", Count: " + entry.getValue());
   }
 
   private void babyTime()
