@@ -3,8 +3,8 @@ float ACCELERATION_NOISE_FACTOR = 15;
 float ACCELERATION_GROWTH_FACTOR = 0.45;
 float SLITHER_FACTOR = 1.5;
 
-float TERMINAL_VELOCITY = 1.5;
-float STAGNANT_VELOCITY = 0.5;
+float TERMINAL_VELOCITY = 1;
+float STAGNANT_VELOCITY = 0.25;
 
 class Motor {
   protected Organism self;

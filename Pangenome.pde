@@ -132,9 +132,9 @@ public class SnakeGenome extends Genome
     Dna dna = new Dna(this);
 
     dna.colour = color(255, 50, 0);
-    dna.predatorFactor = 0.7;
+    dna.predatorFactor = 0.8;
 
-    dna.fertility = 0.001;
+    dna.fertility = 0.002;
     dna.stuffedFactor = 1.5;
 
     dna.lowerMassLimit = 30;
@@ -175,7 +175,7 @@ public class FishGenome extends Genome
     dna.lowerMassLimit = 15;
     dna.upperMassLimit = 25;
 
-    dna.fissionFactor = 0.4;
+    dna.fissionFactor = 0.3;
 
     dna.photosynthesisIncrement = 0;
     
