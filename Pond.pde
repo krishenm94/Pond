@@ -5,7 +5,7 @@ float CLOCK_INCREMENT = 0.1;
 
 static int POPULATION_SIZE = 100;
 
-boolean BLUR = true;
+boolean BLUR = false;
 
 Population population = new Population();
 Painter painter = new Painter();

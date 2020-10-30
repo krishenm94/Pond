@@ -2,8 +2,8 @@ import java.util.Random;
 
 enum Species {
   Algae, 
-    Fish, 
-    Snake
+  Fish, 
+  Snake
 }
 
 class Pangenome
@@ -14,11 +14,11 @@ class Pangenome
   //private static final FishGenome FISH = new FishGenome();
   //private static final AlgaeGenome ALGAE = new AlgaeGenome();
   private SnakeGenome SNAKE = new SnakeGenome();
-  private FishGenome FISH =  = new FishGenome();;
-  private AlgaeGenome ALGAE  = new AlgaeGenome();
+  private FishGenome FISH = new FishGenome();
+  private AlgaeGenome ALGAE = new AlgaeGenome();
 
   final List<Species> SPECIES_LIST =
-    Collections.unmodifiableList(Arrays.asList(Species.values()));
+  Collections.unmodifiableList(Arrays.asList(Species.values()));
   private final Random RANDOM = new Random();
 
   public Species randomSpecies()
@@ -30,13 +30,13 @@ class Pangenome
   {
     switch (species)
     {
-    case Snake:        
+      case Snake:        
       return SNAKE;
-    case Fish:        
+      case Fish:        
       return FISH;
-    case Algae:        
+      case Algae:        
       return ALGAE;
-    default:        
+      default:        
       return null;
     }
   }
@@ -73,6 +73,8 @@ public class Genome
 
     public float lowerMassLimit;
     public float upperMassLimit;
+
+    public float fissionFactor;
 
     public Dna(Genome genome)
     {
@@ -113,6 +115,8 @@ public class SnakeGenome extends Genome
     dna.lowerMassLimit = 10;
     dna.upperMassLimit = 25;
 
+    dna.fissionFactor = 0.4;
+
     return dna;
   }
 }
@@ -135,6 +139,8 @@ public class FishGenome extends Genome
     dna.lowerMassLimit = 5;
     dna.upperMassLimit = 15;
 
+    dna.fissionFactor = 0.2;
+
     return dna;
   }
 }
@@ -156,6 +162,8 @@ public class AlgaeGenome extends Genome
 
     dna.lowerMassLimit = 1;
     dna.upperMassLimit = 1;
+
+    dna.fissionFactor = 0.5;
 
     return dna;
   }
