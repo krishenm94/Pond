@@ -5,6 +5,7 @@ class Organism
   private Genome.Dna dna;
   private float startMass;
   float mass = startMass;
+  float age = 0;
 
   public color randomColour =  painter.randomColour();
   private color colour;
@@ -21,11 +22,18 @@ class Organism
   {
     return this.mass * dna.predatorFactor > other.mass &&
       !other.isDead && 
-      this.mass < this.startMass * dna.stuffedFactor;
+      this.mass < this.startMass * dna.stuffedFactor &&
+      genome.diet.contains(other.species());
   }
 
-  void move()
+  void update()
   {
+    age += CLOCK_INCREMENT;
+    if(age > dna.maxAge)
+    {
+      Log.debug(species() + " is Dead"); 
+      isDead = true;
+    }
     motor.update();
   }
 
@@ -53,18 +61,18 @@ class Organism
 
   void chomp(Organism other)
   {
-    mass = this.mass + other.mass;
+    mass = (this.mass + other.mass) * ENTROPY;
     other.isDead = true;
 
-    //painter.show(this, color( 0, 255, 0), DRAW_PREDATION || DRAW_POST_CHOMP_GROWTH);
+    painter.show(this, color( 0, 255, 0), DRAW_PREDATION || DRAW_POST_CHOMP_GROWTH);
 
     mass = this.mass - other.mass;
 
-    //painter.show(this, color(255, 0, 0), DRAW_PREDATION || DRAW_PREDATOR);
+    painter.show(this, color(255, 0, 0), DRAW_PREDATION || DRAW_PREDATOR);
 
     mass = this.mass + other.mass;
 
-    //painter.show(other, color(255), DRAW_PREDATION || DRAW_DEAD);
+    painter.show(other, color(255), DRAW_PREDATION || DRAW_DEAD);
   }
 
   PVector displacement()
@@ -110,11 +118,11 @@ class Organism
     displacement.mult(this.mass);
     displacement.add(this.displacement());
 
-    Organism baby = new Organism(this.mass * dna.fissionFactor, displacement, this.genome);
+    Organism baby = new Organism(this.mass * dna.fissionFactor *ENTROPY, displacement, this.genome);
 
     baby.setVelocity(baby.velocity());
 
-    this.mass = this.mass - baby.mass;
+    this.mass = (this.mass - baby.mass/ENTROPY) * ENTROPY;
 
     painter.show(this, color(0, 70, 180), DRAW_BIRTH || DRAW_DADDY);
     painter.show(baby, color(0, 150, 25), DRAW_BIRTH || DRAW_BABY);

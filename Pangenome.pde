@@ -96,6 +96,8 @@ public class Genome
     public float fissionFactor;
 
     public float photosynthesisIncrement;
+    
+    public float maxAge;
 
     public Dna(Genome genome)
     {
@@ -130,17 +132,19 @@ public class SnakeGenome extends Genome
     Dna dna = new Dna(this);
 
     dna.colour = color(255, 50, 0);
-    dna.predatorFactor = 0.8;
+    dna.predatorFactor = 0.7;
 
-    dna.howFatToMakeBaby = 0.05;
-    dna.stuffedFactor = 1.0;
+    dna.howFatToMakeBaby = 0.005;
+    dna.stuffedFactor = 2;
 
-    dna.lowerMassLimit = 21;
-    dna.upperMassLimit = 42;
+    dna.lowerMassLimit = 25;
+    dna.upperMassLimit = 50;
 
     dna.fissionFactor = 0.4;
 
     dna.photosynthesisIncrement = 0;
+    
+    dna.maxAge = 100;
 
     return dna;
   }
@@ -166,14 +170,16 @@ public class FishGenome extends Genome
     dna.predatorFactor = 0.5;
 
     dna.howFatToMakeBaby = 0.05;
-    dna.stuffedFactor = 1;
+    dna.stuffedFactor = 2;
 
-    dna.lowerMassLimit = 11;
-    dna.upperMassLimit = 24;
+    dna.lowerMassLimit = 15;
+    dna.upperMassLimit = 25;
 
-    dna.fissionFactor = 0.2;
+    dna.fissionFactor = 0.3;
 
     dna.photosynthesisIncrement = 0;
+    
+    dna.maxAge = 150;
 
     return dna;
   }
@@ -192,7 +198,6 @@ public class AlgaeGenome extends Genome
     return new AlgaeMotor(organism, startDisplacement, startVelocity);
   }
 
-
   public Dna createDna() {
     Dna dna = new Dna(this);
 
@@ -202,12 +207,14 @@ public class AlgaeGenome extends Genome
     dna.howFatToMakeBaby = 0.2;
     dna.stuffedFactor = 100;
 
-    dna.lowerMassLimit = 7;
-    dna.upperMassLimit = 7;
+    dna.lowerMassLimit = 5;
+    dna.upperMassLimit = 5;
 
     dna.fissionFactor = 0.5;
 
     dna.photosynthesisIncrement = 0.1;
+    
+    dna.maxAge = 5;
 
     return dna;
   }

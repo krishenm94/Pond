@@ -16,8 +16,7 @@ class Population
 
   void init(int size)
   {  
-    for (int i = 0; i <size; i++)
-    {
+    for (int i = 0; i <size; i++) {
       add();
     }
   }
@@ -77,8 +76,8 @@ class Population
 
     for (Organism organism : organisms)
     {  
+      organism.update();
       organism.show();
-      organism.move();
 
       if (!BIOMASS_LOCK)
       {
@@ -129,7 +128,6 @@ class Population
     Vector<Organism> theDead = new Vector<Organism>();
     for (Organism organism : organisms)
     {      
-
       if (organism.isDead)
       {
         theDead.add(organism);
