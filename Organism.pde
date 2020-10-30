@@ -31,7 +31,6 @@ class Organism
     age += CLOCK_INCREMENT;
     if(age > dna.maxAge)
     {
-      Log.debug(species() + " is Dead"); 
       isDead = true;
     }
     motor.update();
@@ -107,7 +106,7 @@ class Organism
 
   float howFat()
   {
-    return (mass - startMass)/ startMass * dna.howFatToMakeBaby;
+    return (mass - startMass)/ startMass * dna.fertility;
   }
 
   Organism makeBaby()

@@ -2,7 +2,7 @@ import java.util.*;
 
 boolean BIOMASS_LOCK = false;
 
-int SNAKE_COUNT_INIT = 6;
+int SNAKE_COUNT_INIT = 5;
 int FISH_COUNT_INIT = 20;
 
 int fishCount = 0;

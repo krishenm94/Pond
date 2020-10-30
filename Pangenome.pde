@@ -87,7 +87,7 @@ public class Genome
     public color colour;
     public float predatorFactor;
 
-    public float howFatToMakeBaby;
+    public float fertility;
     public float stuffedFactor;
 
     public float lowerMassLimit;
@@ -134,10 +134,10 @@ public class SnakeGenome extends Genome
     dna.colour = color(255, 50, 0);
     dna.predatorFactor = 0.7;
 
-    dna.howFatToMakeBaby = 0.005;
-    dna.stuffedFactor = 2;
+    dna.fertility = 0.001;
+    dna.stuffedFactor = 1.5;
 
-    dna.lowerMassLimit = 25;
+    dna.lowerMassLimit = 30;
     dna.upperMassLimit = 50;
 
     dna.fissionFactor = 0.4;
@@ -169,17 +169,17 @@ public class FishGenome extends Genome
     dna.colour = color(0, 100, 255);
     dna.predatorFactor = 0.5;
 
-    dna.howFatToMakeBaby = 0.05;
-    dna.stuffedFactor = 2;
+    dna.fertility = 0.05;
+    dna.stuffedFactor = 1.8;
 
     dna.lowerMassLimit = 15;
     dna.upperMassLimit = 25;
 
-    dna.fissionFactor = 0.3;
+    dna.fissionFactor = 0.4;
 
     dna.photosynthesisIncrement = 0;
     
-    dna.maxAge = 150;
+    dna.maxAge = 50;
 
     return dna;
   }
@@ -204,7 +204,7 @@ public class AlgaeGenome extends Genome
     dna.colour = color(100, 255, 0);
     dna.predatorFactor = 0.0;
 
-    dna.howFatToMakeBaby = 0.2;
+    dna.fertility = 1;
     dna.stuffedFactor = 100;
 
     dna.lowerMassLimit = 5;
@@ -212,7 +212,7 @@ public class AlgaeGenome extends Genome
 
     dna.fissionFactor = 0.5;
 
-    dna.photosynthesisIncrement = 0.1;
+    dna.photosynthesisIncrement = 0.5;
     
     dna.maxAge = 5;
 
