@@ -1,33 +1,39 @@
 import java.util.*; 
 
+float BIOMASS_LIMIT = 700;
+boolean BIOMASS_LOCK = false;
+
 class Population
 {
+  float mass;
+
   private Vector<Organism> organisms = new Vector<Organism>();
 
   void init(int size)
-  {
+  {  
     for (int i = 0; i <size; i++)
     {
       add();
     }
   }
 
-  public void add(Organism organism)
+  Organism add(Organism organism)
   {
     organisms.add(organism);
+    return organism;
   }
 
-  public void add()
+  Organism add()
   {
     Genome genome = pangenome.randomGenome();
 
     if (genome == null)
     {
       Log.error("Null genome, skipping random organism creation");
-      return;
+      return null;
     }
 
-    add(new Organism(randomDisplacement(), genome));
+    return add(new Organism(randomDisplacement(), genome));
   }
 
   PVector randomDisplacement()
@@ -40,18 +46,23 @@ class Population
 
   public void update()
   {
-    feedingTime();
+    feedingAndOverlapDetection();
     babyTime();
 
     HashMap<Species, Integer> speciesCount = new HashMap<Species, Integer>();
-    float populationBiomass = 0;
+    float mass = 0;
 
     for (Organism organism : organisms)
     {  
       organism.show();
       organism.move();
 
-      populationBiomass += organism.mass;
+      if (!BIOMASS_LOCK)
+      {
+        organism.photosynthesise();
+      }
+
+      mass += organism.mass;
 
       if (speciesCount.containsKey(organism.species())) { 
         speciesCount.put(organism.species(), speciesCount.get(organism.species()) + 1);
@@ -60,7 +71,9 @@ class Population
       }
     }
 
-    Log.info("Total biomass: " + populationBiomass);
+    BIOMASS_LOCK = mass > BIOMASS_LIMIT ? true : false;
+
+    Log.info("Total biomass: " + mass);
     Log.info("Population size : " + organisms.size());
 
     for (Map.Entry<Species, Integer> entry : speciesCount.entrySet())
@@ -88,7 +101,7 @@ class Population
     organisms.addAll(theBabies);
   }
 
-  private void feedingTime()
+  private void feedingAndOverlapDetection()
   {
     Vector<Organism> theDead = new Vector<Organism>();
     for (Organism organism : organisms)

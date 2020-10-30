@@ -1,42 +1,41 @@
-float COLLISION_DAMPING_FACTOR = -0.5;
-float ACCELERATION_NOISE_FACTOR = 15;      
-float ACCELERATION_GROWTH_FACTOR = 0.90;
-float SLITHER_FACTOR = 1.5;
+float COLLISION_DAMPING_FACTOR = 0.5;
+float ACCELERATION_NOISE_FACTOR = 15;
+float ACCELERATION_GROWTH_FACTOR = 0.45;
+float SLITHER_FACTOR = 2;
 
 float TERMINAL_VELOCITY = 2;
 float STAGNANT_VELOCITY = 0.5;
 
 class Motor {
-  private Organism self;
+  protected Organism self;
 
-  PVector displacement;
-  PVector velocity;
-  PVector acceleration;
+  protected PVector displacement;
+  protected PVector velocity;
+  protected PVector acceleration;
   float timeOffset = random(0, CLOCK_MAX);
 
-  public Motor(Organism organism, PVector startDisplacement, PVector startVelocity)
-  {
+  public Motor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     self = organism;
     displacement = startDisplacement;
     velocity = startVelocity;
     acceleration = new PVector(0, 0);
   }
-  
+
   public void update()
   {
-    if(self == null)
+    if (self == null)
     {
       Log.error("Motor has no self.");
       return;
     }
-      
+
     move();
     clampToCanvas();
     bounceIfOrganismCollision();
     bounceIfWallCollision();
   }
 
-  private void move()
+  protected void move()
   {
     updateAcceleration();
     updateVelocity();
@@ -107,12 +106,19 @@ class Motor {
 
   private void bounceIfOrganismCollision()
   {
-    // TODO: Use mass to determine ratio
     if (self.collidingWith == null)
     {
       return;
     }
 
+    bounceAgainstOther();
+
+    self.collidingWith.collidingWith = null;
+    self.collidingWith = null;
+  }
+
+  protected void bounceAgainstOther()
+  {
     Organism other = self.collidingWith;
 
     PVector otherToSelfVector = displacement.copy().sub(other.displacement());
@@ -166,9 +172,6 @@ class Motor {
         other.displacement().x + (other.velocity().x * 100), 
         other.displacement().y + (other.velocity().y*100));
     }
-
-    other.collidingWith = null;
-    self.collidingWith = null;
   }
 
   float mass()
@@ -187,7 +190,7 @@ public class SnakeMotor extends Motor
 
   protected void updateVelocity() {
     super.updateVelocity();
-    
+
     velocityNormal = velocity.copy();
     velocityNormal.rotate(90);
     velocityNormal.mult(sin(CLOCK + timeOffset));
@@ -196,7 +199,7 @@ public class SnakeMotor extends Motor
 
   protected void updateDisplacement() {
     super.updateDisplacement();
-    
+
     displacement.add(velocityNormal);
   }
 }
@@ -212,5 +215,26 @@ public class AlgaeMotor extends Motor
 {
   public AlgaeMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     super(organism, startDisplacement, startVelocity);
+  }
+
+  protected void bounceAgainstOther()
+  {
+    if (self.collidingWith.species() == Species.Algae)
+    {
+      return;
+    }
+
+    super.bounceAgainstOther();
+  }
+
+  protected void updateAcceleration()
+  {
+    PVector accelerationStep = velocity.copy();
+
+    //accelerationStep.mult(-1);
+    accelerationStep.div(pow(mass(), 3));
+
+    acceleration.mult(ACCELERATION_GROWTH_FACTOR * 0.25);
+    acceleration.add(accelerationStep);
   }
 }

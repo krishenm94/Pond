@@ -4,10 +4,10 @@ static class _Overlap {
 
   enum Type { 
     None, 
-    Partial, 
-    EnclosureOfSelf, 
-    EnclosureOfOther, 
-    MutualEnclosure
+      Partial, 
+      EnclosureOfSelf, 
+      EnclosureOfOther, 
+      MutualEnclosure
   }
 }
 
@@ -28,7 +28,7 @@ class Overlap
     self = _self;
     other = _other;
     init();
-    if(MOVE_OUT_OF_OVERLAP)
+    if (MOVE_OUT_OF_OVERLAP)
     {
       moveOut();
     }
@@ -78,11 +78,11 @@ class Overlap
 
   void moveOut()
   {
-    if(type == _Overlap.Type.None)
+    if (type == _Overlap.Type.None)
     {
       return;
     }
-    
+
     float otherWeight = pow(self.mass, 3);
     float selfWeight = pow(other.mass, 3);
 
@@ -92,30 +92,22 @@ class Overlap
 
     if (right2ToLeft1 > 0 && right2ToLeft1 <= right1ToLeft2)
     {
-
       self.displacement().add(right2ToLeft1 * selfWeight, 0);
       other.displacement().add(-right2ToLeft1 * otherWeight, 0);
-
     } else if (right1ToLeft2 > 0  && right1ToLeft2 <= right2ToLeft1)
     {
-
       self.displacement().add(-right1ToLeft2 * selfWeight, 0);
       other.displacement().add(right1ToLeft2 * otherWeight, 0);
-
     }  
 
     if (bottom1ToTop2 > 0 && bottom1ToTop2 <= bottom2ToTop1)
     {
-
       self.displacement().add(0, -bottom1ToTop2 * selfWeight);
       other.displacement().add(0, bottom1ToTop2 * otherWeight);
-
     } else if (bottom2ToTop1 > 0 && bottom2ToTop1 <= bottom1ToTop2)
     {
-
       self.displacement().add(0, bottom2ToTop1 * selfWeight);
       other.displacement().add(0, -bottom2ToTop1 * otherWeight);
-
     }
   }
 }

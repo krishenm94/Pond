@@ -54,6 +54,7 @@ class Pangenome
 public class Genome
 {
   public Species species;
+  public List<Species> diet;
 
   public Genome(Species _species)
   {
@@ -90,7 +91,7 @@ public class Genome
 
     public float fissionFactor;
 
-    public boolean canPhotosynthesise;
+    public float photosynthesisIncrement;
 
     public Dna(Genome genome)
     {
@@ -130,13 +131,13 @@ public class SnakeGenome extends Genome
     dna.howFatToMakeBaby = 0.05;
     dna.stuffedFactor = 8;
 
-    dna.lowerMassLimit = 5;
-    dna.upperMassLimit = 15;
+    dna.lowerMassLimit = 20;
+    dna.upperMassLimit = 50;
 
     dna.fissionFactor = 0.4;
 
-    canPhotosynthesise = false;
-
+    dna.photosynthesisIncrement = 0;
+    
     return dna;
   }
 }
@@ -161,12 +162,12 @@ public class FishGenome extends Genome
     dna.howFatToMakeBaby = 0.05;
     dna.stuffedFactor = 5;
 
-    dna.lowerMassLimit = 5;
+    dna.lowerMassLimit = 8;
     dna.upperMassLimit = 15;
 
     dna.fissionFactor = 0.2;
 
-    canPhotosynthesise = false;
+    dna.photosynthesisIncrement = 0;
     
     return dna;
   }
@@ -189,15 +190,15 @@ public class AlgaeGenome extends Genome
     dna.colour = color(100, 255, 0);
     dna.predatorFactor = 0.0;
 
-    dna.howFatToMakeBaby = 0.5;
-    dna.stuffedFactor = 2;
+    dna.howFatToMakeBaby = 0.2;
+    dna.stuffedFactor = 100;
 
-    dna.lowerMassLimit = 1;
-    dna.upperMassLimit = 1;
+    dna.lowerMassLimit = 3;
+    dna.upperMassLimit = 5;
 
     dna.fissionFactor = 0.5;
 
-    canPhotosynthesise = true;
+    dna.photosynthesisIncrement = 0.1;
 
     return dna;
   }

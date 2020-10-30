@@ -55,15 +55,15 @@ class Organism
     mass = this.mass + other.mass;
     other.isDead = true;
 
-    painter.show(this, color( 0, 255, 0), DRAW_PREDATION || DRAW_POST_CHOMP_GROWTH);
+    //painter.show(this, color( 0, 255, 0), DRAW_PREDATION || DRAW_POST_CHOMP_GROWTH);
 
     mass = this.mass - other.mass;
 
-    painter.show(this, color(255, 0, 0), DRAW_PREDATION || DRAW_PREDATOR);
+    //painter.show(this, color(255, 0, 0), DRAW_PREDATION || DRAW_PREDATOR);
 
     mass = this.mass + other.mass;
 
-    painter.show(other, color(255), DRAW_PREDATION || DRAW_DEAD);
+    //painter.show(other, color(255), DRAW_PREDATION || DRAW_DEAD);
   }
 
   PVector displacement()
@@ -124,5 +124,15 @@ class Organism
   float timeOffset()
   {
     return motor.timeOffset;
+  }
+
+  void photosynthesise()
+  {
+    if (dna.photosynthesisIncrement <= 0)
+    {
+      return;
+    }
+
+    mass += dna.photosynthesisIncrement;
   }
 }

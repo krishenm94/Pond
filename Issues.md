@@ -29,3 +29,5 @@
 10. Control initial population distribution
 
 11. Prefix all member variables with "m_" and remove local variables prefixed with "_"
+
+12. Add photosynthesis mechanism
