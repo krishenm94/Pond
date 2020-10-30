@@ -2,8 +2,8 @@ import java.util.Random;
 
 enum Species {
   Algae, 
-    Fish, 
-    Snake
+  Fish, 
+  Snake
 }
 
 class Pangenome
@@ -18,7 +18,7 @@ class Pangenome
   private AlgaeGenome ALGAE = new AlgaeGenome();
 
   final List<Species> SPECIES_LIST =
-    Collections.unmodifiableList(Arrays.asList(Species.values()));
+  Collections.unmodifiableList(Arrays.asList(Species.values()));
   private final Random RANDOM = new Random();
 
   public Species randomSpecies()
@@ -30,13 +30,13 @@ class Pangenome
   {
     switch (species)
     {
-    case Snake:        
+      case Snake:        
       return SNAKE;
-    case Fish:        
+      case Fish:        
       return FISH;
-    case Algae:        
+      case Algae:        
       return ALGAE;
-    default:      
+      default:      
       Log.error("Null genome for species: " + species.name());
       return null;
     }
@@ -62,13 +62,13 @@ public class Genome
 
   public Motor createMotor(
     Organism organism,
-     PVector startDisplacement,
-      PVector startVelocity
-      ){
+    PVector startDisplacement,
+    PVector startVelocity
+    ){
     return null;
   }
 
-    public Dna createDna()
+  public Dna createDna()
   {
     return null;
   } 
@@ -89,6 +89,8 @@ public class Genome
     public float upperMassLimit;
 
     public float fissionFactor;
+
+    public boolean canPhotosynthesise;
 
     public Dna(Genome genome)
     {
@@ -114,7 +116,7 @@ public class SnakeGenome extends Genome
     super(Species.Snake);
   }
 
-   public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity){
+  public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity){
     return new SnakeMotor(organism, startDisplacement, startVelocity);
   }
 
@@ -133,6 +135,8 @@ public class SnakeGenome extends Genome
 
     dna.fissionFactor = 0.4;
 
+    canPhotosynthesise = false;
+
     return dna;
   }
 }
@@ -143,7 +147,7 @@ public class FishGenome extends Genome
     super(Species.Fish);
   }
 
-    public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity){
+  public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity){
     return new FishMotor(organism, startDisplacement, startVelocity);
   }
 
@@ -162,6 +166,8 @@ public class FishGenome extends Genome
 
     dna.fissionFactor = 0.2;
 
+    canPhotosynthesise = false;
+    
     return dna;
   }
 }
@@ -190,6 +196,8 @@ public class AlgaeGenome extends Genome
     dna.upperMassLimit = 1;
 
     dna.fissionFactor = 0.5;
+
+    canPhotosynthesise = true;
 
     return dna;
   }
