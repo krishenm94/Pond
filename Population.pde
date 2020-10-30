@@ -19,7 +19,14 @@ class Population
 
   public void add()
   {
-    add(new Organism(randomDisplacement(), pangenome.randomGenome().create()));
+    Genome genome = pangenome.randomGenome();
+
+    if (genome == null)
+    {
+      return;
+    }
+
+    add(new Organism(randomDisplacement(), genome.createDna()));
   }
 
   PVector randomDisplacement()
@@ -38,7 +45,7 @@ class Population
     int wormCount = 0;
     int snakeCount = 0;
     float populationBiomass = 0;
-    
+
     for (Organism organism : organisms)
     {  
       organism.show();
@@ -138,7 +145,7 @@ class Population
   boolean areMeeting(Organism organism1, Organism organism2)
   {
     Overlap overlap = new Overlap(organism1, organism2);
-    
+
     boolean isOverlapping = overlap.type == _Overlap.Type.None? false : true;
 
     if (isOverlapping)
@@ -146,7 +153,7 @@ class Population
       painter.show(organism1, WHITE, DRAW_OVERLAP);
       painter.show(organism2, WHITE, DRAW_OVERLAP);
     }
-    
+
     return isOverlapping;
   }
 }

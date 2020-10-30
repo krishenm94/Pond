@@ -2,30 +2,30 @@ import java.util.Random;
 
 enum Species {
   Algae, 
-    Fish, 
-    Snake
+  Fish, 
+  Snake
 }
 
 class Pangenome
 {
 
   // Genomes
-  //private static final SnakeGenome SNAKE_GENOME = new SnakeGenome();
-  //private static final FishGenome FISH_GENOME = new FishGenome();
-  //private static final AlgaeGenome ALGAE_GENOME = new AlgaeGenome();
-  private SnakeGenome SNAKE_GENOME;
-  private FishGenome FISH_GENOME;
-  private AlgaeGenome ALGAE_GENOME;
+  //private static final SnakeGenome SNAKE = new SnakeGenome();
+  //private static final FishGenome FISH = new FishGenome();
+  //private static final AlgaeGenome ALGAE = new AlgaeGenome();
+  private SnakeGenome SNAKE;
+  private FishGenome FISH;
+  private AlgaeGenome ALGAE;
 
   public Pangenome()
   {
-    SNAKE_GENOME = new SnakeGenome();
-    FISH_GENOME = new FishGenome();
-    ALGAE_GENOME = new AlgaeGenome();
+    SNAKE = new SnakeGenome();
+    FISH = new FishGenome();
+    ALGAE = new AlgaeGenome();
   }
 
   final List<Species> SPECIES_LIST =
-    Collections.unmodifiableList(Arrays.asList(Species.values()));
+  Collections.unmodifiableList(Arrays.asList(Species.values()));
   private final Random RANDOM = new Random();
 
   public Species randomSpecies()
@@ -35,28 +35,18 @@ class Pangenome
 
   public Genome getGenome(Species species)
   {
-    try {
       switch (species)
       {
-      case Snake:
-        return SNAKE_GENOME;
-      case Fish:
-        return FISH_GENOME;
-      case Algae:
-        return ALGAE_GENOME;
-      default:
+        case Snake:
+        return SNAKE;
+        case Fish:
+        return FISH;
+        case Algae:
+        return ALGAE;
+        default:
+        return null;
       }
-
-      throw new Exception("Unknown genome: " + species);
-    }
-    // Move catch to a higher level
-    catch(Exception exception)
-    {
-      System.out.println(exception.getMessage());
-    }
-
-    return new Genome();
-  }
+   }
   
   public Genome randomGenome()
   {
@@ -69,6 +59,13 @@ class Pangenome
 // TODO: Introduce mutation factor
 public class Genome
 {
+  public Species species;
+
+  public Genome(Species _species)
+  {
+    species = _species;
+  }
+
   // TODO: Implement Dna as a map of template typed genes
   public class Dna
   {
@@ -87,14 +84,19 @@ public class Genome
     public Dna(Genome genome)
     {
       Objects.requireNonNull(genome);
+
+      species = genome.species;
     }
 
-    public class Gene
-    {
-    }
+    //private class Nucleotide()
+    //{}
   }
 
-  public Dna create()
+  public class Gene
+  {
+  }
+
+  public Dna createDna()
   {
     return new Dna(this);
   }
@@ -102,10 +104,12 @@ public class Genome
 
 public class SnakeGenome extends Genome
 {
-  public Dna create() {
-    Dna dna = new Dna(this);
+  public SnakeGenome(){
+    super(Species.Snake);
+  }
 
-    dna.species = Species.Snake;
+  public Dna createDna() {
+    Dna dna = new Dna(this);
 
     dna.colour = color(255, 100, 0);
     dna.predatorFactor = 0.8;
@@ -122,10 +126,12 @@ public class SnakeGenome extends Genome
 
 public class FishGenome extends Genome
 {
-  public Dna create() {
-    Dna dna = new Dna(this);
+  public FishGenome(){
+    super(Species.Fish);
+  }
 
-    dna.species = Species.Fish;
+  public Dna createDna() {
+    Dna dna = new Dna(this);
 
     dna.colour = color(0, 100, 255);
     dna.predatorFactor = 0.5;
@@ -142,10 +148,12 @@ public class FishGenome extends Genome
 
 public class AlgaeGenome extends Genome
 {
-  public Dna create() {
-    Dna dna = new Dna(this);
+  public AlgaeGenome(){
+    super(Species.Algae);
+  }
 
-    dna.species = Species.Algae;
+  public Dna createDna() {
+    Dna dna = new Dna(this);
 
     dna.colour = color(100, 255, 0);
     dna.predatorFactor = 0.0;
