@@ -23,6 +23,7 @@ class Population
 
     if (genome == null)
     {
+      Log.error("Null genome, skipping random organism creation");
       return;
     }
 
@@ -42,8 +43,7 @@ class Population
     feedingTime();
     babyTime();
 
-    int wormCount = 0;
-    int snakeCount = 0;
+    HashMap<Species, Integer> speciesCount = new HashMap<Species, Integer>();
     float populationBiomass = 0;
 
     for (Organism organism : organisms)
@@ -53,17 +53,19 @@ class Population
 
       populationBiomass += organism.mass;
 
-      if (organism.species() == Species.Snake)
-      {
-        snakeCount++;
-      } else
-      {
-        wormCount++;
+      if (speciesCount.containsKey(organism.species())) { 
+        speciesCount.put(organism.species(), speciesCount.get(organism.species()) + 1);
+      } else {  
+        speciesCount.put(organism.species(), 1);
       }
     }
 
-    println("Total biomass: " + populationBiomass);
-    println("Population size : " + organisms.size() + ", (Snakes, Worms): " + "(" + snakeCount +", " + wormCount + ")");
+    Log.info("Total biomass: " + populationBiomass);
+    Log.info("Population size : " + organisms.size());
+    //speciesCount.forEach((k, v)-> Log.info("Species: "+k.name()+", Count: "+v));
+    
+     for (Map.Entry<Species, Integer> entry : speciesCount.entrySet())
+     Log.info("Species: " + entry.getKey()+ ", Count: " + entry.getValue());
   }
 
   private void babyTime()

@@ -2,8 +2,8 @@ import java.util.Random;
 
 enum Species {
   Algae, 
-  Fish, 
-  Snake
+    Fish, 
+    Snake
 }
 
 class Pangenome
@@ -18,7 +18,7 @@ class Pangenome
   private AlgaeGenome ALGAE = new AlgaeGenome();
 
   final List<Species> SPECIES_LIST =
-  Collections.unmodifiableList(Arrays.asList(Species.values()));
+    Collections.unmodifiableList(Arrays.asList(Species.values()));
   private final Random RANDOM = new Random();
 
   public Species randomSpecies()
@@ -30,13 +30,14 @@ class Pangenome
   {
     switch (species)
     {
-      case Snake:        
+    case Snake:        
       return SNAKE;
-      case Fish:        
+    case Fish:        
       return FISH;
-      case Algae:        
+    case Algae:        
       return ALGAE;
-      default:        
+    default:      
+      Log.error("Null genome for species: " + species.name());
       return null;
     }
   }
