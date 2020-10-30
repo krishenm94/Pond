@@ -27,7 +27,7 @@ class Population
       return;
     }
 
-    add(new Organism(randomDisplacement(), genome.createDna()));
+    add(new Organism(randomDisplacement(), genome));
   }
 
   PVector randomDisplacement()
@@ -62,9 +62,6 @@ class Population
 
     Log.info("Total biomass: " + populationBiomass);
     Log.info("Population size : " + organisms.size());
-
-    // TODO: Why isn't this working??
-    //speciesCount.forEach((k, v)->{ Log.info("Species: "+k.name()+", Count: "+v)});
 
     for (Map.Entry<Species, Integer> entry : speciesCount.entrySet())
       Log.info("Species: " + entry.getKey()+ ", Count: " + entry.getValue());

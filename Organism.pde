@@ -1,6 +1,7 @@
 class Organism
 {
   private Motor motor;
+  private Genome genome;
   private Genome.Dna dna;
   private float startMass;
   float mass = startMass;
@@ -27,20 +28,21 @@ class Organism
     motor.update();
   }
 
-  private Organism(PVector displacement, Genome.Dna _dna)
+  private Organism(PVector displacement, Genome genome)
   {
-    this(random(_dna.lowerMassLimit, _dna.upperMassLimit), displacement, _dna);
+    this(0, displacement, genome);
+    mass = startMass;
   }
 
-  public Organism(float _mass, PVector displacement, Genome.Dna _dna)
+  public Organism(float _mass, PVector displacement, Genome _genome)
   {
-    dna = _dna;
-    
+    genome = _genome;
+    dna = genome.createDna();
+    motor = genome.createMotor(this, displacement, PVector.random2D());
+
     mass = _mass;
     startMass = random(dna.lowerMassLimit, dna.upperMassLimit);
     colour = dna.colour;
-    
-    motor = new Motor(this, displacement, PVector.random2D());
   }
 
   public void show()
@@ -107,7 +109,7 @@ class Organism
     displacement.mult(this.mass);
     displacement.add(this.displacement());
 
-    Organism baby = new Organism(this.mass * dna.fissionFactor, displacement, this.dna);
+    Organism baby = new Organism(this.mass * dna.fissionFactor, displacement, this.genome);
 
     baby.setVelocity(baby.velocity());
 

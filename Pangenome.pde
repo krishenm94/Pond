@@ -60,8 +60,8 @@ public class Genome
     species = _species;
   }
 
-  public Motor createMotor(){
-    return new null;
+  public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity){
+    return null;
   }
 
     public Dna createDna()
@@ -110,8 +110,8 @@ public class SnakeGenome extends Genome
     super(Species.Snake);
   }
 
-   public Motor createMotor(){
-    return new SnakeMotor();
+   public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity){
+    return new SnakeMotor(organism, startDisplacement, startVelocity);
   }
 
 
@@ -139,8 +139,8 @@ public class FishGenome extends Genome
     super(Species.Fish);
   }
 
-    public Motor createMotor(){
-    return new FishMotor();
+    public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity){
+    return new FishMotor(organism, startDisplacement, startVelocity);
   }
 
 
@@ -168,8 +168,8 @@ public class AlgaeGenome extends Genome
     super(Species.Algae);
   }
 
-  public Motor createMotor(){
-    return new AlgaeMotor();
+  public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity){
+    return new AlgaeMotor(organism, startDisplacement, startVelocity);
   }
 
 

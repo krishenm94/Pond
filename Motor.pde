@@ -21,9 +21,15 @@ class Motor {
     velocity = startVelocity;
     acceleration = new PVector(0, 0);
   }
-
+  
   public void update()
   {
+    if(self == null)
+    {
+      Log.error("Motor has no self.");
+      return;
+    }
+      
     move();
     clampToCanvas();
     bounceIfOrganismCollision();
@@ -60,39 +66,6 @@ class Motor {
     accelerationStep.div(pow(mass(), 3));
 
     acceleration.mult(ACCELERATION_GROWTH_FACTOR * 0.5);
-    acceleration.add(accelerationStep);
-  }
-
-  private void moveSnake()
-  {
-    velocity.add(acceleration);
-
-    if ( velocity.mag() > TERMINAL_VELOCITY)
-    {
-      velocity.div(velocity.mag() / TERMINAL_VELOCITY);
-    } else if ( velocity.mag() < STAGNANT_VELOCITY)
-    {
-      velocity.mult(STAGNANT_VELOCITY / velocity.mag());
-    }
-
-    PVector velocityNormal = velocity.copy();
-    velocityNormal.rotate(90);
-    velocityNormal.mult(sin(CLOCK + timeOffset));
-    velocityNormal.mult(SLITHER_FACTOR);
-
-    // TODO: ALGAE GROWTH ALGORITHM?
-    //velocity.x *= sin(velocity.y * CLOCK) * 1.7;
-    //velocity.y *= sin(velocity.x * CLOCK) * 1.7;
-
-    displacement.add(velocity);
-    displacement.add(velocityNormal);
-
-    PVector accelerationStep = new PVector();
-
-    accelerationStep.add(PVector.random2D().mult(ACCELERATION_NOISE_FACTOR));
-    accelerationStep.div(pow(mass(), 3));
-
-    acceleration.mult(ACCELERATION_GROWTH_FACTOR);
     acceleration.add(accelerationStep);
   }
 
@@ -201,5 +174,43 @@ class Motor {
   float mass()
   {
     return self.mass;
+  }
+}
+
+public class SnakeMotor extends Motor
+{
+  PVector velocityNormal;
+
+  public SnakeMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
+    super(organism, startDisplacement, startVelocity);
+  }
+
+  protected void updateVelocity() {
+    super.updateVelocity();
+    
+    velocityNormal = velocity.copy();
+    velocityNormal.rotate(90);
+    velocityNormal.mult(sin(CLOCK + timeOffset));
+    velocityNormal.mult(SLITHER_FACTOR);
+  }
+
+  protected void updateDisplacement() {
+    super.updateDisplacement();
+    
+    displacement.add(velocityNormal);
+  }
+}
+
+public class FishMotor extends Motor
+{
+  public FishMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
+    super(organism, startDisplacement, startVelocity);
+  }
+}
+
+public class AlgaeMotor extends Motor
+{
+  public AlgaeMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
+    super(organism, startDisplacement, startVelocity);
   }
 }
