@@ -60,6 +60,15 @@ public class Genome
     species = _species;
   }
 
+  public Motor createMotor(){
+    return new null;
+  }
+
+    public Dna createDna()
+  {
+    return new Dna(this);
+  } 
+
   // TODO: Implement Dna as a map of template typed genes
   public class Dna
   {
@@ -92,10 +101,7 @@ public class Genome
   {
   }
 
-  public Dna createDna()
-  {
-    return new Dna(this);
-  }
+
 }
 
 public class SnakeGenome extends Genome
@@ -103,6 +109,11 @@ public class SnakeGenome extends Genome
   public SnakeGenome() {
     super(Species.Snake);
   }
+
+   public Motor createMotor(){
+    return new SnakeMotor();
+  }
+
 
   public Dna createDna() {
     Dna dna = new Dna(this);
@@ -128,6 +139,11 @@ public class FishGenome extends Genome
     super(Species.Fish);
   }
 
+    public Motor createMotor(){
+    return new FishMotor();
+  }
+
+
   public Dna createDna() {
     Dna dna = new Dna(this);
 
@@ -151,6 +167,11 @@ public class AlgaeGenome extends Genome
   public AlgaeGenome() {
     super(Species.Algae);
   }
+
+  public Motor createMotor(){
+    return new AlgaeMotor();
+  }
+
 
   public Dna createDna() {
     Dna dna = new Dna(this);
