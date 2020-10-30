@@ -184,18 +184,29 @@ class Motor {
 public class SnakeMotor extends Motor
 {
   PVector velocityNormal;
+  PVector velocityPropagation;
 
   public SnakeMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     super(organism, startDisplacement, startVelocity);
+    velocityPropagation = startVelocity.copy();
   }
 
   protected void updateVelocity() {
-    super.updateVelocity();
+    velocityPropagation.add(acceleration);
 
-    velocityNormal = velocity.copy();
+    velocityNormal = velocityPropagation.copy();
     velocityNormal.rotate(90);
     velocityNormal.mult(sin(CLOCK + timeOffset));
     velocityNormal.mult(SLITHER_FACTOR);
+    
+    velocity = velocityPropagation.copy().add(velocityNormal);
+    if ( velocity.mag() > TERMINAL_VELOCITY)
+    {
+      velocity.div(velocity.mag() / TERMINAL_VELOCITY);
+    } else if ( velocity.mag() < STAGNANT_VELOCITY)
+    {
+      velocity.mult(STAGNANT_VELOCITY / velocity.mag());
+    }
   }
 
   protected void updateDisplacement() {
@@ -225,7 +236,6 @@ public class AlgaeMotor extends Motor
       return;
     }
 
-    Log.debug("Bounce against other things algae!");
     super.bounceAgainstOther();
   }
 

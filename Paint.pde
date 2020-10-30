@@ -1,4 +1,4 @@
-boolean BLUR = false;
+boolean BLUR = true;
 
 boolean DRAW_BIRTH = false;
 boolean DRAW_DADDY = false;
