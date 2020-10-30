@@ -1,10 +1,10 @@
 float COLLISION_DAMPING_FACTOR = -0.9;
 float ACCELERATION_NOISE_FACTOR = 15;
 float ACCELERATION_GROWTH_FACTOR = 0.45;
-float SLITHER_FACTOR = 2;
+float SLITHER_FACTOR = 1.5;
 
-float TERMINAL_VELOCITY = 2;
-float STAGNANT_VELOCITY = 1;
+float TERMINAL_VELOCITY = 1.5;
+float STAGNANT_VELOCITY = 0.5;
 
 class Motor {
   protected Organism self;
@@ -30,6 +30,7 @@ class Motor {
     }
 
     move();
+
     bounceIfOrganismCollision();
     bounceIfWallCollision();
     clampToWall();
@@ -89,7 +90,7 @@ class Motor {
     displacement.y = clamp(displacement.y, 0, height);
   }
 
-  private void bounceIfWallCollision()
+  protected void bounceIfWallCollision()
   {
     if (displacement.x >= width || displacement.x <= 0)
     {
@@ -198,8 +199,9 @@ public class SnakeMotor extends Motor
     velocityNormal.rotate(90);
     velocityNormal.mult(sin(CLOCK + timeOffset));
     velocityNormal.mult(SLITHER_FACTOR);
-    
+
     velocity = velocityPropagation.copy().add(velocityNormal);
+
     if ( velocity.mag() > TERMINAL_VELOCITY)
     {
       velocity.div(velocity.mag() / TERMINAL_VELOCITY);
@@ -214,6 +216,22 @@ public class SnakeMotor extends Motor
 
     displacement.add(velocityNormal);
   }
+
+  protected void bounceIfWallCollision()
+  {
+    if (displacement.x >= width || displacement.x <= 0)
+    {
+      velocityPropagation.x = velocity.x * COLLISION_DAMPING_FACTOR;
+      acceleration.x = acceleration.x  * COLLISION_DAMPING_FACTOR;
+      return;
+    }
+
+    if (displacement.y >= height || displacement.y <= 0 )
+    {
+      velocityPropagation.y = velocity.y * COLLISION_DAMPING_FACTOR;
+      acceleration.y = acceleration.y  * COLLISION_DAMPING_FACTOR;
+    }
+  }
 }
 
 public class FishMotor extends Motor
@@ -225,33 +243,74 @@ public class FishMotor extends Motor
 
 public class AlgaeMotor extends Motor
 {
+  private boolean isAgglutinating;
+
   public AlgaeMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     super(organism, startDisplacement, startVelocity);
   }
+
+  protected void updateVelocity()
+  {
+    velocity.add(acceleration);
+
+    if (velocity.mag() == 0.f)
+    {
+      return;
+    }
+
+    // TODO: Make this a gene
+    float ALGAE_BE_SLOW = 0.2;
+
+    if ( velocity.mag() > TERMINAL_VELOCITY * ALGAE_BE_SLOW)
+    {
+      velocity.div(velocity.mag() / TERMINAL_VELOCITY / ALGAE_BE_SLOW);
+    } else if ( velocity.mag() < STAGNANT_VELOCITY * ALGAE_BE_SLOW)
+    {
+      velocity.mult(STAGNANT_VELOCITY * ALGAE_BE_SLOW / velocity.mag());
+    }
+  }
+
 
   protected void bounceAgainstOther()
   {
     if (self.collidingWith.species() == Species.Algae)
     {
+      agglutinate();
       return;
     }
 
     super.bounceAgainstOther();
   }
 
+  private void agglutinate()
+  {
+    Organism other = self.collidingWith;
+    velocity = other.velocity();
+    acceleration = other.acceleration();
+
+    if (DRAW_COLLISION)
+    {
+      stroke(GREEN);
+      line(displacement.x, 
+        displacement.y, 
+        displacement.x + (velocity.x * 100), 
+        displacement.y + (velocity.y*100));
+
+      stroke(MAROON);
+      line(other.displacement().x, 
+        other.displacement().y, 
+        other.displacement().x + (other.velocity().x * 100), 
+        other.displacement().y + (other.velocity().y*100));
+    }
+  }
+
   protected void updateAcceleration()
   {
     PVector accelerationStep = velocity.copy();
     accelerationStep.mult(-1);
-
-    PVector center = new PVector(width/2, height/2);
-    PVector displacementToCenter = center.sub(displacement);
-    displacementToCenter.normalize();
-    accelerationStep.add(displacementToCenter);
-
     accelerationStep.div(pow(mass(), 3));
 
-    acceleration.mult(ACCELERATION_GROWTH_FACTOR * 0.25);
+    acceleration.mult(ACCELERATION_GROWTH_FACTOR * 0.1);
     acceleration.add(accelerationStep);
   }
 }

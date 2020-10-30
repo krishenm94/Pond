@@ -1,10 +1,10 @@
 int BACKGROUND = 255;
 float CLOCK = 0;
 float CLOCK_MAX = 360;
-float CLOCK_INCREMENT = 0.1;
+float CLOCK_INCREMENT = 0.05;
 
 static int POPULATION_SIZE = 100;
-float BIOMASS_LIMIT = 3000;
+float BIOMASS_LIMIT = 5000;
 
 Population population = new Population();
 Painter painter = new Painter();
@@ -21,7 +21,7 @@ void setup()
 
 void draw()
 {
-  if (!BLUR)
+  if (!BLUR && !PRETTY)
   {
     background(BACKGROUND);
   }

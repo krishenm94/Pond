@@ -6,6 +6,7 @@ class Organism
   private float startMass;
   float mass = startMass;
 
+  public color randomColour =  painter.randomColour();
   private color colour;
 
   boolean isDead = false;

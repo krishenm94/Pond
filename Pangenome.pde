@@ -135,8 +135,8 @@ public class SnakeGenome extends Genome
     dna.howFatToMakeBaby = 0.05;
     dna.stuffedFactor = 1.0;
 
-    dna.lowerMassLimit = 20;
-    dna.upperMassLimit = 50;
+    dna.lowerMassLimit = 21;
+    dna.upperMassLimit = 42;
 
     dna.fissionFactor = 0.4;
 
@@ -168,8 +168,8 @@ public class FishGenome extends Genome
     dna.howFatToMakeBaby = 0.05;
     dna.stuffedFactor = 1;
 
-    dna.lowerMassLimit = 12;
-    dna.upperMassLimit = 25;
+    dna.lowerMassLimit = 11;
+    dna.upperMassLimit = 24;
 
     dna.fissionFactor = 0.2;
 
@@ -202,8 +202,8 @@ public class AlgaeGenome extends Genome
     dna.howFatToMakeBaby = 0.2;
     dna.stuffedFactor = 100;
 
-    dna.lowerMassLimit = 5;
-    dna.upperMassLimit = 5;
+    dna.lowerMassLimit = 7;
+    dna.upperMassLimit = 7;
 
     dna.fissionFactor = 0.5;
 

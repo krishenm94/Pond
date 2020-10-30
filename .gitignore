@@ -1,1 +1,5 @@
 *.autosave
+*.zip
+*.7z
+*windows*
+*linux*
