@@ -13,7 +13,7 @@ float HOW_FAT_TO_MAKE_BABY_MULTIPLIER = 0.05;
 class Organism
 {
   private Motor motor;
-  private Dna dna;
+  private Genome.Dna dna;
   private float startMass = random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT);
   float mass = startMass;
 
@@ -21,9 +21,13 @@ class Organism
   private color colour = color(random(0, 255), random(0, 255), random(0, 255));
 
   boolean isDead = false;
-  Species species;
   Organism collidingWith; // TODO: Make this a List
 
+  Species species()
+  {
+    return dna.species;
+  }
+  
   boolean canIEat(Organism other)
   {
     return this.mass * PREDATOR_FACTOR > other.mass &&
@@ -36,15 +40,15 @@ class Organism
     motor.update();
   }
 
-  private Organism(PVector displacement, Species _species)
+  private Organism(PVector displacement, Genome.Dna _dna)
   {
-    this(random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT), displacement, _species);
+    this(random(MASS_LOWER_LIMIT, MASS_UPPER_LIMIT), displacement, _dna);
   }
 
-  public Organism(float _mass, PVector displacement, Species _species)
+  public Organism(float _mass, PVector displacement, Genome.Dna _dna)
   {
     mass = _mass;
-    species = _species;
+    dna = _dna;
     motor = new Motor(this, displacement, PVector.random2D());
   }
 
@@ -112,7 +116,7 @@ class Organism
     displacement.mult(this.mass* PROJECTILE_DELIVERY_FACTOR);
     displacement.add(this.displacement());
     
-    Organism baby = new Organism(this.mass * FISSION_FACTOR, displacement, this.species);
+    Organism baby = new Organism(this.mass * FISSION_FACTOR, displacement, this.dna);
     
     baby.setVelocity(baby.velocity().mult(PROJECTILE_DELIVERY_FACTOR));
     

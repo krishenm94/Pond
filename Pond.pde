@@ -3,12 +3,13 @@ float CLOCK = 0;
 float CLOCK_MAX = 360;
 float CLOCK_INCREMENT = 0.1;
 
-static int POPULATION_SIZE = 400;
+static int POPULATION_SIZE = 100;
 
 boolean BLUR = true;
 
 Population population = new Population();
 Painter painter = new Painter();
+Pangenome pangenome = new Pangenome();
 
 void setup()
 {

@@ -19,7 +19,7 @@ class Population
 
   public void add()
   {
-    add(new Organism(randomDisplacement(), Pangenome.randomSpecies()));
+    add(new Organism(randomDisplacement(), pangenome.randomGenome().create()));
   }
 
   PVector randomDisplacement()
@@ -46,7 +46,7 @@ class Population
 
       populationBiomass += organism.mass;
 
-      if (organism.species == Species.Snake)
+      if (organism.species() == Species.Snake)
       {
         snakeCount++;
       } else
@@ -110,7 +110,7 @@ class Population
         continue;
       }
 
-      if (other.species == organism.species) 
+      if (other.species() == organism.species()) 
       {
         organism.collidingWith = other;
         other.collidingWith = organism;
