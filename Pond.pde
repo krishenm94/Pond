@@ -5,7 +5,7 @@ float CLOCK_INCREMENT = 0.1;
 
 static int POPULATION_SIZE = 100;
 
-boolean BLUR = false;
+boolean BLUR = true;
 
 Population population = new Population();
 Painter painter = new Painter();
@@ -13,7 +13,7 @@ Pangenome pangenome = new Pangenome();
 
 void setup()
 {
-  size(500, 500);
+  size(1500, 500);
   background(BACKGROUND);
   smooth();
 

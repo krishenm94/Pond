@@ -60,13 +60,17 @@ public class Genome
     species = _species;
   }
 
-  public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity){
+  public Motor createMotor(
+    Organism organism,
+     PVector startDisplacement,
+      PVector startVelocity
+      ){
     return null;
   }
 
     public Dna createDna()
   {
-    return new Dna(this);
+    return null;
   } 
 
   // TODO: Implement Dna as a map of template typed genes
@@ -118,14 +122,14 @@ public class SnakeGenome extends Genome
   public Dna createDna() {
     Dna dna = new Dna(this);
 
-    dna.colour = color(255, 100, 0);
+    dna.colour = color(255, 50, 0);
     dna.predatorFactor = 0.8;
 
     dna.howFatToMakeBaby = 0.05;
     dna.stuffedFactor = 8;
 
-    dna.lowerMassLimit = 10;
-    dna.upperMassLimit = 25;
+    dna.lowerMassLimit = 5;
+    dna.upperMassLimit = 15;
 
     dna.fissionFactor = 0.4;
 

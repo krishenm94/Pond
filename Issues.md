@@ -20,12 +20,12 @@
 
 6. Sexual reproduction: Blocked by 1
 
-7. Movement modes for each species: Blocked by 1 (in progress)
+7. Movement modes for each species: Blocked by 1 (closed)
 
 8. Speciation: Blocked by 5
 
 9. Write a macro to get current function signature for better logging
 
-10. Control initial population distibrution
+10. Control initial population distribution
 
 11. Prefix all member variables with "m_" and remove local variables prefixed with "_"
