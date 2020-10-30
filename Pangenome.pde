@@ -2,8 +2,8 @@ import java.util.Random;
 
 enum Species {
   Algae, 
-  Fish, 
-  Snake
+    Fish, 
+    Snake
 }
 
 class Pangenome
@@ -18,7 +18,7 @@ class Pangenome
   private AlgaeGenome ALGAE = new AlgaeGenome();
 
   final List<Species> SPECIES_LIST =
-  Collections.unmodifiableList(Arrays.asList(Species.values()));
+    Collections.unmodifiableList(Arrays.asList(Species.values()));
   private final Random RANDOM = new Random();
 
   public Species randomSpecies()
@@ -30,13 +30,13 @@ class Pangenome
   {
     switch (species)
     {
-      case Snake:        
+    case Snake:        
       return SNAKE;
-      case Fish:        
+    case Fish:        
       return FISH;
-      case Algae:        
+    case Algae:        
       return ALGAE;
-      default:      
+    default:      
       Log.error("Null genome for species: " + species.name());
       return null;
     }
@@ -55,17 +55,21 @@ public class Genome
 {
   public Species species;
   public List<Species> diet;
+  int initCount;
+  int initCountMax;
 
-  public Genome(Species _species)
+  public Genome(Species _species, List<Species> _diet, int _initCountMax)
   {
     species = _species;
+    diet = _diet;
+    initCountMax = _initCountMax;
   }
 
   public Motor createMotor(
-    Organism organism,
-    PVector startDisplacement,
+    Organism organism, 
+    PVector startDisplacement, 
     PVector startVelocity
-    ){
+    ) {
     return null;
   }
 
@@ -84,7 +88,7 @@ public class Genome
     public float predatorFactor;
 
     public float howFatToMakeBaby;
-    public int stuffedFactor;
+    public float stuffedFactor;
 
     public float lowerMassLimit;
     public float upperMassLimit;
@@ -107,17 +111,17 @@ public class Genome
   public class Gene
   {
   }
-
-
 }
 
 public class SnakeGenome extends Genome
 {
   public SnakeGenome() {
-    super(Species.Snake);
+    super(Species.Snake, 
+      Arrays.asList(new Species[]{Species.Fish}), 
+      SNAKE_COUNT_INIT);
   }
 
-  public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity){
+  public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     return new SnakeMotor(organism, startDisplacement, startVelocity);
   }
 
@@ -129,7 +133,7 @@ public class SnakeGenome extends Genome
     dna.predatorFactor = 0.8;
 
     dna.howFatToMakeBaby = 0.05;
-    dna.stuffedFactor = 8;
+    dna.stuffedFactor = 1.5;
 
     dna.lowerMassLimit = 20;
     dna.upperMassLimit = 50;
@@ -137,7 +141,7 @@ public class SnakeGenome extends Genome
     dna.fissionFactor = 0.4;
 
     dna.photosynthesisIncrement = 0;
-    
+
     return dna;
   }
 }
@@ -145,10 +149,12 @@ public class SnakeGenome extends Genome
 public class FishGenome extends Genome
 {
   public FishGenome() {
-    super(Species.Fish);
+    super(Species.Fish, 
+      Arrays.asList(new Species[]{Species.Snake, Species.Algae}), 
+      FISH_COUNT_INIT);
   }
 
-  public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity){
+  public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     return new FishMotor(organism, startDisplacement, startVelocity);
   }
 
@@ -160,15 +166,15 @@ public class FishGenome extends Genome
     dna.predatorFactor = 0.5;
 
     dna.howFatToMakeBaby = 0.05;
-    dna.stuffedFactor = 5;
+    dna.stuffedFactor = 2;
 
-    dna.lowerMassLimit = 8;
-    dna.upperMassLimit = 15;
+    dna.lowerMassLimit = 12;
+    dna.upperMassLimit = 25;
 
     dna.fissionFactor = 0.2;
 
     dna.photosynthesisIncrement = 0;
-    
+
     return dna;
   }
 }
@@ -176,10 +182,13 @@ public class FishGenome extends Genome
 public class AlgaeGenome extends Genome
 {
   public AlgaeGenome() {
-    super(Species.Algae);
+    super(Species.Algae, 
+      Arrays.asList(new Species[]{}), 
+      999999999);
   }
 
-  public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity){
+
+  public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     return new AlgaeMotor(organism, startDisplacement, startVelocity);
   }
 
@@ -193,7 +202,7 @@ public class AlgaeGenome extends Genome
     dna.howFatToMakeBaby = 0.2;
     dna.stuffedFactor = 100;
 
-    dna.lowerMassLimit = 3;
+    dna.lowerMassLimit = 5;
     dna.upperMassLimit = 5;
 
     dna.fissionFactor = 0.5;

@@ -11,7 +11,7 @@ Pangenome pangenome = new Pangenome();
 
 void setup()
 {
-  size(500, 500);
+  size(400, 400);
   background(BACKGROUND);
   smooth();
 

@@ -38,8 +38,7 @@ class Painter
       return;
     }
 
-    //stroke(BLUR? organism.colour: color(0,0,0) , BLUR? 30 : 255);
-    stroke(organism.colour , BLUR? 30 : 255);
+    stroke(BLUR? organism.colour: color(0,0,0) , BLUR? 30 : 255);
     fill(organism.colour, BLUR? 20 : 200);
 
     ellipse(organism.displacement().x, 

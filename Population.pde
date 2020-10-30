@@ -1,7 +1,13 @@
 import java.util.*; 
 
-float BIOMASS_LIMIT = 700;
+float BIOMASS_LIMIT = 7000;
 boolean BIOMASS_LOCK = false;
+
+int SNAKE_COUNT_INIT = 3;
+int FISH_COUNT_INIT = 20;
+
+int fishCount = 0;
+int snakeCount = 0;
 
 class Population
 {
@@ -31,6 +37,24 @@ class Population
     {
       Log.error("Null genome, skipping random organism creation");
       return null;
+    }
+
+    if (genome.species == Species.Fish)
+    {
+      fishCount++;
+      if (fishCount > FISH_COUNT_INIT) 
+      {
+        return null;
+      }
+    }
+
+    if (genome.species == Species.Snake)
+    {
+      snakeCount++;
+      if (snakeCount > SNAKE_COUNT_INIT) 
+      {
+        return null;
+      }
     }
 
     return add(new Organism(randomDisplacement(), genome));

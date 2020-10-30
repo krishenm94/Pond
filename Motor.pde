@@ -231,7 +231,7 @@ public class AlgaeMotor extends Motor
   {
     PVector accelerationStep = velocity.copy();
 
-    //accelerationStep.mult(-1);
+    accelerationStep.mult(-1);
     accelerationStep.div(pow(mass(), 3));
 
     acceleration.mult(ACCELERATION_GROWTH_FACTOR * 0.25);
