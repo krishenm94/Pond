@@ -13,16 +13,9 @@ class Pangenome
   //private static final SnakeGenome SNAKE = new SnakeGenome();
   //private static final FishGenome FISH = new FishGenome();
   //private static final AlgaeGenome ALGAE = new AlgaeGenome();
-  private SnakeGenome SNAKE;
-  private FishGenome FISH;
-  private AlgaeGenome ALGAE;
-
-  public Pangenome()
-  {
-    SNAKE = new SnakeGenome();
-    FISH = new FishGenome();
-    ALGAE = new AlgaeGenome();
-  }
+  private SnakeGenome SNAKE = new SnakeGenome();
+  private FishGenome FISH =  = new FishGenome();;
+  private AlgaeGenome ALGAE  = new AlgaeGenome();
 
   final List<Species> SPECIES_LIST =
     Collections.unmodifiableList(Arrays.asList(Species.values()));

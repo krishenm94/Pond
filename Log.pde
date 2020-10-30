@@ -1,27 +1,27 @@
 public static class Log
 {
-  public static warning(String string)
+  public static void warning(String string)
   {
-    log("WARNING: " + string);
+    log("WARNING", string);
   }
   
-  public static error(String string)
+  public static void error(String string)
   {
-    log("ERROR: " + string);
+    log("ERROR", string);
   }
   
-  public static debug(String string)
+  public static void debug(String string)
   {
-    log("DEBUG:" + string)
+    log("DEBUG", string);
   }
   
-  public static info(String string)
+  public static void info(String string)
   {
     log("INFO", string);
   }
   
-  private log(String prefix, String message)
+  private static void log(String prefix, String message)
   {
-    println(prefix + ": " + string);
+    println(prefix + ": " + message);
   }
 }
