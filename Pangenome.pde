@@ -133,7 +133,7 @@ public class SnakeGenome extends Genome
     dna.predatorFactor = 0.8;
 
     dna.howFatToMakeBaby = 0.05;
-    dna.stuffedFactor = 1.5;
+    dna.stuffedFactor = 1.0;
 
     dna.lowerMassLimit = 20;
     dna.upperMassLimit = 50;
@@ -166,7 +166,7 @@ public class FishGenome extends Genome
     dna.predatorFactor = 0.5;
 
     dna.howFatToMakeBaby = 0.05;
-    dna.stuffedFactor = 2;
+    dna.stuffedFactor = 1;
 
     dna.lowerMassLimit = 12;
     dna.upperMassLimit = 25;

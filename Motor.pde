@@ -1,10 +1,10 @@
-float COLLISION_DAMPING_FACTOR = 0.5;
+float COLLISION_DAMPING_FACTOR = -0.9;
 float ACCELERATION_NOISE_FACTOR = 15;
 float ACCELERATION_GROWTH_FACTOR = 0.45;
 float SLITHER_FACTOR = 2;
 
 float TERMINAL_VELOCITY = 2;
-float STAGNANT_VELOCITY = 0.5;
+float STAGNANT_VELOCITY = 1;
 
 class Motor {
   protected Organism self;
@@ -30,9 +30,9 @@ class Motor {
     }
 
     move();
-    clampToCanvas();
     bounceIfOrganismCollision();
     bounceIfWallCollision();
+    clampToWall();
   }
 
   protected void move()
@@ -83,7 +83,7 @@ class Motor {
     return input;
   }
 
-  private void clampToCanvas()
+  private void clampToWall()
   {
     displacement.x = clamp(displacement.x, 0, width);
     displacement.y = clamp(displacement.y, 0, height);
@@ -91,13 +91,14 @@ class Motor {
 
   private void bounceIfWallCollision()
   {
-    if (displacement.x == width || displacement.x == 0)
+    if (displacement.x >= width || displacement.x <= 0)
     {
       velocity.x = velocity.x * COLLISION_DAMPING_FACTOR;
       acceleration.x = acceleration.x  * COLLISION_DAMPING_FACTOR;
+      return;
     }
 
-    if (displacement.y == height || displacement.y == 0 )
+    if (displacement.y >= height || displacement.y <= 0 )
     {
       velocity.y = velocity.y * COLLISION_DAMPING_FACTOR;
       acceleration.y = acceleration.y  * COLLISION_DAMPING_FACTOR;
@@ -224,6 +225,7 @@ public class AlgaeMotor extends Motor
       return;
     }
 
+    Log.debug("Bounce against other things algae!");
     super.bounceAgainstOther();
   }
 
@@ -234,9 +236,9 @@ public class AlgaeMotor extends Motor
 
     PVector center = new PVector(width/2, height/2);
     PVector displacementToCenter = center.sub(displacement);
-    displacementToCenter.normalize().mult(5);
+    displacementToCenter.normalize();
     accelerationStep.add(displacementToCenter);
-    
+
     accelerationStep.div(pow(mass(), 3));
 
     acceleration.mult(ACCELERATION_GROWTH_FACTOR * 0.25);

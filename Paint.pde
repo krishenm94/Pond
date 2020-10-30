@@ -9,14 +9,13 @@ boolean DRAW_DEAD = false;
 boolean DRAW_PREDATOR = false;
 boolean DRAW_POST_CHOMP_GROWTH = false;
 
-boolean DRAW_ORGANISM = true;
-
-boolean DRAW_OVERLAP = false;
+boolean DRAW_ORGANISM = false;
 
 boolean DEBUG_RECT = false;
 boolean DEBUG_ELLIPSE = true;
 
-boolean DRAW_COLLISION = false;
+boolean DRAW_OVERLAP = true;
+boolean DRAW_COLLISION = true;
 
 color RED = color(255, 0, 0);
 color GREEN = color(0, 255, 0);
@@ -38,7 +37,7 @@ class Painter
       return;
     }
 
-    stroke(BLUR? organism.colour: color(0,0,0) , BLUR? 30 : 255);
+    stroke(BLUR? organism.colour: color(0, 0, 0), BLUR? 30 : 255);
     fill(organism.colour, BLUR? 20 : 200);
 
     ellipse(organism.displacement().x, 
@@ -64,7 +63,7 @@ class Painter
         , organism.displacement().y
         , organism.mass, organism.mass);
     }
- 
+
     if (DEBUG_RECT)
     {
       rect(organism.displacement().x - organism.mass / 2

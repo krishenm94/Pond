@@ -1,10 +1,9 @@
 import java.util.*; 
 
-float BIOMASS_LIMIT = 7000;
 boolean BIOMASS_LOCK = false;
 
-int SNAKE_COUNT_INIT = 3;
-int FISH_COUNT_INIT = 20;
+int SNAKE_COUNT_INIT = 4;
+int FISH_COUNT_INIT = 15;
 
 int fishCount = 0;
 int snakeCount = 0;
@@ -166,11 +165,13 @@ class Population
       if (organism.canIEat(other)) {
         organism.chomp(other);
         continue;
-      }
-
-      if (other.canIEat(organism)) {
+      } else if (other.canIEat(organism)) {
         other.chomp(organism);
         continue;
+      } else
+      {
+        organism.collidingWith = other;
+        other.collidingWith = organism;
       }
     }
   }
@@ -188,8 +189,8 @@ class Population
 
     if (isOverlapping)
     {
-      painter.show(organism1, WHITE, DRAW_OVERLAP);
-      painter.show(organism2, WHITE, DRAW_OVERLAP);
+      painter.show(organism1, WHITE, DRAW_OVERLAP || DRAW_COLLISION);
+      painter.show(organism2, WHITE, DRAW_OVERLAP || DRAW_COLLISION);
     }
 
     return isOverlapping;
