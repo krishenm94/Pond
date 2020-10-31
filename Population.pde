@@ -89,7 +89,7 @@ class Population
       }
 
       organism.show();
-      
+
       interactWithOthers(organism);
 
       float babyChance = random(0, 1);
@@ -103,7 +103,7 @@ class Population
         organism.photosynthesise();
       }
 
-     mass += organism.mass;
+      mass += organism.mass;
 
       if (speciesCount.containsKey(organism.species())) { 
         speciesCount.put(organism.species(), speciesCount.get(organism.species()) + 1);
@@ -125,10 +125,14 @@ class Population
 
   private void interactWithOthers(Organism organism)
   {
+    if (organism.collidingWith != null || organism.isDead)
+    {
+      return;
+    }
+
     for (Organism other : organisms)
     {
-      boolean areTheyMeeting = areMeeting(organism, other);
-      if (other == organism || !areTheyMeeting || other.isDead) {
+      if (other == organism || !areMeeting(organism, other) || other.isDead) {
         continue;
       }
 
@@ -149,9 +153,6 @@ class Population
         organism.collidingWith = other;
         other.collidingWith = organism;
       }
-      
-      if(areTheyMeeting)
-      {return;)
     }
   }
 

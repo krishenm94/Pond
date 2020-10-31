@@ -24,7 +24,7 @@ Status: in planning
 
 1. Restructure `Organism` components as nested classes
 2. Add sensory apparatus
-3. Optimize speed
+3. Population.update() optimization
 
 ## Etc.
 

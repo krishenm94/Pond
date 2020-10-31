@@ -6,6 +6,8 @@ enum Species {
     Snake
 }
 
+float MUTATION_FACTOR = 0.1;
+
 public class Pangenome
 {
   // Genomes
@@ -95,7 +97,7 @@ public class Genome
     public float fissionFactor;
 
     public float photosynthesisIncrement;
-    
+
     public float maxAge;
     public float metabolicRate;
     public float emaciationQuotient;
@@ -136,7 +138,7 @@ public class SnakeGenome extends Genome
     dna.predatorFactor = 1.5;
 
     dna.fertility = 0.0001;
-    dna.maxFoodCapacityCoefficient = 2.0;
+    dna.maxFoodCapacityCoefficient = 3.0;
 
     dna.lowerMassLimit = 20;
     dna.upperMassLimit = 30;
@@ -144,10 +146,12 @@ public class SnakeGenome extends Genome
     dna.fissionFactor = 0.5;
 
     dna.photosynthesisIncrement = 0;
-    
-    dna.maxAge = 10000;
+
+    dna.maxAge = 1000;
+    dna.maxAge = random(dna.maxAge*(1 - MUTATION_FACTOR), dna.maxAge*(1 + MUTATION_FACTOR));
+
     dna.metabolicRate = 0.01;
-    dna.emaciationQuotient = 3;
+    dna.emaciationQuotient = 1.1;
 
     return dna;
   }
@@ -172,18 +176,20 @@ public class FishGenome extends Genome
     dna.colour = color(0, 100, 255);
     dna.predatorFactor = 0.7;
 
-    dna.fertility = 0.0015;
+    dna.fertility = 0.0005;
     dna.maxFoodCapacityCoefficient = 1.8;
 
     dna.lowerMassLimit = 15;
     dna.upperMassLimit = 20;
 
-    dna.fissionFactor = 0.2;
+    dna.fissionFactor = 0.3;
 
     dna.photosynthesisIncrement = 0;
-    
-    dna.maxAge = 100;
-    dna.metabolicRate = 0.1;
+
+    dna.maxAge = 500;
+    dna.maxAge = random(dna.maxAge*(1 - MUTATION_FACTOR), dna.maxAge*(1 + MUTATION_FACTOR));
+
+    dna.metabolicRate = 0.02;
     dna.emaciationQuotient = 5;
 
     return dna;
@@ -217,9 +223,11 @@ public class AlgaeGenome extends Genome
 
     dna.fissionFactor = 0.5;
 
-    dna.photosynthesisIncrement = 0.5;
-    
+    dna.photosynthesisIncrement = 0.02;
+
     dna.maxAge = 50000;
+    dna.maxAge = random(dna.maxAge*(1 - MUTATION_FACTOR), dna.maxAge*(1 + MUTATION_FACTOR));
+
     dna.metabolicRate = 0;
     dna.emaciationQuotient = 5;
 
