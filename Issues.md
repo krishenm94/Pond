@@ -34,3 +34,17 @@
 12. Add photosynthesis mechanism (closed)
 
 13. Block all commits to `release_*` branches
+
+Example code:
+```
+# START: Block pushing to release branches 
+if [[ $refname == "refs/heads/release_v1" ]]
+then
+    echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+    echo "You cannot push to branch: release_v1! It's locked"
+    echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+    exit 1
+fi
+exit 0
+# END : Block pushing to release branches
+```
