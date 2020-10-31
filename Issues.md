@@ -1,6 +1,6 @@
 # Issues
 
-1. Use a GenomeFactory and GeneFactory paradigm to control Organism attributes (closed)
+1. Use a genome factory and gene factory paradigm to control Organism attributes (closed)
 
 2. Javafy files: 
     a. Remove Painter as a global variable 
@@ -28,6 +28,9 @@
 
 10. Control initial population distribution
 
-11. Prefix all member variables with "m_" and remove local variables prefixed with "_"
+11. Prefix all member variables with `m_` and remove local variables prefixed with `_`
 
-12. Add photosynthesis mechanism
+
+12. Add photosynthesis mechanism (closed)
+
+13. Block all commits to `release_*` branches
