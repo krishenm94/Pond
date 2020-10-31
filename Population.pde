@@ -127,7 +127,8 @@ class Population
   {
     for (Organism other : organisms)
     {
-      if (other == organism || !areMeeting(organism, other) || other.isDead) {
+      boolean areTheyMeeting = areMeeting(organism, other);
+      if (other == organism || !areTheyMeeting || other.isDead) {
         continue;
       }
 
@@ -148,6 +149,9 @@ class Population
         organism.collidingWith = other;
         other.collidingWith = organism;
       }
+      
+      if(areTheyMeeting)
+      {return;)
     }
   }
 
