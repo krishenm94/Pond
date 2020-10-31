@@ -3,10 +3,7 @@ float CLOCK = 0;
 float CLOCK_MAX = 360;
 float CLOCK_INCREMENT = 0.05;
 
-static int POPULATION_SIZE = 100;
-float BIOMASS_LIMIT = 2500;
-
-float ENTROPY = 0.9;
+float ENTROPY = 0.8;
 
 Population population = new Population();
 Painter painter = new Painter();
@@ -14,7 +11,7 @@ Pangenome pangenome = new Pangenome();
 
 void setup()
 {
-  size(600, 400);
+  size(400, 400);
   background(BACKGROUND);
   smooth();
 

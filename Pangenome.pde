@@ -6,9 +6,8 @@ enum Species {
     Snake
 }
 
-class Pangenome
+public class Pangenome
 {
-
   // Genomes
   //private static final SnakeGenome SNAKE = new SnakeGenome();
   //private static final FishGenome FISH = new FishGenome();
@@ -134,19 +133,19 @@ public class SnakeGenome extends Genome
     Dna dna = new Dna(this);
 
     dna.colour = color(255, 50, 0);
-    dna.predatorFactor = 0.95;
+    dna.predatorFactor = 1.5;
 
-    dna.fertility = 0.005;
+    dna.fertility = 0.0005;
     dna.maxFoodCapacityCoefficient = 1.7;
 
-    dna.lowerMassLimit = 20;
-    dna.upperMassLimit = 35;
+    dna.lowerMassLimit = 25;
+    dna.upperMassLimit = 40;
 
-    dna.fissionFactor = 0.2;
+    dna.fissionFactor = 0.5;
 
     dna.photosynthesisIncrement = 0;
     
-    dna.maxAge = 200;
+    dna.maxAge = 2000;
     dna.metabolicRate = 0.00625;
     dna.emaciationQuotient = 4;
 
@@ -173,18 +172,18 @@ public class FishGenome extends Genome
     dna.colour = color(0, 100, 255);
     dna.predatorFactor = 0.5;
 
-    dna.fertility = 0.01;
+    dna.fertility = 0.005;
     dna.maxFoodCapacityCoefficient = 1.8;
 
     dna.lowerMassLimit = 15;
     dna.upperMassLimit = 25;
 
-    dna.fissionFactor = 0.25;
+    dna.fissionFactor = 0.5;
 
     dna.photosynthesisIncrement = 0;
     
-    dna.maxAge = 60;
-    dna.metabolicRate = 0.025;
+    dna.maxAge = 1000;
+    dna.metabolicRate = 0.005;
     dna.emaciationQuotient = 5;
 
     return dna;
@@ -213,8 +212,8 @@ public class AlgaeGenome extends Genome
     dna.fertility = 1;
     dna.maxFoodCapacityCoefficient = 100;
 
-    dna.lowerMassLimit = 4;
-    dna.upperMassLimit = 4;
+    dna.lowerMassLimit = 5;
+    dna.upperMassLimit = 5;
 
     dna.fissionFactor = 0.5;
 

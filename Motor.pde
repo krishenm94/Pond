@@ -232,72 +232,6 @@ public class SnakeMotor extends Motor
       acceleration.y = acceleration.y  * COLLISION_DAMPING_FACTOR;
     }
   }
-
-  protected void bounceAgainstOther()
-  {
-    Organism other = self.collidingWith;
-
-    PVector otherToSelfVector = displacement.copy().sub(other.displacement());
-    PVector otherToSelfUnitVector = otherToSelfVector.copy().normalize();
-
-    if (DRAW_COLLISION)
-    {
-      stroke(RED);
-      line(displacement.x, 
-        displacement.y, 
-        displacement.x + (velocity.x * 100), 
-        displacement.y + (velocity.y*100));
-
-      stroke(BLUE);
-      line(other.displacement().x, 
-        other.displacement().y, 
-        other.displacement().x + (other.velocity().x * 100), 
-        other.displacement().y + (other.velocity().y*100));
-    }
-
-    // For proof on perfectly inelastic collision of balls:
-    // https://stackoverflow.com/questions/35211114/2d-elastic-ball-collision-physics
-    ////////////////////////////////////////////////////////
-    PVector newVelocity = otherToSelfUnitVector.copy();
-    newVelocity.mult(other.mass * 2 / (other.mass + mass()));
-    newVelocity.mult(otherToSelfUnitVector.dot(velocity.copy().sub(other.velocity())));
-    newVelocity = velocity.copy().sub(newVelocity);
-
-    PVector selfToOtherUnitVector = otherToSelfUnitVector.copy().mult(-1);
-    PVector newOtherVelocity = selfToOtherUnitVector.copy();
-    newOtherVelocity.mult(mass() * 2 / (other.mass + mass()));
-    newOtherVelocity.mult(selfToOtherUnitVector.dot(other.velocity().copy().sub(velocity)));
-    newOtherVelocity = other.velocity().copy().sub(newOtherVelocity);
-
-    velocityPropagation = newVelocity;
-
-    if (self.collidingWith.motor instanceof SnakeMotor)
-    {
-      SnakeMotor otherMotor = (SnakeMotor)other.motor;
-      otherMotor.setVelocityPropagation(newOtherVelocity);
-    } else
-    {
-      other.setVelocity(newOtherVelocity);
-    }
-
-
-    ///////////////////////////////////////////////////////////
-
-    if (DRAW_COLLISION)
-    {
-      stroke(GREEN);
-      line(displacement.x, 
-        displacement.y, 
-        displacement.x + (velocity.x * 100), 
-        displacement.y + (velocity.y*100));
-
-      stroke(MAROON);
-      line(other.displacement().x, 
-        other.displacement().y, 
-        other.displacement().x + (other.velocity().x * 100), 
-        other.displacement().y + (other.velocity().y*100));
-    }
-  }
 }
 
 public class FishMotor extends Motor
@@ -309,8 +243,6 @@ public class FishMotor extends Motor
 
 public class AlgaeMotor extends Motor
 {
-  private boolean isAgglutinating;
-
   public AlgaeMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     super(organism, startDisplacement, startVelocity);
   }

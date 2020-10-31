@@ -16,7 +16,7 @@ boolean DEBUG_RECT = false;
 boolean DEBUG_ELLIPSE = true;
 
 boolean DRAW_OVERLAP = false;
-boolean DRAW_COLLISION = false;
+boolean DRAW_COLLISION = true;
 
 color RED = color(255, 0, 0);
 color GREEN = color(0, 255, 0);
