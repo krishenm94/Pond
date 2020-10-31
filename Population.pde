@@ -71,23 +71,39 @@ class Population
 
   public void update()
   {
-    feedingAndOverlapDetection();
-    babyTime();
+    //feedingBirthAndOverlap();
 
     HashMap<Species, Integer> speciesCount = new HashMap<Species, Integer>();
     float mass = 0;
 
+    Vector<Organism> theBabies = new Vector<Organism>();
+    Vector<Organism> theDead = new Vector<Organism>();
+
     for (Organism organism : organisms)
-    {  
+    { 
       organism.update();
+      if (organism.isDead)
+      {
+        theDead.add(organism);
+        continue;
+      }
+
       organism.show();
+      
+      interactWithOthers(organism);
+
+      float babyChance = random(0, 1);
+      if (babyChance < organism.howFat() && organism.howFat() > 0)
+      {
+        theBabies.add(organism.makeBaby());
+      }
 
       if (!BIOMASS_LOCK)
       {
         organism.photosynthesise();
       }
 
-      mass += organism.mass;
+     mass += organism.mass;
 
       if (speciesCount.containsKey(organism.species())) { 
         speciesCount.put(organism.species(), speciesCount.get(organism.species()) + 1);
@@ -96,6 +112,8 @@ class Population
       }
     }
 
+    organisms.removeAll(theDead);
+    organisms.addAll(theBabies);
     BIOMASS_LOCK = mass > BIOMASS_LIMIT ? true : false;
 
     Log.info("Total biomass: " + mass);
@@ -105,49 +123,7 @@ class Population
       Log.info("Species: " + entry.getKey()+ ", Count: " + entry.getValue());
   }
 
-  private void babyTime()
-  {
-    Vector<Organism> theBabies = new Vector<Organism>();
-    for (Organism organism : organisms)
-    {  
-      if (organism.howFat() <= 0)
-      {
-        continue;
-      }
-
-      float babyChance = random(0, 1);
-
-      if (babyChance < organism.howFat())
-      {
-        theBabies.add(organism.makeBaby());
-      }
-    }
-
-    organisms.addAll(theBabies);
-  }
-
-  private void feedingAndOverlapDetection()
-  {
-    Vector<Organism> theDead = new Vector<Organism>();
-    for (Organism organism : organisms)
-    {      
-      if (organism.isDead)
-      {
-        theDead.add(organism);
-        continue;
-      }
-
-      fightTheOthers(organism);
-
-      if (organism.isDead) {
-        theDead.add(organism);
-      }
-    }
-
-    organisms.removeAll(theDead);
-  }
-
-  private void fightTheOthers(Organism organism)
+  private void interactWithOthers(Organism organism)
   {
     for (Organism other : organisms)
     {
@@ -165,10 +141,8 @@ class Population
 
       if (organism.canIEat(other)) {
         organism.chomp(other);
-        continue;
       } else if (other.canIEat(organism)) {
         other.chomp(organism);
-        continue;
       } else
       {
         organism.collidingWith = other;

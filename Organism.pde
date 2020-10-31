@@ -34,6 +34,7 @@ class Organism
     if (mass < startMass /dna.emaciationQuotient)
     { 
       isDead = true;
+      return;
     }
 
     if (age > dna.maxAge)
