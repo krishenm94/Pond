@@ -1,6 +1,6 @@
 class Organism
 {
-  private Motor motor;
+  public Motor motor;
   private Genome genome;
   private Genome.Dna dna;
   private float startMass;
@@ -22,17 +22,25 @@ class Organism
   {
     return this.mass * dna.predatorFactor > other.mass &&
       !other.isDead && 
-      this.mass < this.startMass * dna.stuffedFactor &&
+      this.mass < this.startMass * dna.maxFoodCapacityCoefficient &&
       genome.diet.contains(other.species());
   }
 
   void update()
   {
     age += CLOCK_INCREMENT;
-    if(age > dna.maxAge)
+    mass -= CLOCK_INCREMENT * dna.metabolicRate;
+    
+    if (mass < startMass /dna.emaciationQuotient)
+    { 
+      isDead = true;
+    }
+    
+    if (age > dna.maxAge)
     {
       isDead = true;
     }
+    
     motor.update();
   }
 
@@ -142,5 +150,10 @@ class Organism
     }
 
     mass += dna.photosynthesisIncrement;
+  }
+  
+  float maxMass()
+  {
+    return startMass*dna.maxFoodCapacityCoefficient;
   }
 }

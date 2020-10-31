@@ -1,10 +1,10 @@
 float COLLISION_DAMPING_FACTOR = -0.9;
 float ACCELERATION_NOISE_FACTOR = 15;
 float ACCELERATION_GROWTH_FACTOR = 0.45;
-float SLITHER_FACTOR = 1.5;
+float SLITHER_FACTOR = 2;
 
-float TERMINAL_VELOCITY = 1;
-float STAGNANT_VELOCITY = 0.25;
+float TERMINAL_VELOCITY = 1.5;
+float STAGNANT_VELOCITY = 0.5;
 
 class Motor {
   protected Organism self;
@@ -29,10 +29,11 @@ class Motor {
       return;
     }
 
-    move();
-
     bounceIfOrganismCollision();
     bounceIfWallCollision();
+    
+    move();
+
     clampToWall();
   }
 
@@ -187,6 +188,11 @@ public class SnakeMotor extends Motor
   PVector velocityNormal;
   PVector velocityPropagation;
 
+  void setVelocityPropagation(PVector vector)
+  {
+    velocityPropagation = vector;
+  }
+
   public SnakeMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     super(organism, startDisplacement, startVelocity);
     velocityPropagation = startVelocity.copy();
@@ -211,12 +217,6 @@ public class SnakeMotor extends Motor
     }
   }
 
-  protected void updateDisplacement() {
-    super.updateDisplacement();
-
-    displacement.add(velocityNormal);
-  }
-
   protected void bounceIfWallCollision()
   {
     if (displacement.x >= width || displacement.x <= 0)
@@ -230,6 +230,69 @@ public class SnakeMotor extends Motor
     {
       velocityPropagation.y = velocity.y * COLLISION_DAMPING_FACTOR;
       acceleration.y = acceleration.y  * COLLISION_DAMPING_FACTOR;
+    }
+  }
+  
+  protected void bounceAgainstOther()
+  {
+    Organism other = self.collidingWith;
+
+    PVector otherToSelfVector = displacement.copy().sub(other.displacement());
+    PVector otherToSelfUnitVector = otherToSelfVector.copy().normalize();
+
+    if (DRAW_COLLISION)
+    {
+      stroke(RED);
+      line(displacement.x, 
+        displacement.y, 
+        displacement.x + (velocity.x * 100), 
+        displacement.y + (velocity.y*100));
+
+      stroke(BLUE);
+      line(other.displacement().x, 
+        other.displacement().y, 
+        other.displacement().x + (other.velocity().x * 100), 
+        other.displacement().y + (other.velocity().y*100));
+    }
+
+    // For proof on perfectly inelastic collision of balls:
+    // https://stackoverflow.com/questions/35211114/2d-elastic-ball-collision-physics
+    ////////////////////////////////////////////////////////
+    PVector newVelocity = otherToSelfUnitVector.copy();
+    newVelocity.mult(other.mass * 2 / (other.mass + mass()));
+    newVelocity.mult(otherToSelfUnitVector.dot(velocity.copy().sub(other.velocity())));
+    newVelocity = velocity.copy().sub(newVelocity);
+
+    PVector selfToOtherUnitVector = otherToSelfUnitVector.copy().mult(-1);
+    PVector newOtherVelocity = selfToOtherUnitVector.copy();
+    newOtherVelocity.mult(mass() * 2 / (other.mass + mass()));
+    newOtherVelocity.mult(selfToOtherUnitVector.dot(other.velocity().copy().sub(velocity)));
+    newOtherVelocity = other.velocity().copy().sub(newOtherVelocity);
+
+    velocityPropagation = newVelocity;
+
+    if (self.collidingWith.motor instanceof SnakeMotor)
+    {
+      SnakeMotor otherMotor = (SnakeMotor)other.motor;
+      otherMotor.setVelocityPropagation(newOtherVelocity);
+    }
+    other.setVelocity(newOtherVelocity);
+
+    ///////////////////////////////////////////////////////////
+
+    if (DRAW_COLLISION)
+    {
+      stroke(GREEN);
+      line(displacement.x, 
+        displacement.y, 
+        displacement.x + (velocity.x * 100), 
+        displacement.y + (velocity.y*100));
+
+      stroke(MAROON);
+      line(other.displacement().x, 
+        other.displacement().y, 
+        other.displacement().x + (other.velocity().x * 100), 
+        other.displacement().y + (other.velocity().y*100));
     }
   }
 }
@@ -269,7 +332,6 @@ public class AlgaeMotor extends Motor
       velocity.mult(STAGNANT_VELOCITY * ALGAE_BE_SLOW / velocity.mag());
     }
   }
-
 
   protected void bounceAgainstOther()
   {

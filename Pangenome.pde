@@ -88,7 +88,7 @@ public class Genome
     public float predatorFactor;
 
     public float fertility;
-    public float stuffedFactor;
+    public float maxFoodCapacityCoefficient;
 
     public float lowerMassLimit;
     public float upperMassLimit;
@@ -98,6 +98,8 @@ public class Genome
     public float photosynthesisIncrement;
     
     public float maxAge;
+    public float metabolicRate;
+    public float emaciationQuotient;
 
     public Dna(Genome genome)
     {
@@ -132,19 +134,21 @@ public class SnakeGenome extends Genome
     Dna dna = new Dna(this);
 
     dna.colour = color(255, 50, 0);
-    dna.predatorFactor = 0.8;
+    dna.predatorFactor = 0.95;
 
-    dna.fertility = 0.002;
-    dna.stuffedFactor = 1.5;
+    dna.fertility = 0.005;
+    dna.maxFoodCapacityCoefficient = 1.7;
 
-    dna.lowerMassLimit = 30;
-    dna.upperMassLimit = 50;
+    dna.lowerMassLimit = 20;
+    dna.upperMassLimit = 35;
 
-    dna.fissionFactor = 0.4;
+    dna.fissionFactor = 0.2;
 
     dna.photosynthesisIncrement = 0;
     
-    dna.maxAge = 100;
+    dna.maxAge = 200;
+    dna.metabolicRate = 0.00625;
+    dna.emaciationQuotient = 4;
 
     return dna;
   }
@@ -169,17 +173,19 @@ public class FishGenome extends Genome
     dna.colour = color(0, 100, 255);
     dna.predatorFactor = 0.5;
 
-    dna.fertility = 0.05;
-    dna.stuffedFactor = 1.8;
+    dna.fertility = 0.005;
+    dna.maxFoodCapacityCoefficient = 1.8;
 
     dna.lowerMassLimit = 15;
     dna.upperMassLimit = 25;
 
-    dna.fissionFactor = 0.3;
+    dna.fissionFactor = 0.25;
 
     dna.photosynthesisIncrement = 0;
     
-    dna.maxAge = 50;
+    dna.maxAge = 60;
+    dna.metabolicRate = 0.025;
+    dna.emaciationQuotient = 5;
 
     return dna;
   }
@@ -205,7 +211,7 @@ public class AlgaeGenome extends Genome
     dna.predatorFactor = 0.0;
 
     dna.fertility = 1;
-    dna.stuffedFactor = 100;
+    dna.maxFoodCapacityCoefficient = 100;
 
     dna.lowerMassLimit = 5;
     dna.upperMassLimit = 5;
@@ -214,7 +220,9 @@ public class AlgaeGenome extends Genome
 
     dna.photosynthesisIncrement = 0.5;
     
-    dna.maxAge = 5;
+    dna.maxAge = 50000;
+    dna.metabolicRate = 0;
+    dna.emaciationQuotient = 5;
 
     return dna;
   }

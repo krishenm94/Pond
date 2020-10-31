@@ -16,7 +16,7 @@ boolean DEBUG_RECT = false;
 boolean DEBUG_ELLIPSE = true;
 
 boolean DRAW_OVERLAP = false;
-boolean DRAW_COLLISION = true;
+boolean DRAW_COLLISION = false;
 
 color RED = color(255, 0, 0);
 color GREEN = color(0, 255, 0);
@@ -52,7 +52,7 @@ class Painter
       stroke(BLUR? organism.colour: color(0, 0, 0), BLUR? 30 : 255);
       fill(organism.colour, BLUR? 20 : 200);
     }
-    
+
     ellipse(organism.displacement().x, 
       organism.displacement().y, 
       organism.mass, 
