@@ -173,7 +173,7 @@ public class FishGenome extends Genome
     dna.colour = color(0, 100, 255);
     dna.predatorFactor = 0.5;
 
-    dna.fertility = 0.005;
+    dna.fertility = 0.01;
     dna.maxFoodCapacityCoefficient = 1.8;
 
     dna.lowerMassLimit = 15;
@@ -213,8 +213,8 @@ public class AlgaeGenome extends Genome
     dna.fertility = 1;
     dna.maxFoodCapacityCoefficient = 100;
 
-    dna.lowerMassLimit = 5;
-    dna.upperMassLimit = 5;
+    dna.lowerMassLimit = 4;
+    dna.upperMassLimit = 4;
 
     dna.fissionFactor = 0.5;
 

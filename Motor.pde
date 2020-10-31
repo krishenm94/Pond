@@ -31,7 +31,7 @@ class Motor {
 
     bounceIfOrganismCollision();
     bounceIfWallCollision();
-    
+
     move();
 
     clampToWall();
@@ -232,7 +232,7 @@ public class SnakeMotor extends Motor
       acceleration.y = acceleration.y  * COLLISION_DAMPING_FACTOR;
     }
   }
-  
+
   protected void bounceAgainstOther()
   {
     Organism other = self.collidingWith;
@@ -275,8 +275,11 @@ public class SnakeMotor extends Motor
     {
       SnakeMotor otherMotor = (SnakeMotor)other.motor;
       otherMotor.setVelocityPropagation(newOtherVelocity);
+    } else
+    {
+      other.setVelocity(newOtherVelocity);
     }
-    other.setVelocity(newOtherVelocity);
+
 
     ///////////////////////////////////////////////////////////
 

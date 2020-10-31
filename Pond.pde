@@ -4,7 +4,7 @@ float CLOCK_MAX = 360;
 float CLOCK_INCREMENT = 0.05;
 
 static int POPULATION_SIZE = 100;
-float BIOMASS_LIMIT = 3500;
+float BIOMASS_LIMIT = 2500;
 
 float ENTROPY = 0.9;
 
