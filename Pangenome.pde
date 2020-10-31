@@ -135,19 +135,19 @@ public class SnakeGenome extends Genome
     dna.colour = color(255, 50, 0);
     dna.predatorFactor = 1.5;
 
-    dna.fertility = 0.0005;
-    dna.maxFoodCapacityCoefficient = 1.7;
+    dna.fertility = 0.0001;
+    dna.maxFoodCapacityCoefficient = 2.0;
 
-    dna.lowerMassLimit = 25;
-    dna.upperMassLimit = 40;
+    dna.lowerMassLimit = 20;
+    dna.upperMassLimit = 30;
 
     dna.fissionFactor = 0.5;
 
     dna.photosynthesisIncrement = 0;
     
-    dna.maxAge = 2000;
-    dna.metabolicRate = 0.00625;
-    dna.emaciationQuotient = 4;
+    dna.maxAge = 10000;
+    dna.metabolicRate = 0.01;
+    dna.emaciationQuotient = 3;
 
     return dna;
   }
@@ -170,20 +170,20 @@ public class FishGenome extends Genome
     Dna dna = new Dna(this);
 
     dna.colour = color(0, 100, 255);
-    dna.predatorFactor = 0.5;
+    dna.predatorFactor = 0.7;
 
-    dna.fertility = 0.005;
+    dna.fertility = 0.0015;
     dna.maxFoodCapacityCoefficient = 1.8;
 
     dna.lowerMassLimit = 15;
-    dna.upperMassLimit = 25;
+    dna.upperMassLimit = 20;
 
-    dna.fissionFactor = 0.5;
+    dna.fissionFactor = 0.2;
 
     dna.photosynthesisIncrement = 0;
     
-    dna.maxAge = 1000;
-    dna.metabolicRate = 0.005;
+    dna.maxAge = 100;
+    dna.metabolicRate = 0.1;
     dna.emaciationQuotient = 5;
 
     return dna;

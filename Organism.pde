@@ -11,7 +11,7 @@ class Organism
   private color colour;
 
   boolean isDead = false;
-  Organism collidingWith; // TODO: Make this a List
+  Organism collidingWith;
 
   Species species()
   {
@@ -29,18 +29,18 @@ class Organism
   void update()
   {
     age += CLOCK_INCREMENT;
-    mass -= CLOCK_INCREMENT * dna.metabolicRate;
-    
+    mass -= CLOCK_INCREMENT * dna.metabolicRate / ENTROPY;
+
     if (mass < startMass /dna.emaciationQuotient)
     { 
       isDead = true;
     }
-    
+
     if (age > dna.maxAge)
     {
       isDead = true;
     }
-    
+
     motor.update();
   }
 
@@ -151,7 +151,7 @@ class Organism
 
     mass += dna.photosynthesisIncrement;
   }
-  
+
   float maxMass()
   {
     return startMass*dna.maxFoodCapacityCoefficient;

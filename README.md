@@ -22,8 +22,8 @@ Status: completed
 
 Status: in planning
 
-1. Genetic drift through natural selection and mutation
-2. Restructure `Organism` components as nested classes
+1. Restructure `Organism` components as nested classes
+2. Add sensory apparatus
 
 ## Etc.
 

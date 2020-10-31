@@ -3,7 +3,7 @@ float CLOCK = 0;
 float CLOCK_MAX = 360;
 float CLOCK_INCREMENT = 0.05;
 
-float ENTROPY = 0.8;
+float ENTROPY = 0.90;
 
 Population population = new Population();
 Painter painter = new Painter();
