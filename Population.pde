@@ -6,7 +6,7 @@ int SNAKE_COUNT_INIT = 2;
 int FISH_COUNT_INIT = 6;
 
 static int POPULATION_SIZE = 100;
-float BIOMASS_LIMIT = 5000;
+float BIOMASS_LIMIT = 1000;
 
 int fishCount = 0;
 int snakeCount = 0;
@@ -72,10 +72,10 @@ class Population
   public void update()
   {
     HashMap<Species, Integer> speciesCount = new HashMap<Species, Integer>();
-    
+
     for (Species species : pangenome.SPECIES_LIST)
     {
-       speciesCount.put(species, 0);  
+      speciesCount.put(species, 0);
     }
     float mass = 0;
 
@@ -108,7 +108,7 @@ class Population
 
       mass += organism.mass;
 
-        speciesCount.put(organism.species(), speciesCount.get(organism.species()) + 1);
+      speciesCount.put(organism.species(), speciesCount.get(organism.species()) + 1);
     }
 
     organisms.removeAll(theDead);
@@ -126,7 +126,7 @@ class Population
 
   private void interactWithOthers(Organism organism)
   {
-    if (organism.collidingWith != null || organism.isDead)
+    if (organism.isDead)
     {
       return;
     }
@@ -139,8 +139,8 @@ class Population
 
       if (other.species() == organism.species()) 
       {
-        organism.collidingWith = other;
-        other.collidingWith = organism;
+        organism.collidingWith.add(other);
+        other.collidingWith.add(organism);
 
         continue;
       }
@@ -149,10 +149,9 @@ class Population
         organism.chomp(other);
       } else if (other.canIEat(organism)) {
         other.chomp(organism);
-      } else
-      {
-        organism.collidingWith = other;
-        other.collidingWith = organism;
+      } else {
+        organism.collidingWith.add(other);
+        other.collidingWith.add(organism);
       }
     }
   }
@@ -164,23 +163,16 @@ class Population
 
   boolean areMeeting(Organism organism1, Organism organism2)
   {
-    Overlap overlap = new Overlap(organism1, organism2);
-
-    boolean isOverlapping = overlap.type == _Overlap.Type.None? false : true;
-
-    if (isOverlapping)
+    PVector selfToOtherVector = organism2.displacement().copy().sub(organism1.displacement()); 
+    float distanceBetweenCenters = selfToOtherVector.mag();
+    if (distanceBetweenCenters > (organism2.mass + organism1.mass)/2)
+    {
+      return false;
+    } else
     {
       painter.show(organism1, WHITE, DRAW_OVERLAP || DRAW_COLLISION);
       painter.show(organism2, WHITE, DRAW_OVERLAP || DRAW_COLLISION);
+      return true;
     }
-
-    return isOverlapping;
   }
-
-  //public List<Organism> getInteractableOrganisms(Organism organism)
-  //{
-  //  List<Organism> interactable = new List<Organism>();
-
-  //  return organisms;
-  //}
 }

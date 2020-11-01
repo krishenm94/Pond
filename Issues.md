@@ -12,9 +12,10 @@
 3. Store a list of Overlaps in Organism
     a. may not be required because handling collisions of two bodies at a time seems enough
 
-4. Implement shape accurate overlap detection
+4. Implement shape accurate overlap detection (closed)
     a. Currently all overlap detection is based on a bounding rect
     b. Reference: http://jeffreythompson.org/collision-detection/circle-rect.php
+    c. Move out of overlap along vector between center of mass of both bodies
 
 5. Mutation: Blocked by 1
 

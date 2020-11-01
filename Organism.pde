@@ -11,7 +11,7 @@ class Organism
   private color colour;
 
   boolean isDead = false;
-  Organism collidingWith;
+  ArrayList<Organism> collidingWith = new ArrayList<Organism>();
 
   Species species()
   {

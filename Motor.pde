@@ -3,7 +3,7 @@ float ACCELERATION_NOISE_FACTOR = 15;
 float ACCELERATION_GROWTH_FACTOR = 0.45;
 float SLITHER_FACTOR = 2;
 
-float TERMINAL_VELOCITY = 1.3;
+float TERMINAL_VELOCITY = 1.0;
 float STAGNANT_VELOCITY = 0.5;
 
 class Motor {
@@ -109,20 +109,45 @@ class Motor {
 
   private void bounceIfOrganismCollision()
   {
-    if (self.collidingWith == null)
+    if (self.collidingWith.isEmpty())
     {
       return;
     }
 
-    bounceAgainstOther();
+    for (Organism other : self.collidingWith)
+    {
+      moveOutOfOverlap(other);
+      bounceAgainstOther(other);
+      other.collidingWith.remove(self);
+    }
 
-    self.collidingWith.collidingWith = null;
-    self.collidingWith = null;
+    self.collidingWith = new ArrayList<Organism>();
   }
 
-  protected void bounceAgainstOther()
+  private void moveOutOfOverlap(Organism other)
   {
-    Organism other = self.collidingWith;
+    PVector selfToOtherVector = other.displacement().copy().sub(self.displacement()); 
+
+    PVector xUnitVector = selfToOtherVector.copy().normalize();
+    // Find edge points along difference vector of displacements
+
+    PVector selfRightEdgePoint = self.displacement().copy().add(xUnitVector.copy().mult(self.mass/2));
+    PVector otherLeftEdgePoint = other.displacement().copy().sub(xUnitVector.copy().mult(other.mass/2));
+    PVector otherLeftEdgeToSelfRightEdge = selfRightEdgePoint.copy().sub(otherLeftEdgePoint);
+
+    float otherWeight = pow(self.mass, 3);
+    float selfWeight = pow(other.mass, 3);
+
+    float totalWeight = selfWeight + otherWeight;
+    selfWeight /= totalWeight;
+    otherWeight /= totalWeight;
+
+    self.displacement().sub(otherLeftEdgeToSelfRightEdge.mult(selfWeight));
+    other.displacement().add(otherLeftEdgeToSelfRightEdge.mult(otherWeight));
+  }
+
+  protected void bounceAgainstOther(Organism other)
+  {
 
     PVector otherToSelfVector = displacement.copy().sub(other.displacement());
     PVector otherToSelfUnitVector = otherToSelfVector.copy().normalize();
@@ -208,12 +233,12 @@ public class SnakeMotor extends Motor
 
     velocity = velocityPropagation.copy().add(velocityNormal);
 
-    if ( velocity.mag() > TERMINAL_VELOCITY)
+    if ( velocity.mag() > TERMINAL_VELOCITY * 2)
     {
-      velocity.div(velocity.mag() / TERMINAL_VELOCITY);
-    } else if ( velocity.mag() < STAGNANT_VELOCITY)
+      velocity.div(velocity.mag() / TERMINAL_VELOCITY / 2);
+    } else if ( velocity.mag() < STAGNANT_VELOCITY * 2)
     {
-      velocity.mult(STAGNANT_VELOCITY / velocity.mag());
+      velocity.mult(STAGNANT_VELOCITY * 2 / velocity.mag());
     }
   }
 
@@ -268,22 +293,21 @@ public class AlgaeMotor extends Motor
     }
   }
 
-  protected void bounceAgainstOther()
+  protected void bounceAgainstOther(Organism other)
   {
-    if (self.collidingWith.species() == Species.Algae)
+    if (other.species() == Species.Algae)
     {
-      agglutinate();
+      agglutinate(other);
       return;
     }
 
-    super.bounceAgainstOther();
+    super.bounceAgainstOther(other);
   }
 
-  private void agglutinate()
+  private void agglutinate(Organism other)
   {
-    Organism other = self.collidingWith;
-    velocity = other.velocity();
-    acceleration = other.acceleration();
+    velocity = other.velocity().copy().add(velocity).div(2);
+    acceleration = other.acceleration().copy().add(acceleration).div(2);
 
     if (DRAW_COLLISION)
     {

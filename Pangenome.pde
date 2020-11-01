@@ -11,9 +11,6 @@ float MUTATION_FACTOR = 0.1;
 public class Pangenome
 {
   // Genomes
-  //private static final SnakeGenome SNAKE = new SnakeGenome();
-  //private static final FishGenome FISH = new FishGenome();
-  //private static final AlgaeGenome ALGAE = new AlgaeGenome();
   private SnakeGenome SNAKE = new SnakeGenome();
   private FishGenome FISH = new FishGenome();
   private AlgaeGenome ALGAE = new AlgaeGenome();
@@ -176,11 +173,11 @@ public class FishGenome extends Genome
     dna.colour = color(0, 100, 255);
     dna.predatorFactor = 0.7;
 
-    dna.fertility = 0.001;
+    dna.fertility = 0.002;
     dna.maxFoodCapacityCoefficient = 1.8;
 
-    dna.lowerMassLimit = 15;
-    dna.upperMassLimit = 20;
+    dna.lowerMassLimit = 10;
+    dna.upperMassLimit = 15;
 
     dna.fissionFactor = 0.3;
 
