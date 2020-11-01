@@ -28,7 +28,6 @@ class Population
   {
     Genome genome = pangenome.randomGenome();
 
-    Log.debug(genome.species + " " + genome.initCountMax);
     if (genome.initCount > genome.initCountMax) {
       return null;
     }

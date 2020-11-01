@@ -63,7 +63,6 @@ public class Genome
     species = _species;
     diet = _diet;
     initCountMax = _initCountMax;
-    Log.debug("When is this created: " + initCountMax);
   }
 
   public Motor createMotor(
