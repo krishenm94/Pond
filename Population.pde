@@ -5,11 +5,21 @@ boolean BIOMASS_LOCK = false;
 static int POPULATION_SIZE = 100;
 float BIOMASS_LIMIT = 3000;
 
+int SNAKE_COUNT_INIT = 2;
+int FISH_COUNT_INIT = 6;
+int ALGAE_COUNT_INIT = 9999999;
+
 class Population
 {
   float mass;
+  Pangenome pangenome = new Pangenome();
 
   private Vector<Organism> organisms = new Vector<Organism>();
+  
+  Population()
+  {
+    init(POPULATION_SIZE);
+  }
 
   void init(int size)
   {  
