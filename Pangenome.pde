@@ -1,5 +1,7 @@
 import java.util.Random;
 
+
+
 enum Species {
   Algae, 
     Fish, 
@@ -11,9 +13,9 @@ float MUTATION_FACTOR = 0.1;
 public class Pangenome
 {
   // Genomes
-  private SnakeGenome SNAKE = new SnakeGenome();
-  private FishGenome FISH = new FishGenome();
-  private AlgaeGenome ALGAE = new AlgaeGenome();
+  private final SnakeGenome SNAKE = new SnakeGenome();
+  private final FishGenome FISH = new FishGenome();
+  private final AlgaeGenome ALGAE = new AlgaeGenome();
 
   final List<Species> SPECIES_LIST =
     Collections.unmodifiableList(Arrays.asList(Species.values()));
@@ -61,6 +63,7 @@ public class Genome
     species = _species;
     diet = _diet;
     initCountMax = _initCountMax;
+    Log.debug("When is this created: " + initCountMax);
   }
 
   public Motor createMotor(
@@ -145,7 +148,6 @@ public class SnakeGenome extends Genome
     dna.photosynthesisIncrement = 0;
 
     dna.maxAge = 1000;
-    dna.maxAge = random(dna.maxAge*(1 - MUTATION_FACTOR), dna.maxAge*(1 + MUTATION_FACTOR));
 
     dna.metabolicRate = 0.01;
     dna.emaciationQuotient = 1.1;
@@ -184,7 +186,6 @@ public class FishGenome extends Genome
     dna.photosynthesisIncrement = 0;
 
     dna.maxAge = 300;
-    dna.maxAge = random(dna.maxAge*(1 - MUTATION_FACTOR), dna.maxAge*(1 + MUTATION_FACTOR));
 
     dna.metabolicRate = 0.02;
     dna.emaciationQuotient = 5;
@@ -198,7 +199,7 @@ public class AlgaeGenome extends Genome
   public AlgaeGenome() {
     super(Species.Algae, 
       Arrays.asList(new Species[]{}), 
-      999999999);
+      ALGAE_COUNT_INIT);
   }
 
 
@@ -223,7 +224,6 @@ public class AlgaeGenome extends Genome
     dna.photosynthesisIncrement = 0.2;
 
     dna.maxAge = 50000;
-    dna.maxAge = random(dna.maxAge*(1 - MUTATION_FACTOR), dna.maxAge*(1 + MUTATION_FACTOR));
 
     dna.metabolicRate = 0;
     dna.emaciationQuotient = 5;

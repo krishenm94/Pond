@@ -334,10 +334,6 @@ public class AlgaeMotor extends Motor
     PVector accelerationStep = velocity.copy();
     accelerationStep.mult(-1);
 
-    // PVector selfToMouseVector = (new PVector(mouseX, mouseY)).sub(displacement);
-    // selfToMouseVector.normalize();
-    // accelerationStep.add(selfToMouseVector);
-
     accelerationStep.div(pow(mass(), 3));
 
     acceleration.mult(ACCELERATION_GROWTH_FACTOR * 0.1);

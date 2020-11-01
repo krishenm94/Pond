@@ -5,6 +5,10 @@ float CLOCK_INCREMENT = 0.05;
 
 float ENTROPY = 0.99;
 
+int SNAKE_COUNT_INIT = 2;
+int FISH_COUNT_INIT = 6;
+int ALGAE_COUNT_INIT = 9999999;
+
 Population population = new Population();
 Painter painter = new Painter();
 Pangenome pangenome = new Pangenome();
