@@ -72,6 +72,11 @@ class Population
   public void update()
   {
     HashMap<Species, Integer> speciesCount = new HashMap<Species, Integer>();
+    
+    for (Species species : pangenome.SPECIES_LIST)
+    {
+       speciesCount.put(species, 0);  
+    }
     float mass = 0;
 
     Vector<Organism> theBabies = new Vector<Organism>();
@@ -103,11 +108,7 @@ class Population
 
       mass += organism.mass;
 
-      if (speciesCount.containsKey(organism.species())) { 
         speciesCount.put(organism.species(), speciesCount.get(organism.species()) + 1);
-      } else {  
-        speciesCount.put(organism.species(), 1);
-      }
     }
 
     organisms.removeAll(theDead);
@@ -120,10 +121,6 @@ class Population
     for (Map.Entry<Species, Integer> entry : speciesCount.entrySet())
     {
       Log.info("Species: " + entry.getKey()+ ", Count: " + entry.getValue());
-      if (entry.getValue() == 0)
-      {
-        add(new Organism(randomDisplacement(), pangenome.getGenome(entry.getKey())));
-      }
     }
   }
 
