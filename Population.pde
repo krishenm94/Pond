@@ -2,8 +2,8 @@ import java.util.*;
 
 boolean BIOMASS_LOCK = false;
 
-int SNAKE_COUNT_INIT = 3;
-int FISH_COUNT_INIT = 12;
+int SNAKE_COUNT_INIT = 2;
+int FISH_COUNT_INIT = 6;
 
 static int POPULATION_SIZE = 100;
 float BIOMASS_LIMIT = 5000;
@@ -68,7 +68,7 @@ class Population
     displacement.y = random(0, height);
     return displacement;
   }
-  
+
   public void update()
   {
     HashMap<Species, Integer> speciesCount = new HashMap<Species, Integer>();
@@ -119,6 +119,12 @@ class Population
 
     for (Map.Entry<Species, Integer> entry : speciesCount.entrySet())
       Log.info("Species: " + entry.getKey()+ ", Count: " + entry.getValue());
+
+    // At least one algae at all times
+    if (speciesCount.get(Species.Algae) == 0)
+    {
+      add(new Organism(randomDisplacement(), pangenome.getGenome(Species.Algae)));
+    }
   }
 
   private void interactWithOthers(Organism organism)
@@ -173,11 +179,11 @@ class Population
 
     return isOverlapping;
   }
-  
+
   //public List<Organism> getInteractableOrganisms(Organism organism)
   //{
   //  List<Organism> interactable = new List<Organism>();
-    
+
   //  return organisms;
   //}
 }
