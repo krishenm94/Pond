@@ -306,8 +306,12 @@ public class AlgaeMotor extends Motor
 
   private void agglutinate(Organism other)
   {
-    velocity = other.velocity().copy().add(velocity).div(2);
-    acceleration = other.acceleration().copy().add(acceleration).div(2);
+    PVector velocityCopy = velocity.copy();
+    PVector accelerationCopy = acceleration.copy();
+    velocity.add(other.velocity()).div(2);
+    acceleration.add(other.acceleration()).div(2);
+    other.velocity().add(velocityCopy).div(2);
+    other.acceleration().add(accelerationCopy).div(2);
 
     if (DRAW_COLLISION)
     {

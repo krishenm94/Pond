@@ -6,7 +6,7 @@ int SNAKE_COUNT_INIT = 2;
 int FISH_COUNT_INIT = 6;
 
 static int POPULATION_SIZE = 100;
-float BIOMASS_LIMIT = 2500;
+float BIOMASS_LIMIT = 3000;
 
 int fishCount = 0;
 int snakeCount = 0;

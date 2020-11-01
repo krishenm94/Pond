@@ -132,19 +132,19 @@ public class SnakeGenome extends Genome
     Dna dna = new Dna(this);
 
     dna.colour = color(255, 50, 0);
-    dna.predatorFactor = 0; //1.5
+    dna.predatorFactor = 1.5;
 
     dna.fertility = 0.0002;
     dna.maxFoodCapacityCoefficient = 3.0;
 
-    dna.lowerMassLimit = 20;
-    dna.upperMassLimit = 30;
+    dna.lowerMassLimit = 40;
+    dna.upperMassLimit = 60;
 
     dna.fissionFactor = 0.5;
 
     dna.photosynthesisIncrement = 0;
 
-    dna.maxAge = 100000; //1000
+    dna.maxAge = 1000;
     dna.maxAge = random(dna.maxAge*(1 - MUTATION_FACTOR), dna.maxAge*(1 + MUTATION_FACTOR));
 
     dna.metabolicRate = 0.01;
@@ -171,19 +171,19 @@ public class FishGenome extends Genome
     Dna dna = new Dna(this);
 
     dna.colour = color(0, 100, 255);
-    dna.predatorFactor = 0.0;
+    dna.predatorFactor = 0.7;
 
     dna.fertility = 0.002;
     dna.maxFoodCapacityCoefficient = 1.8;
 
-    dna.lowerMassLimit = 10;
-    dna.upperMassLimit = 15;
+    dna.lowerMassLimit = 20;
+    dna.upperMassLimit = 30;
 
     dna.fissionFactor = 0.3;
 
     dna.photosynthesisIncrement = 0;
 
-    dna.maxAge = 30000; //300
+    dna.maxAge = 300;
     dna.maxAge = random(dna.maxAge*(1 - MUTATION_FACTOR), dna.maxAge*(1 + MUTATION_FACTOR));
 
     dna.metabolicRate = 0.02;
@@ -215,8 +215,8 @@ public class AlgaeGenome extends Genome
     dna.fertility = 1;
     dna.maxFoodCapacityCoefficient = 100;
 
-    dna.lowerMassLimit = 4;
-    dna.upperMassLimit = 4;
+    dna.lowerMassLimit = 10;
+    dna.upperMassLimit = 10;
 
     dna.fissionFactor = 0.5;
 

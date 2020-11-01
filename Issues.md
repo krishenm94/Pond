@@ -49,3 +49,4 @@ fi
 exit 0
 # END : Block pushing to release branches
 ```
+14. Should collision in a motor only change its own states?
