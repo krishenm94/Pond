@@ -118,12 +118,12 @@ class Population
     Log.info("Population size : " + organisms.size());
 
     for (Map.Entry<Species, Integer> entry : speciesCount.entrySet())
-      Log.info("Species: " + entry.getKey()+ ", Count: " + entry.getValue());
-
-    // At least one algae at all times
-    if (speciesCount.get(Species.Algae) == 0)
     {
-      add(new Organism(randomDisplacement(), pangenome.getGenome(Species.Algae)));
+      Log.info("Species: " + entry.getKey()+ ", Count: " + entry.getValue());
+      if (entry.getValue() == 0)
+      {
+        add(new Organism(randomDisplacement(), pangenome.getGenome(entry.getKey())));
+      }
     }
   }
 

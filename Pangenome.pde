@@ -218,8 +218,8 @@ public class AlgaeGenome extends Genome
     dna.fertility = 1;
     dna.maxFoodCapacityCoefficient = 100;
 
-    dna.lowerMassLimit = 5;
-    dna.upperMassLimit = 5;
+    dna.lowerMassLimit = 7;
+    dna.upperMassLimit = 7;
 
     dna.fissionFactor = 0.5;
 
