@@ -9,7 +9,7 @@
     b. Make top level classes static
     c. Organise files into folders
 
-3. Store a list of Overlaps in Organism
+3. Store a list of Overlaps in Organism (closed)
     a. may not be required because handling collisions of two bodies at a time seems enough
 
 4. Implement shape accurate overlap detection (closed)
