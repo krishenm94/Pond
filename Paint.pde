@@ -1,5 +1,6 @@
 boolean BLUR = false;
 boolean PRETTY = false;
+boolean OUTLINE = true;
 
 boolean DRAW_ORGANISM = true;
 
@@ -49,7 +50,7 @@ class Painter
       fill(organism.randomColour, 20);
     } else
     {
-      stroke(BLUR? organism.colour: color(0, 0, 0), BLUR? 40 : 255);
+      stroke(BLUR && !OUTLINE? organism.colour: color(0, 0, 0), BLUR && !OUTLINE? 40 : 40);
       fill(organism.colour, BLUR? 20 : 200);
     }
 

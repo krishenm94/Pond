@@ -20,7 +20,7 @@ Status: completed
 
 ### Branch: release_v2
 
-Status: in planning
+Status: in progress
 
 1. Restructure `Organism` components as nested classes
 2. Add sensory apparatus

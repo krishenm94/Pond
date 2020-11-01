@@ -68,11 +68,9 @@ class Population
     displacement.y = random(0, height);
     return displacement;
   }
-
+  
   public void update()
   {
-    //feedingBirthAndOverlap();
-
     HashMap<Species, Integer> speciesCount = new HashMap<Species, Integer>();
     float mass = 0;
 
@@ -175,4 +173,11 @@ class Population
 
     return isOverlapping;
   }
+  
+  //public List<Organism> getInteractableOrganisms(Organism organism)
+  //{
+  //  List<Organism> interactable = new List<Organism>();
+    
+  //  return organisms;
+  //}
 }

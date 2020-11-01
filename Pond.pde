@@ -26,7 +26,7 @@ void draw()
   }
 
   population.update();
-
+  
   drawMouse();
 
   CLOCK += CLOCK_INCREMENT;
