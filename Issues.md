@@ -32,7 +32,7 @@
 
 12. Add photosynthesis mechanism (closed)
 
-13. Block all commits to `release_*` branches
+13. Tag release commits
 
 Example code:
 ```
@@ -47,4 +47,10 @@ fi
 exit 0
 # END : Block pushing to release branches
 ```
+
 14. Should collision in a motor only change its own states?
+
+15. Install sensory apparatus
+
+16. Organism respond to sensory information (blocked by 15)
+

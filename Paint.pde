@@ -1,4 +1,4 @@
-boolean BLUR = false;
+boolean BLUR = true;
 boolean PRETTY = false;
 boolean OUTLINE = true;
 
