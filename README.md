@@ -1,5 +1,5 @@
 # Pond
-Simulates the natural environment of a pond with 2D visualisation
+Simulates the ecosystem of a pond with 2D visualisation
 
 ## Releases 
 
