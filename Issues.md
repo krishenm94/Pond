@@ -10,7 +10,6 @@
     c. Organise files into folders
 
 3. Store a list of Overlaps in Organism (closed)
-    a. may not be required because handling collisions of two bodies at a time seems enough
 
 4. Implement shape accurate overlap detection (closed)
     a. Currently all overlap detection is based on a bounding rect
@@ -27,10 +26,9 @@
 
 9. Write a macro to get current function signature for better logging
 
-10. Control initial population distribution
+10. Control initial population distribution (closed)
 
 11. Prefix all member variables with `m_` and remove local variables prefixed with `_`
-
 
 12. Add photosynthesis mechanism (closed)
 
