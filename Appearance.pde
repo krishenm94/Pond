@@ -39,17 +39,15 @@ class FishAppearance extends Appearance
     float y = m_self.displacement().y;
     float r = m_self.mass / 2;
 
-    ellipse(m_self.displacement().x, m_self.displacement().y, m_self.mass, m_self.mass);
-
     float heading = m_self.velocity().heading();
 
     translate(x, y);
     rotate(heading);
-    
+
     // drawn with 60 deg 
     triangle(-1.5 * r, 0, 
-      -r/2 , -r/2, 
-      -r/2 , r/2); 
+      -r/2, -r * 0.8, 
+      -r/2, r * 0.8); 
 
     triangle( -1.5 * r, 0, 
       -2.5 * r, -r, 
@@ -57,6 +55,8 @@ class FishAppearance extends Appearance
 
     rotate(-heading);
     translate(-x, -y);
+
+    ellipse(m_self.displacement().x, m_self.displacement().y, m_self.mass, m_self.mass);
   }
 }
 

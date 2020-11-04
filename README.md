@@ -3,7 +3,7 @@ Simulates the ecosystem of a pond with 2D visualisation
 
 ## Releases 
 
-### Branch: release_v1
+### Tag: v1
 
 Status: completed
 
@@ -18,7 +18,7 @@ Status: completed
     b. lifespan
 6. Implement genome factory (`Pangenome`) and gene factory (`Genome`)
 
-### Branch: release_v2
+### Tag: v2
 
 Status: in progress
 
@@ -26,6 +26,7 @@ Status: in progress
 2. Add sensory apparatus
 3. Population.update() optimization
 4. Overlap detection for circular bodies 
+5. Basic organism animations
 
 ## Etc.
 

@@ -54,3 +54,5 @@ exit 0
 
 16. Organism respond to sensory information (blocked by 15)
 
+17. Basic organism animations (done)
+
