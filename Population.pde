@@ -3,7 +3,7 @@ import java.util.*;
 boolean BIOMASS_LOCK = false;
 
 static int POPULATION_SIZE = 100;
-float BIOMASS_LIMIT = 3000;
+float BIOMASS_LIMIT = 8000;
 
 int SNAKE_COUNT_INIT = 2;
 int FISH_COUNT_INIT = 6;
@@ -79,7 +79,10 @@ class Population
 
       organism.show();
 
+      // TODO: Hacky optimization
+      if(organism.species() != Species.Algae){
       interactWithOthers(organism);
+      }
 
       float babyChance = random(0, 1);
       if (babyChance < organism.howFat() && organism.howFat() > 0)

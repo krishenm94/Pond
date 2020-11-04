@@ -1,6 +1,7 @@
 class Organism
 {
   public Motor motor;
+  private Appearance appearance;
   private Genome genome;
   private Genome.Dna dna;
   private float startMass;
@@ -55,16 +56,19 @@ class Organism
   {
     genome = _genome;
     dna = genome.createDna();
-    motor = genome.createMotor(this, displacement, PVector.random2D());
-
+    
     mass = _mass;
     startMass = random(dna.lowerMassLimit, dna.upperMassLimit);
+    mass = startMass;
     colour = dna.colour;
+    
+    motor = genome.createMotor(this, displacement, PVector.random2D());
+    appearance = genome.createAppearance(this, dna.colour);
   }
 
   public void show()
   {
-    painter.show(this);
+    appearance.show();
   }
 
   void chomp(Organism other)

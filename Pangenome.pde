@@ -1,7 +1,5 @@
 import java.util.Random;
 
-
-
 enum Species {
   Algae, 
     Fish, 
@@ -72,6 +70,10 @@ public class Genome
     ) {
     return null;
   }
+  
+  public Appearance createAppearance(Organism organism, color colour){
+    return null;
+  }
 
   public Dna createDna()
   {
@@ -129,7 +131,10 @@ public class SnakeGenome extends Genome
     return new SnakeMotor(organism, startDisplacement, startVelocity);
   }
 
-
+  public Appearance createAppearance(Organism organism, color colour){
+    return new SnakeAppearance(organism, colour);
+  }
+  
   public Dna createDna() {
     Dna dna = new Dna(this);
 
@@ -139,8 +144,8 @@ public class SnakeGenome extends Genome
     dna.fertility = 0.0002;
     dna.maxFoodCapacityCoefficient = 3.0;
 
-    dna.lowerMassLimit = 40;
-    dna.upperMassLimit = 60;
+    dna.lowerMassLimit = 20;
+    dna.upperMassLimit = 30;
 
     dna.fissionFactor = 0.5;
 
@@ -162,11 +167,14 @@ public class FishGenome extends Genome
       Arrays.asList(new Species[]{Species.Snake, Species.Algae}), 
       FISH_COUNT_INIT);
   }
+    
+  public Appearance createAppearance(Organism organism, color colour){
+    return new FishAppearance(organism, colour);
+  }
 
   public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     return new FishMotor(organism, startDisplacement, startVelocity);
   }
-
 
   public Dna createDna() {
     Dna dna = new Dna(this);
@@ -177,8 +185,8 @@ public class FishGenome extends Genome
     dna.fertility = 0.002;
     dna.maxFoodCapacityCoefficient = 1.8;
 
-    dna.lowerMassLimit = 20;
-    dna.upperMassLimit = 30;
+    dna.lowerMassLimit = 10;
+    dna.upperMassLimit = 15;
 
     dna.fissionFactor = 0.3;
 
@@ -201,7 +209,10 @@ public class AlgaeGenome extends Genome
       ALGAE_COUNT_INIT);
   }
 
-
+  public Appearance createAppearance(Organism organism, color colour){
+    return new AlgaeAppearance(organism, colour);
+  }
+  
   public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     return new AlgaeMotor(organism, startDisplacement, startVelocity);
   }
@@ -215,8 +226,8 @@ public class AlgaeGenome extends Genome
     dna.fertility = 1;
     dna.maxFoodCapacityCoefficient = 100;
 
-    dna.lowerMassLimit = 10;
-    dna.upperMassLimit = 10;
+    dna.lowerMassLimit = 5;
+    dna.upperMassLimit = 5;
 
     dna.fissionFactor = 0.5;
 
