@@ -41,14 +41,22 @@ class FishAppearance extends Appearance
 
     ellipse(m_self.displacement().x, m_self.displacement().y, m_self.mass, m_self.mass);
 
-    // drawn with 60 deg 
-    triangle( x + 1.5 * r, y, 
-      x + 0.75 * r, y - r/2, 
-      x + 0.75 * r, y + r/2); 
+    float heading = m_self.velocity().heading();
 
-    triangle( x + 1.5 * r, y, 
-      x + 2.25 * r, y - r/2, 
-      x + 2.25 * r, y + r/2);
+    translate(x, y);
+    rotate(heading);
+    
+    // drawn with 60 deg 
+    triangle(-1.5 * r, 0, 
+      -r/2 , -r/2, 
+      -r/2 , r/2); 
+
+    triangle( -1.5 * r, 0, 
+      -2.5 * r, -r, 
+      -2.5 * r, r);
+
+    rotate(-heading);
+    translate(-x, -y);
   }
 }
 
@@ -60,7 +68,7 @@ class SnakeAppearance extends Appearance
   SnakeAppearance(Organism organism, color colour)
   {
     super(organism, colour);
-    
+
     for (float i = 0; i <= organism.mass; i += GROWTH_RATE)
     {
       m_points.add(organism.displacement().copy());
@@ -87,6 +95,6 @@ class SnakeAppearance extends Appearance
     {
       PVector point = m_points.get(int(i));
       ellipse(point.x, point.y, m_self.mass - taper, m_self.mass - taper);
-    }  
+    }
   }
 }
