@@ -46,18 +46,11 @@ class Organism
     motor.update();
   }
 
-  private Organism(PVector displacement, Genome genome)
-  {
-    this(0, displacement, genome);
-    mass = startMass;
-  }
-
-  public Organism(float _mass, PVector displacement, Genome _genome)
+  private Organism(PVector displacement, Genome _genome)
   {
     genome = _genome;
     dna = genome.createDna();
     
-    mass = _mass;
     startMass = random(dna.lowerMassLimit, dna.upperMassLimit);
     mass = startMass;
     colour = dna.colour;
@@ -130,8 +123,8 @@ class Organism
     displacement.mult(this.mass);
     displacement.add(this.displacement());
 
-    Organism baby = new Organism(this.mass * dna.fissionFactor *ENTROPY, displacement, this.genome);
-
+    Organism baby = new Organism(displacement, this.genome);
+    baby.mass = this.mass * dna.fissionFactor *ENTROPY;
     baby.setVelocity(baby.velocity());
 
     this.mass = (this.mass - baby.mass/ENTROPY) * ENTROPY;
