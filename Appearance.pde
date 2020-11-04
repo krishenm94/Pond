@@ -72,8 +72,6 @@ class SnakeAppearance extends Appearance
     int newPointCount = int(m_self.mass / GROWTH_RATE) + 1;
     int currentPointCount = m_points.size();
 
-    Log.debug("Starting update points no: " + m_points.size());
-
     if (currentPointCount >= newPointCount) { 
       m_points.remove(m_points.size()-1);
     }
@@ -83,8 +81,6 @@ class SnakeAppearance extends Appearance
     } 
 
     m_points.add(0, m_self.displacement().copy());
-
-    Log.debug("Updated points no: " + m_points.size());
 
     fill(m_colour); 
     for (float i = m_points.size() - 1, taper = m_self.mass; i >= 0 && taper > 0; i--, taper -= GROWTH_RATE)
