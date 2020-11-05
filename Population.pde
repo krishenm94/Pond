@@ -72,7 +72,6 @@ class Population
     for (int i = 0; i < organisms.size(); i++)
     { 
       Organism organism = organisms.get(i);
-      organism.update();
       if (organism.isDead)
       {
         theDead.add(organism);
@@ -81,10 +80,8 @@ class Population
 
       organism.show();
 
-      // TODO: Hacky optimization
-      //if (organism.species() != Species.Algae) {
-        interactWithOthers(organism, i);
-      //}
+      organism.update();
+      interactWithOthers(organism, i);
 
       float babyChance = random(0, 1);
       if (babyChance < organism.howFat() && organism.howFat() > 0)
