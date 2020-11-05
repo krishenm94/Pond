@@ -62,7 +62,7 @@ class FishAppearance extends Appearance
 
 class SnakeAppearance extends Appearance
 {
-  private final float GROWTH_RATE = 0.5;   
+  private final float GROWTH_RATE = 0.3;   
   ArrayList<PVector> m_points = new ArrayList<PVector>();
 
   SnakeAppearance(Organism organism, color colour)
@@ -91,7 +91,7 @@ class SnakeAppearance extends Appearance
     m_points.add(0, m_self.displacement().copy());
 
     fill(m_colour); 
-    for (float i = m_points.size() - 1, taper = m_self.mass; i >= 0 && taper > 0; i--, taper -= GROWTH_RATE)
+    for (float i = m_points.size() - 1, taper = m_self.mass; i >= 0 && taper > 0; i--, taper -= m_self.mass / m_points.size())
     {
       PVector point = m_points.get(int(i));
       ellipse(point.x, point.y, m_self.mass - taper, m_self.mass - taper);
