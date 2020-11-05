@@ -27,36 +27,54 @@ class AlgaeAppearance extends Appearance
 
 class FishAppearance extends Appearance
 {
+  private final float GROWTH_RATE = 0.4;   
+  ArrayList<PVector> m_points = new ArrayList<PVector>();
+
   FishAppearance(Organism organism, color colour)
   {
     super(organism, colour);
+
+    for (float i = 0; i <= organism.mass; i += GROWTH_RATE)
+    {
+      m_points.add(organism.displacement().copy());
+    }
   }
 
   public void show()
   {
-    fill(m_colour);
-    float x = m_self.displacement().x;
-    float y = m_self.displacement().y;
+    int newPointCount = int(m_self.mass / GROWTH_RATE) + 1;
+    int currentPointCount = m_points.size();
+
+    if (currentPointCount >= newPointCount) { 
+      m_points.remove(m_points.size()-1);
+    }
+
+    if (currentPointCount > newPointCount) {
+      m_points.remove(m_points.size()-1);
+    } 
+
+    m_points.add(0, m_self.displacement().copy());
+
+    fill(m_colour); 
+    for (float i = m_points.size() - 1, taper = m_self.mass; i >= 0 && taper > 0; i--, taper -= m_self.mass / m_points.size())
+    {
+      PVector point = m_points.get(int(i));
+      ellipse(point.x, point.y, m_self.mass - taper, m_self.mass - taper);
+    }
+
     float r = m_self.mass / 2;
+    PVector lastPoint = m_points.get(m_points.size() -1);
+    PVector finHeadingVector = m_points.get(m_points.size() - 2).copy().sub(m_points.get(m_points.size()-1));
+    finHeadingVector.normalize().mult(3);
+    float heading = finHeadingVector.heading();
 
-    float heading = m_self.velocity().heading();
-
-    translate(x, y);
+    translate(lastPoint.x + finHeadingVector.x, lastPoint.y  + finHeadingVector.y);
     rotate(heading);
 
-    // drawn with 60 deg 
-    triangle(-1.5 * r, 0, 
-      -r/2, -r * 0.8, 
-      -r/2, r * 0.8); 
-
-    triangle( -1.5 * r, 0, 
-      -2.5 * r, -r, 
-      -2.5 * r, r);
+    triangle( 0, 0, -r, -r, -r, r);
 
     rotate(-heading);
-    translate(-x, -y);
-
-    ellipse(m_self.displacement().x, m_self.displacement().y, m_self.mass, m_self.mass);
+    translate(-(lastPoint.x + finHeadingVector.x), -(lastPoint.y  + finHeadingVector.y));
   }
 }
 
