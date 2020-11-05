@@ -14,17 +14,16 @@ class Senses{
         m_self = organism; 
     }
 
-    boolean checkCollision(Organism other){
+    void checkCollision(Organism other){
         PVector selfToOtherVector = other.displacement().copy().sub(m_self.displacement()); 
         float distanceBetweenCenters = selfToOtherVector.mag();
         if (distanceBetweenCenters > (other.mass + m_self.mass)/2)
         {
-            m_collisions.removeAll(organism);
         } else {
 
             painter.show(m_self, WHITE, DRAW_OVERLAP || DRAW_COLLISION);
             painter.show(other, WHITE, DRAW_OVERLAP || DRAW_COLLISION);
-            m_collisions.add(organism);
+            m_collisions.add(other.displacement());
         }
     }
 
@@ -58,8 +57,8 @@ class SnakeSenses extends Senses{
 class FishSenses extends Senses{
     public FishSenses(Organism organism){
         super(organism);
-        prey.add(Species.Algae, Species.Snake);
+        prey.add(Species.Algae);
+        prey.add(Species.Snake);
         predators.add(Species.Snake);
     }
 }
-

@@ -3,7 +3,7 @@ import java.util.*;
 boolean BIOMASS_LOCK = false;
 
 static int POPULATION_SIZE = 100;
-float BIOMASS_LIMIT = 8000;
+float BIOMASS_LIMIT = 5000;
 
 int SNAKE_COUNT_INIT = 2;
 int FISH_COUNT_INIT = 6;
@@ -14,8 +14,8 @@ class Population
   float mass;
   Pangenome pangenome = new Pangenome();
 
-  private Vector<Organism> organisms = new Vector<Organism>();
-  
+  private ArrayList<Organism> organisms = new ArrayList<Organism>();
+
   Population()
   {
     init(POPULATION_SIZE);
@@ -68,8 +68,10 @@ class Population
     Vector<Organism> theBabies = new Vector<Organism>();
     Vector<Organism> theDead = new Vector<Organism>();
 
-    for (Organism organism : organisms)
+    int startTime =  millis();
+    for (int i = 0; i < organisms.size(); i++)
     { 
+      Organism organism = organisms.get(i);
       organism.update();
       if (organism.isDead)
       {
@@ -80,9 +82,9 @@ class Population
       organism.show();
 
       // TODO: Hacky optimization
-      if(organism.species() != Species.Algae){
-      interactWithOthers(organism);
-      }
+      //if (organism.species() != Species.Algae) {
+        interactWithOthers(organism, 0);
+      //}
 
       float babyChance = random(0, 1);
       if (babyChance < organism.howFat() && organism.howFat() > 0)
@@ -99,6 +101,7 @@ class Population
 
       speciesCount.put(organism.species(), speciesCount.get(organism.species()) + 1);
     }
+    Log.debug("Time in population loop: " + (millis() - startTime));
 
     organisms.removeAll(theDead);
     organisms.addAll(theBabies);
@@ -113,15 +116,16 @@ class Population
     }
   }
 
-  private void interactWithOthers(Organism organism)
+  private void interactWithOthers(Organism organism, int index)
   {
     if (organism.isDead)
     {
       return;
     }
 
-    for (Organism other : organisms)
+    for (int i = index + 1; i < organisms.size(); i++)
     {
+      Organism other = organisms.get(i);
       if (other == organism || !areMeeting(organism, other) || other.isDead) {
         continue;
       }
@@ -147,7 +151,7 @@ class Population
 
   public void remove(Organism organism)
   {
-    organisms.removeElement(organism);
+    organisms.remove(organism);
   }
 
   boolean areMeeting(Organism organism1, Organism organism2)
