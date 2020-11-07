@@ -15,8 +15,10 @@
 
 11. Prefix all member variables with `m_` and remove local variables prefixed with `_`
 
-15. Install sensory apparatus
+15. Install sensory apparatus (closed)
 
 16. Organism respond to sensory information (blocked by 15)
 
 17. Broad phase collision algorithm
+
+18. Integrate Senses with Motor, let senses change velocity's and acceleration's heading
