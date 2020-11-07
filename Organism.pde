@@ -1,9 +1,12 @@
 class Organism
 {
-  public Motor motor;
-  private Appearance appearance;
   private Genome genome;
   private Genome.Dna dna;
+  
+  private Motor motor;
+  private Appearance appearance;
+  private Senses senses;
+
   private float startMass;
   float mass = startMass;
   float age = 0;
@@ -57,6 +60,7 @@ class Organism
     
     motor = genome.createMotor(this, displacement, PVector.random2D());
     appearance = genome.createAppearance(this, dna.colour);
+    senses = genome.createSenses(this);
   }
 
   public void show()

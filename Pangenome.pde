@@ -70,8 +70,13 @@ public class Genome
     ) {
     return null;
   }
-  
-  public Appearance createAppearance(Organism organism, color colour){
+
+  public Appearance createAppearance(Organism organism, color colour) {
+    return null;
+  }
+
+  public Senses createSenses(Organism organism)
+  {
     return null;
   }
 
@@ -131,10 +136,14 @@ public class SnakeGenome extends Genome
     return new SnakeMotor(organism, startDisplacement, startVelocity);
   }
 
-  public Appearance createAppearance(Organism organism, color colour){
+  public Appearance createAppearance(Organism organism, color colour) {
     return new SnakeAppearance(organism, colour);
   }
-  
+
+  public Senses createSenses(Organism organism) {
+    return new SnakeSenses(organism);
+  }
+
   public Dna createDna() {
     Dna dna = new Dna(this);
 
@@ -167,8 +176,12 @@ public class FishGenome extends Genome
       Arrays.asList(new Species[]{Species.Snake, Species.Algae}), 
       FISH_COUNT_INIT);
   }
-    
-  public Appearance createAppearance(Organism organism, color colour){
+  
+  public Senses createSenses(Organism organism) {
+    return new FishSenses(organism);
+  }
+
+  public Appearance createAppearance(Organism organism, color colour) {
     return new FishAppearance(organism, colour);
   }
 
@@ -209,10 +222,10 @@ public class AlgaeGenome extends Genome
       ALGAE_COUNT_INIT);
   }
 
-  public Appearance createAppearance(Organism organism, color colour){
+  public Appearance createAppearance(Organism organism, color colour) {
     return new AlgaeAppearance(organism, colour);
   }
-  
+
   public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     return new AlgaeMotor(organism, startDisplacement, startVelocity);
   }
