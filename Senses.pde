@@ -1,6 +1,7 @@
 class Senses {
   ArrayList<PVector> m_repulsions = new ArrayList<PVector>();
   PVector m_attraction;
+  float m_distanceToAttraction;
 
   ArrayList<Species> prey = new ArrayList<Species>();
   ArrayList<Species> predators = new ArrayList<Species>();
@@ -12,20 +13,34 @@ class Senses {
     m_self = organism;
   }
 
-  void update(){
+  void update() {
   }
 
-  boolean isPerceptible(Organism other) {
+  void clear() {
+    m_repulsions.clear();
+    m_attraction = null;
+  }
+
+  void update(Organism other) {
     PVector selfToOtherVector = other.displacement().copy().sub(m_self.displacement()); 
     float distanceBetweenCenters = selfToOtherVector.mag();
 
-    if (distanceBetweenCenters <= (other.mass + m_self.mass)/2 + distance)
+    if (distanceBetweenCenters > (other.mass + m_self.mass)/2 + distance)
     {
-      return true;
+      return;
     }
-
-    return false;
+    
+    if (isAttraction(other) && (m_attraction == null || distanceBetweenCenters < m_distanceToAttraction) )
+    {
+      m_attraction = other.displacement();
+      m_distanceToAttraction = distanceBetweenCenters;
+    }
+    else if (isRepulsion(other) )
+    {
+      m_repulsions.add(other.displacement());
+    }
   }
+
 
   boolean isAttraction(Organism organism) {
     if (prey.contains(organism.species()))
