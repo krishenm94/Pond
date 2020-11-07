@@ -121,8 +121,12 @@ class Population
     }
 
     for (int i = index + 1; i < organisms.size(); i++)
-    {
+    {       
       Organism other = organisms.get(i);
+      
+      organism.sense(other);
+      other.sense(organism);
+
       if (other == organism || !areMeeting(organism, other) || other.isDead) {
         continue;
       }

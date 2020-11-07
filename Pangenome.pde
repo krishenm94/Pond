@@ -176,7 +176,7 @@ public class FishGenome extends Genome
       Arrays.asList(new Species[]{Species.Snake, Species.Algae}), 
       FISH_COUNT_INIT);
   }
-  
+
   public Senses createSenses(Organism organism) {
     return new FishSenses(organism);
   }
@@ -228,6 +228,10 @@ public class AlgaeGenome extends Genome
 
   public Motor createMotor(Organism organism, PVector startDisplacement, PVector startVelocity) {
     return new AlgaeMotor(organism, startDisplacement, startVelocity);
+  }
+
+  public Senses createSenses(Organism organism) {
+    return new AlgaeSenses(organism);
   }
 
   public Dna createDna() {

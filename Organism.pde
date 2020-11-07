@@ -47,6 +47,7 @@ class Organism
     }
 
     motor.update();
+    senses.execute();
   }
 
   private Organism(PVector displacement, Genome _genome)
@@ -157,5 +158,9 @@ class Organism
   float maxMass()
   {
     return startMass*dna.maxFoodCapacityCoefficient;
+  }
+  
+  void sense(Organism other){
+    senses.update(other);
   }
 }
