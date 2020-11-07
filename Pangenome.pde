@@ -138,7 +138,7 @@ public class SnakeGenome extends Genome
   public Dna createDna() {
     Dna dna = new Dna(this);
 
-    dna.colour = color(255, 50, 0);
+    dna.colour = color(255, 20, 20);
     dna.predatorFactor = 1.5;
 
     dna.fertility = 0.0002;
@@ -179,7 +179,7 @@ public class FishGenome extends Genome
   public Dna createDna() {
     Dna dna = new Dna(this);
 
-    dna.colour = color(0, 100, 255);
+    dna.colour = color(50, 100, 200);
     dna.predatorFactor = 0.7;
 
     dna.fertility = 0.002;
@@ -220,7 +220,7 @@ public class AlgaeGenome extends Genome
   public Dna createDna() {
     Dna dna = new Dna(this);
 
-    dna.colour = color(100, 255, 0);
+    dna.colour = color(70, 255, 70);
     dna.predatorFactor = 0.0;
 
     dna.fertility = 1;

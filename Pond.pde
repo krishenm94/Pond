@@ -1,4 +1,4 @@
-int BACKGROUND = 255;
+color BACKGROUND = 255;
 float CLOCK = 0;
 float CLOCK_MAX = 360;
 float CLOCK_INCREMENT = 0.05;
@@ -10,7 +10,7 @@ Painter painter = new Painter();
 
 void setup()
 {
-  size(1200, 400);
+  size(1200, 400, P2D);
   background(BACKGROUND);
   smooth();
 
@@ -19,13 +19,16 @@ void setup()
 
 void draw()
 {
+  blendMode(ADD);
+  blendMode(BLEND);
+  
   if (!BLUR && !PRETTY)
   {
     background(BACKGROUND);
   }
 
   population.update();
-  
+
   drawMouse();
 
   CLOCK += CLOCK_INCREMENT;

@@ -10,9 +10,15 @@ class Appearance {
     m_colour = colour;
   }
 
+  protected void init()
+  {
+    fill(m_colour); 
+    stroke(0, 0, 0, 50);
+  }
+
   public void show()
   {
-    fill(m_colour);
+    init();
     ellipse(m_self.displacement().x, m_self.displacement().y, m_self.mass, m_self.mass);
   }
 }
@@ -40,8 +46,25 @@ class FishAppearance extends Appearance
     }
   }
 
+  private void drawTailFin() {
+    float r = m_self.mass / 2;
+    PVector lastPoint = m_points.get(m_points.size() -1);
+    PVector finHeadingVector = m_points.get(m_points.size() - 2).copy().sub(m_points.get(m_points.size()-1));
+    float heading = finHeadingVector.heading();
+
+    translate(lastPoint.x , lastPoint.y );
+    rotate(heading);
+
+    triangle( r, 0, 0, -r, 0, r);
+
+    rotate(-heading);
+    translate(-(lastPoint.x), -(lastPoint.y ));
+  }
+
   public void show()
   {
+    init();
+
     int newPointCount = int(m_self.mass / GROWTH_RATE) + 1;
     int currentPointCount = m_points.size();
 
@@ -55,26 +78,15 @@ class FishAppearance extends Appearance
 
     m_points.add(0, m_self.displacement().copy());
 
-    fill(m_colour); 
-    for (float i = m_points.size() - 1, taper = m_self.mass; i >= 0 && taper > 0; i--, taper -= m_self.mass / m_points.size())
+    drawTailFin();
+
+    for (float i = m_points.size() - 1, taper = m_self.mass; 
+      i >= 0 && taper > 0; 
+      i--, taper -= m_self.mass / m_points.size())
     {
       PVector point = m_points.get(int(i));
       ellipse(point.x, point.y, m_self.mass - taper, m_self.mass - taper);
     }
-
-    float r = m_self.mass / 2;
-    PVector lastPoint = m_points.get(m_points.size() -1);
-    PVector finHeadingVector = m_points.get(m_points.size() - 2).copy().sub(m_points.get(m_points.size()-1));
-    finHeadingVector.normalize().mult(3);
-    float heading = finHeadingVector.heading();
-
-    translate(lastPoint.x + finHeadingVector.x, lastPoint.y  + finHeadingVector.y);
-    rotate(heading);
-
-    triangle( 0, 0, -r, -r, -r, r);
-
-    rotate(-heading);
-    translate(-(lastPoint.x + finHeadingVector.x), -(lastPoint.y  + finHeadingVector.y));
   }
 }
 
@@ -95,6 +107,8 @@ class SnakeAppearance extends Appearance
 
   public void show()
   {
+    init();
+
     int newPointCount = int(m_self.mass / GROWTH_RATE) + 1;
     int currentPointCount = m_points.size();
 
@@ -108,7 +122,6 @@ class SnakeAppearance extends Appearance
 
     m_points.add(0, m_self.displacement().copy());
 
-    fill(m_colour); 
     for (float i = m_points.size() - 1, taper = m_self.mass; i >= 0 && taper > 0; i--, taper -= m_self.mass / m_points.size())
     {
       PVector point = m_points.get(int(i));

@@ -1,6 +1,9 @@
 # Pond
 Simulates the ecosystem of a pond with 2D visualisation
 
+References:
+1. https://natureofcode.com/
+
 ## Releases 
 
 ### Tag: v1
