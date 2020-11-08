@@ -10,7 +10,7 @@ References:
 
 Status: completed
 
-1. 2D perfectly elastic colission of bodies
+1. 2D perfectly elastic collision of bodies
 2. Organisms have characteristic movement modes
 3. Food chains
     a. (Algae -> Fish -> Snake)
