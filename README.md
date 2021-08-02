@@ -4,9 +4,9 @@ Simulates the ecosystem of a pond with 2D visualisation
 References:
 1. https://natureofcode.com/
 
-## Releases 
+## Versions 
 
-### Tag: v1
+### v1
 
 Status: completed
 
@@ -21,15 +21,23 @@ Status: completed
     b. lifespan
 6. Implement genome factory (`Pangenome`) and gene factory (`Genome`)
 
-### Tag: v2
+### v2
 
-Status: in progress
+Status: completed
 
 1. Restructure `Organism` components as nested classes
 2. Add sensory apparatus
 3. Population.update() optimization
 4. Overlap detection for circular bodies 
 5. Basic organism animations
+
+### v3
+
+Status: in progress
+
+1. Mutation 
+2. Speciation
+3. Sexual reproduction
 
 ## Etc.
 
